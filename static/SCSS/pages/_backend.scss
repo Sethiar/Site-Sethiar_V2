@@ -1,0 +1,186 @@
+// Importation des variables.
+@import '../base/variables';
+
+
+// Backend CSS - pages/backend.scss
+
+/* Style pour la page d'accueil du baseback.html.jinja2 */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: $color-black;
+  color: $color-white;
+  font-size: $font-size-base;
+}
+
+.header-backend {
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+}
+
+.nav-backend{
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+
+  &:hover {
+    color: $color-white;
+  }
+}
+
+// Style global du backend.
+.h1-backend {
+  font-size: $font-size-xxxl;
+  color: $color-decline-orange2;
+  text-align: center;
+}
+
+.annonce-back p {
+  font-size: $font-size-xxl;
+  color: $color-primary;
+  background-color: $color-lightgrey;
+  border: 1px solid $color-decline-orange2;
+  border-radius: 12px;
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.h4-backend{
+  margin-left: 10%;
+}
+
+.h5-backend {
+  padding-left: 5vw;
+  text-decoration: underline;
+  font-size: $font-size-lg;
+  color: $color-decline-gold2;
+}
+
+// Style de la page calendar.html
+.table {
+  font-size: $font-size-base;
+  border: 1px solid $color-lightgrey;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2%;
+}
+
+th {
+  color: $color-decline-orange2;
+  border: 1px solid $color-lightgrey;
+  padding: 2%;
+}
+
+tr {
+  color: $color-white;
+  padding: 1%;
+  border: 1px solid $color-lightgrey;
+}
+
+td {
+  margin-right: 1%;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  border: 1px solid $color-lightgrey;
+  padding: 2%;
+}
+
+.actions-buttons {
+  margin-right: 1rem;
+}
+
+.btn-suppression, .btn-valide {
+  width: 10vw;
+  border: 1px solid $color-secondary-gold;
+  background-color: $color-primary;
+
+  &:hover {
+    /* Ombre subtile */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Animation fluide */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+
+    border: 1px solid $color-decline-gold2;
+    background-color: $color-decline-orange2;
+  }
+}
+
+// Page de la liste des utilisateurs.
+/* Sélection de tous les utilisateurs */
+.select-all-users {
+  color: $color-decline-gold2;
+  font-size: $font-size-lg;
+  transition: color 0.3s, transform 0.3s;
+
+  &:hover {
+    font-size: $font-size-xl;
+    color: $color-decline-gold1;
+  }
+}
+
+/* Présentation des premières lettres des pseudos des utilisateurs */
+.lettre-navigation {
+  padding-left: 20vw;
+  display: flex-column;
+}
+
+/* Sélection des lettres */
+.lettre a {
+  color: $color-primary;
+  margin-right: 4vw;
+  /* Animation fluide */
+  transition: color 0.3s, transform 0.3s;
+
+  &:hover {
+    color: $color-decline-gold1;
+    /* Légère mise en avan */
+    transform: scale(1.1);
+    text-decoration: underline;
+  }
+}
+
+.col-user {
+  width: 15vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.col-title {
+  width: 25vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.col-comment {
+  width: 40vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.col-actions {
+  width: 20vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.separation {
+  border: 1px solid $color-white;
+}
+
+.container-category {
+  margin: 0 auto;
+  text-align: center;
+  border : 1px solid $color-decline-orange2;
+  font-size: $font-size-base;
+  width : 50%;
+}
+
+.label {
+  width: 40%;
+}

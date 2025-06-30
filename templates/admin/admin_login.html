@@ -1,0 +1,77 @@
+{% extends 'baseform.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description" content="Formulaire de connexion au back-end du site de l'entreprise SethiarWorks.">
+<title>{% block title %}Authentification administrateur{% endblock %}</title>
+{% endblock %}
+
+{% block header_content %}
+{% endblock %}
+
+{% block body_content %}
+<div class="outer-frame">
+    <div class="inner-frame">
+        <form method="POST" action="{{ url_for('auth.login_admin') }}" class="form-base"
+              enctype="multipart/form-data">
+
+            <!-- Image du logo -->
+            <div class="imgcontainer-form">
+                <img src="{{ url_for('static', filename='Images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
+                     class="avatar-form">
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            {% if category == 'login_admin' %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <!-- Titre du formulaire -->
+            <h3 class="h3-form">Authentification Administrateur</h3>
+
+            <!-- Token CSRF pour la sécurité -->
+            {{ form_admin.csrf_token }}
+
+            <!-- Conteneur des champs du formulaire -->
+            <div class="form-container">
+                <!-- Champ pour le pseudo -->
+                <div class="form-group">
+                    {{ form_admin.pseudo.label }} {{ form_admin.pseudo() }}
+                </div>
+
+                <!--Renseignement du rôle -->
+                <div class="form-group">
+                    {{ form_admin.role.label }} {{ form_admin.role() }}
+                </div>
+
+                <!-- Champ pour le mot de passe -->
+                <div class="form-group">
+                    {{ form_admin.password.label }} {{ form_admin.password() }}
+                    <span class="toggle-password" onclick="togglePassword('password')" aria-controls="password">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+
+                <div class="separation1"></div>
+
+                <!-- Champ pour les boutons du formulaire -->
+
+                <div class="container-btn">
+                    <button type="submit" class="validated-btn" aria-label="Valider l'authentification">
+                        Validation de l'authentification
+                    </button>
+                    <a href="{{ url_for('landing_page') }}" class="cancelled-btn">Annulation et retour à l'accueil</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_content %}
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends 'baseform.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description"
+      content="Obtenez rapidement un devis personnalisé pour votre projet avec SethiarWorks, expert en développement et conception numérique.">
+<title>{% block title %}Demande de devis entreprise SethiarWorks{% endblock %}</title>
+{% endblock %}
+
+{% block body_content %}
+<div class="outer-frame">
+    <div class="inner-frame">
+        <h1 class="h1-devis">Demande de devis</h1>
+        <div class="space2"></div>
+        <div class="annonce">
+
+            <!-- Titre -->
+            <h2 class="h2-devis">
+                Bienvenue sur la demande de devis.
+            </h2>
+            <div class="space2"></div>
+
+            <!-- Présentation -->
+            <ul>
+                <li><b>Rapidité :</b> Réponse garantie sous une semaine.</li>
+                <li><b>Clarté :</b> Décrivez votre projet avec les fonctionnalités attendues.</li>
+                <li><b>Transparence :</b> Consultez nos <a href="{{url_for('functional.politique')}}">conditions
+                    générales</a>.
+                </li>
+            </ul>
+            <div class="space2"></div>
+
+            <!--Champ de précision -->
+            <p>
+                Pour tout renseignement supplémentaire, vous pouvez consulter nos
+                <b><a href="{{url_for('functional.politique')}}">conditions générales d'utilisation</a></b>
+                ou nos <b><a href="{{url_for('functional.mentions')}}">mentions légales</a></b>.
+            </p>
+        </div>
+
+        <form method="POST" action="{{ url_for('user.user_devis_demand') }}" class="form-base"
+              enctype="multipart/form-data">
+
+            <!-- Image du logo -->
+            <div class="imgcontainer-form">
+                <img src="{{ url_for('static', filename='Images/images_accueil/logo.jpg') }}" alt="Logo de SethiarWorks"
+                     class="avatar-form">
+            </div>
+
+            <!-- Titre du formulaire -->
+            <h3 class="h3-form">Demande de devis</h3>
+
+            <!-- Token CSRF pour la sécurité -->
+            {{ form_devis.csrf_token }}
+
+            <div class="space-form"></div>
+
+            <!-- Conteneur des champs du formulaire -->
+            <div class="form-container">
+
+                <!-- Champ pour le nom et le prénom -->
+                <div class="form-group">
+                    {{ form_devis.lastname.label }} {{ form_devis.lastname() }}
+                    {% if form_devis.lastname.errors %}
+                    <ul>
+                        {% for error in form_devis.lastname.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {{ form_devis.firstname.label }} {{ form_devis.firstname() }}
+                    {% if form_devis.firstname.errors %}
+                    <ul>
+                        {% for error in form_devis.firstname.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Champ pour le numéro de téléphone -->
+                <div class="form-group">
+                    {{ form_devis.phone.label }} {{ form_devis.phone() }}
+                    {% if form_devis.phone.errors %}
+                    <ul>
+                        {% for error in form_devis.phone.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Champs pour le nom de l'entreprise-->
+                <div class="form-group">
+                    {{ form_devis.enterprise_name.label }} {{ form_devis.enterprise_name() }}
+                    {% if form_devis.enterprise_name.errors %}
+                    <ul>
+                        {% for error in form_devis.enterprise_name %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Champ pour le mail -->
+                <div class="form-group">
+                    {{ form_devis.email.label }} {{ form_devis.email() }}
+                    {% if form_devis.email.errors %}
+                    <ul>
+                        {% for error in form_devis.email.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Champ pour le type de projet -->
+                <div class="form-group">
+                    {{ form_devis.project_type.label }} {{ form_devis.project_type() }}
+                    {% if form_devis.project_type.errors %}
+                    <ul>
+                        {% for error in form_devis.project_type.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Conteneur du contenu de la demande de devis -->
+                <div class="form-group">
+                    {{ form_devis.devis_content.label }}
+                    {{ form_devis.devis_content(class="form-control",
+                    placeholder="Votre description de votre projet") }}
+                    {% if form_devis.devis_content.errors %}
+                    <ul>
+                        {% for error in form_devis.demand_content.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="space2"></div>
+
+            <div class="separation1"></div>
+
+            <div class="space2"></div>
+
+            <!-- Conteneur des boutons du formulaire -->
+            <div class="container-btn">
+                <button type="submit" class="validated-btn" aria-label="Valider la demande de devis">Validation de la
+                    demande de devis
+                </button>
+                <a href="{{ url_for('landing_page') }}" class="cancelled-btn">Annulation et retour à l'accueil</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

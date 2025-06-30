@@ -1,0 +1,3679 @@
+@charset "UTF-8";
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Réinitialiser les marges, le padding et la box-sizing */
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+ul,
+li,
+figure,
+figcaption,
+footer,
+header,
+section,
+article,
+main,
+aside {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Utiliser box-sizing border-box par défaut */
+}
+
+/* Éviter que le texte soit hérité de styles non désirés */
+body {
+  line-height: 1.6;
+  font-family: "Calibri", "Arial", sans-serif;
+}
+
+/* Réinitialiser les styles pour les liens */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Réinitialiser les styles pour les listes */
+ul,
+li {
+  list-style: none;
+}
+
+/* Réinitialiser les bordures */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #DE7915;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+th {
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+}
+
+td,
+th {
+  padding: 1rem;
+  text-align: left;
+}
+
+/* Assurez-vous que les boutons sont sans styles par défaut */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Empêcher les comportements par défaut des formulaires */
+input,
+textarea {
+  outline: none;
+}
+
+/* Contrôler les valeurs par défaut des images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Media Queries pour la Responsivité */
+/* Mobile - Portrait (max-width: 599px) */
+@media (max-width: 599px) {
+  html,
+  body {
+    font-size: 1.5rem;
+  }
+  /* Ajouter d'autres ajustements pour les mobiles ici si nécessaire */
+}
+/* Mobile - Paysage (min-width: 600px et max-width: 899px) */
+@media (min-width: 600px) and (max-width: 899px) {
+  html,
+  body {
+    font-size: 1.5rem;
+  }
+  /* Ajouter d'autres ajustements pour les mobiles paysage ici */
+}
+/* Tablette - Portrait (min-width: 900px et max-width: 1199px) */
+@media (min-width: 900px) and (max-width: 1199px) {
+  html,
+  body {
+    font-size: 1.5rem;
+  }
+  /* Ajouter d'autres ajustements pour les tablettes portrait ici */
+}
+/* Tablette - Paysage (min-width: 1200px et max-width: 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  html,
+  body {
+    font-size: 2rem;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Gère les conteneurs droit et gauche et les séparations et espacement. */
+.layout {
+  display: flex;
+  height: 0;
+}
+
+.main-content {
+  position: relative;
+  margin-left: 30%;
+  width: 70%;
+  padding: 2rem;
+  overflow-y: auto;
+  margin-top: -200vh;
+  background-color: #000000;
+}
+
+.outer-frame {
+  /* Couleur et taille de la bordure externe */
+  border: 4px solid #C96B12;
+  /* Coins arrondis */
+  border-radius: 15px;
+  /* Espacement interne */
+  padding: 2%;
+  /* Couleur de fond du cadre externe */
+  background: #f2f2f2;
+  /* Ombre subtile */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Animation fluide */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.outer-frame:hover {
+  /* Légère mise en avant */
+  transform: scale(1.05);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.inner-frame {
+  /* Couleur et taille de la bordure interne */
+  border: 2px solid #E5AD36;
+  /* Coins arrondis */
+  border-radius: 10px;
+  /* Espacement interne */
+  padding: 1.5%;
+  /* Couleur de fond du cadre interne */
+  background: #000000;
+  /* Ombre interne */
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.inner-frame:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Changement de couleur de bordure */
+  border-color: #C96B12;
+}
+
+.registration-wrapper {
+  display: flex;
+  /* Centre horizontalement */
+  justify-content: center;
+  /* Centre verticalement */
+  align-items: center;
+  /* Prend la hauteur disponible du parent */
+  height: 100%;
+  /* Prend toute la largeur disponible */
+  width: 100%;
+}
+
+.outer-frame-registration {
+  /* Couleur et taille de la bordure externe */
+  border: 4px solid #C96B12;
+  /* Coins arrondis */
+  border-radius: 20px;
+  /* Largeur */
+  width: 50%;
+  /* Espacement interne */
+  padding: 2%;
+  /* Couleur de fond du cadre externe */
+  background: #f2f2f2;
+  /* Ombre subtile */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Animation fluide */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.outer-frame-registration:hover {
+  /* Légère mise en avant */
+  transform: scale(1.05);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.inner-frame-registration {
+  /* Couleur et taille de la bordure interne */
+  border: 2px solid #E5AD36;
+  /* Coins arrondis */
+  border-radius: 15px;
+  /* Espacement interne */
+  padding: 1.5%;
+  /* Couleur de fond du cadre interne */
+  background: #000000;
+  /* Ombre interne */
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.inner-frame-registration:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Changement de couleur de bordure */
+  border-color: #C96B12;
+}
+
+.separation1 {
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 3px solid #E5AD36;
+}
+
+.separation2 {
+  width: 80%;
+  margin: auto;
+  border-bottom: 3px solid #E5AD36;
+}
+
+.space {
+  height: 10vh;
+}
+
+.space2 {
+  height: 5vh;
+}
+
+/* Mobile - Portrait (max-width: 599px) */
+@media (max-width: 599px) {
+  .layout {
+    /* Afficher la mise en page en colonne */
+    flex-direction: column;
+    height: 10vh;
+  }
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    top: 0;
+  }
+  .outer-frame, .inner-frame {
+    padding: 5%;
+    width: 100%;
+  }
+  .outer-frame-registration {
+    width: 80%;
+  }
+}
+/* Mobile - Paysage (min-width: 600px et max-width: 899px) */
+@media (min-width: 600px) and (max-width: 899px) {
+  .layout {
+    /* Afficher la mise en page en colonne */
+    flex-direction: column;
+    height: 30vh;
+  }
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+    top: 0;
+  }
+  .outer-frame, .inner-frame {
+    padding: 5%;
+    width: 100%;
+  }
+  .outer-frame-registration {
+    width: 70%;
+  }
+}
+/* Tablette - Portrait (min-width: 900px et max-width: 1199px) */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .layout {
+    /* Retour à une mise en page en ligne */
+    flex-direction: row;
+    height: 25vh;
+  }
+  .main-content {
+    margin-left: 25%;
+    width: 75%;
+  }
+  .outer-frame, .inner-frame {
+    padding: 3%;
+    width: 100%;
+  }
+  .outer-frame-registration {
+    width: 60%;
+  }
+}
+/* Tablette - Paysage (min-width: 1200px et max-width: 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .layout {
+    /* Retour à une mise en page en ligne */
+    flex-direction: row;
+  }
+  .main-content {
+    margin-left: 25%;
+    width: 75%;
+  }
+  .outer-frame, .inner-frame {
+    padding: 3%;
+    width: 100%;
+  }
+  .outer-frame-registration {
+    width: 50%;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* typography css - base/typography.scss */
+/* Personnalisation des titres, paragraphes et éléments de contenus */
+/*h1*/
+h1.comment-title {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 3rem;
+  text-decoration: underline;
+}
+
+/*h4*/
+.section-title {
+  font-size: 1.5rem;
+  color: #E5AD36;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+.h1-politique {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 3rem;
+  text-decoration: underline;
+}
+
+.h2-politique {
+  font-size: 2rem;
+}
+
+.h1-devis {
+  font-size: 3rem;
+  color: #E5AD36;
+  display: flex;
+  /* Centre verticalement */
+  align-items: center;
+  /* Centre horizontalement */
+  justify-content: center;
+  /* Optionnel, pour garantir que le texte est bien centré */
+  text-align: center;
+}
+
+.h2-devis {
+  font-size: 2rem;
+  /* Centrage horizontal du conteneur */
+  margin: 0 auto;
+  /* Bordure */
+  border: 1px solid #C96B12;
+  display: flex;
+  /* Centre verticalement */
+  align-items: center;
+  /* Centre horizontalement */
+  justify-content: center;
+  /* Assure que le texte est bien centré */
+  text-align: center;
+}
+
+/* Pour les tablettes portrait */
+@media (max-width: 768px) {
+  .comment-title {
+    width: 80%;
+    font-size: 2rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .h1-politique {
+    width: 80%;
+    font-size: 2rem;
+  }
+  .h2-politique {
+    font-size: 1.5rem;
+  }
+}
+/* Pour les tablettes paysage */
+@media (max-width: 1024px) {
+  .comment-title {
+    width: 70%;
+    font-size: 2rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .h1-politique {
+    width: 70%;
+    font-size: 3rem;
+  }
+  .h2-politique {
+    font-size: 1.5rem;
+  }
+}
+/* Pour les téléphones portrait */
+@media (max-width: 480px) {
+  .comment-title {
+    width: 90%;
+    font-size: 1.5rem;
+  }
+  .section-title {
+    font-size: 1.25rem;
+  }
+  .h1-politique {
+    width: 90%;
+    font-size: 1.5rem;
+  }
+  .h2-politique {
+    font-size: 1.25rem;
+  }
+}
+/* Pour les téléphones paysage */
+@media (max-width: 600px) {
+  .comment-title {
+    width: 90%;
+    font-size: 1.5rem;
+  }
+  .section-title {
+    font-size: 1.25rem;
+  }
+  .h1-politique {
+    width: 90%;
+    font-size: 1.5rem;
+  }
+  .h2-politique {
+    font-size: 1.25rem;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Animation CSS - components/animations.css */
+/* Configuration du bouton */
+#btn-logo {
+  position: absolute;
+  /* Position du bouton */
+  bottom: 10%;
+  left: 50%;
+  /* Centrer horizontalement */
+  transform: translateX(-50%);
+  /* Bouton au-dessus des autres éléments */
+  z-index: 10;
+}
+
+/*  Conteneur globale du logo */
+#logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  height: 569px;
+  background-repeat: no-repeat;
+  margin: auto;
+}
+
+/* Conteneur de l'animation */
+.logo-animation {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  height: 569px;
+  overflow: hidden;
+}
+
+/* Base commune pour tous les sprites */
+.sprite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  background-repeat: no-repeat;
+  animation-fill-mode: forwards;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Animation pour chaque sprite */
+.sprite1 {
+  background-image: url("/static/images/images_spritesheet/sprite_1.png");
+}
+
+.sprite2 {
+  background-image: url("/static/images/images_spritesheet/sprite_2.png");
+}
+
+.sprite3 {
+  background-image: url("/static/images/images_spritesheet/sprite_3.png");
+}
+
+.sprite4 {
+  background-image: url("/static/images/images_spritesheet/sprite_4.png");
+}
+
+.sprite5 {
+  background-image: url("/static/images/images_spritesheet/sprite_5.png");
+}
+
+.sprite6 {
+  background-image: url("/static/images/images_spritesheet/sprite_6.png");
+}
+
+.sprite7 {
+  background-image: url("/static/images/images_spritesheet/sprite_7.png");
+}
+
+.sprite8 {
+  background-image: url("/static/images/images_spritesheet/sprite_8.png");
+}
+
+/* Keyframes pour chaque animation de sprite */
+@keyframes animateLogo1 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -11000px 0;
+  }
+}
+@keyframes animateLogo2 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -11000px 0;
+  }
+}
+@keyframes animateLogo3 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -11000px 0;
+  }
+}
+@keyframes animateLogo4 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -11000px 0;
+  }
+}
+@keyframes animateLogo5 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -11000px 0;
+  }
+}
+@keyframes animateLogo6 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -11000px 0;
+  }
+}
+@keyframes animateLogo7 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -11000px 0;
+  }
+}
+@keyframes animateLogo8 {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -11000px 0;
+  }
+}
+/* Animation Responsive */
+/* Pour les tablettes portrait */
+@media (max-width: 768px) {
+  body, #logo, .logo-animation {
+    /* Logo positionné par rapport au body */
+    position: relative;
+  }
+  #logo, .logo-animation {
+    position: absolute;
+    /* Positionné tout en haut */
+    top: 0;
+    left: 50%;
+    /* Centré horizontalement */
+    transform: translateX(-50%);
+    /* Adaptation responsive */
+    width: 70%;
+    /* Limite la taille maximale */
+    max-width: 550px;
+    /* Ajuste la hauteur proportionnellement */
+    height: auto;
+    /* URL d'image */
+    background-image: url("/static/images/images_accueil/logo_png.png");
+    /* Redimensionne l'image en maintenant ses proportions */
+    background-size: contain;
+    /* Centré dans son conteneur */
+    background-position: center;
+    /* Une seule image */
+    background-repeat: no-repeat;
+    margin: 0;
+    /* Logo au-dessus d'autres éléments */
+    z-index: 10;
+  }
+}
+@media (max-width: 1024px) {
+  body, #logo, .logo-animation {
+    /* Logo est positionné par rapport au body */
+    position: relative;
+  }
+  #logo, .logo-animation {
+    position: absolute;
+    /* Positionné tout en haut */
+    top: 0;
+    left: 50%;
+    /* Centré horizontalement */
+    transform: translateX(-50%);
+    /* Adaptation responsive */
+    width: 70%;
+    /* Limite la taille maximale */
+    max-width: 550px;
+    /* Ajuste la hauteur proportionnellement */
+    height: auto;
+    /* URL d'image */
+    background-image: url("/static/images/images_accueil/logo_png.png");
+    /* Redimensionne l'image en maintenant ses proportions */
+    background-size: contain;
+    /* Centré dans son conteneur */
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    /* Logo au-dessus d'autres éléments */
+    z-index: 10;
+  }
+}
+@media (max-width: 480px) {
+  body, #logo, .logo-animation {
+    /* Logo est positionné par rapport au body */
+    position: relative;
+  }
+  #logo, .logo-animation {
+    position: absolute;
+    /* Positionné tout en haut */
+    top: 0;
+    left: 50%;
+    /* Centré horizontalement */
+    transform: translateX(-50%);
+    /* Adaptation responsive */
+    width: 80%;
+    /* Limite la taille maximale */
+    max-width: 400px;
+    /* Ajuste la hauteur proportionnellement */
+    height: auto;
+    /* URL d'image */
+    background-image: url("/static/images/images_accueil/logo_png.png");
+    /* Redimensionne l'image en maintenant ses proportions */
+    background-size: contain;
+    /* Centré dans son conteneur */
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    /* Logo au-dessus d'autres éléments */
+    z-index: 10;
+  }
+}
+@media (max-width: 600px) {
+  body, #logo, .logo-animation {
+    /* Logo est positionné par rapport au body */
+    position: relative;
+  }
+  #logo, .logo-animation {
+    position: absolute;
+    /* Positionné tout en haut */
+    top: 0;
+    left: 50%;
+    /* Centré horizontalement */
+    transform: translateX(-50%);
+    /* Adaptation responsive */
+    width: 80%;
+    /* Limite la taille maximale */
+    max-width: 400px;
+    /* Ajuste la hauteur proportionnellement */
+    height: auto;
+    /* URL d'image */
+    background-image: url("/static/images/images_accueil/logo_png.png");
+    /* Redimensionne l'image en maintenant ses proportions */
+    background-size: contain;
+    /* Centré dans son conteneur */
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    /* Assure que le logo reste au-dessus d'autres éléments */
+    z-index: 10;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Button CSS - Components/Buttons.scss */
+/* Regroupement des styles communs aux boutons */
+nav button, .cancelled-btn, .validated-btn, .back-comment, .btn-secondary, .btn-secondary-comment, .reply-button, .change-button, .delete-comment-form button, .btn-primary, .btn-primary-comment, .btn-primary-registration {
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+}
+
+/* Bouton primaire pour les commentaires */
+.btn-primary-comment {
+  display: flex;
+  margin: 0 auto;
+}
+
+.btn-primary, .btn-primary-comment, .btn-primary-registration {
+  padding: 2% 4%;
+  font-size: 1rem;
+  background-color: #DE7915;
+  color: #ffffff;
+}
+.btn-primary:hover, .btn-primary-comment:hover, .btn-primary-registration:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background-color: #C96B12;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+.btn-primary-registration {
+  display: block;
+  margin: 0 auto;
+  /* Ajuste pour des écrans plus larges */
+  width: 60%;
+}
+
+.btn-secondary, .btn-secondary-comment, .reply-button, .change-button, .delete-comment-form button {
+  padding: 2% 3%;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: #DE7915;
+}
+.btn-secondary:hover, .btn-secondary-comment:hover, .reply-button:hover, .change-button:hover, .delete-comment-form button:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background-color: #a9a9a9;
+  color: #C96B12;
+}
+
+.delete-comment-form button {
+  background-color: #DE7915;
+}
+.delete-comment-form button:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background-color: #C96B12;
+  color: #ffffff;
+}
+
+.back-comment {
+  background-color: #DE7915;
+  color: #ffffff;
+  padding: 1% 1.5%;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.25rem;
+  box-shadow: 2px 2px 10px rgba(255, 165, 0, 0.5);
+  cursor: pointer;
+}
+.back-comment:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  /* Pas de transformation de texte */
+  text-decoration: none;
+  background-color: #C96B12;
+  color: #ffffff;
+}
+
+.cancelled-btn, .validated-btn {
+  display: inline-block;
+  width: 80%;
+  padding: 2% 3%;
+  text-align: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.cancelled-btn {
+  background-color: #D32F2F;
+  color: #ffffff;
+}
+.cancelled-btn:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background-color: #6b1919;
+  color: #ffffff;
+}
+
+.validated-btn {
+  background-color: #DE7915;
+  color: #ffffff;
+}
+.validated-btn:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background-color: #C96B12;
+  border: 1px solid #E5AD36;
+}
+
+nav button {
+  background-color: #DE7915;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 1% 2%;
+}
+nav button:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background-color: #C96B12;
+  border: 2px solid #FFD580;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.button-container button {
+  width: 70%;
+  padding: 10px 20px;
+  background-color: #DE7915;
+  color: #ffffff;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button a {
+  text-decoration: none;
+  color: #ffffff;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.button-container button a:hover {
+  /* Légère mise en avant du cadre interne */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  background-color: #C96B12;
+  border: 2px solid #E5AD36;
+}
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .btn-primary-registration {
+    /* Plus large sur les tablettes */
+    width: 80%;
+  }
+  .btn-primary, .btn-secondary, .reply-button, .change-button, .cancelled-btn, .validated-btn {
+    padding: 2% 5%;
+    font-size: 1rem;
+  }
+}
+/* Mobile */
+@media (max-width: 768px) {
+  .btn-primary-registration {
+    /* S'adapte complètement sur mobile */
+    width: 100%;
+  }
+  .btn-primary, .btn-secondary, .reply-button, .change-button, .cancelled-btn, .validated-btn {
+    font-size: 1rem;
+  }
+  .button-container button {
+    /* Les boutons prennent toute la largeur de l'écran */
+    width: 100%;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Pages CSS du composant carrousel */
+/* Images du carrousel */
+.product-pic {
+  border: 1px solid #C96B12;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+.product-pic:hover {
+  transform: scale(1.1); /* Zoom au survol */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Conteneur principal du swiper */
+.swiper-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 2% 0;
+}
+
+.swiper-slide {
+  text-align: center;
+  background: #a9a9a9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #DE7915;
+}
+
+/* Boutons de navigation du swiper */
+.swiper-button-prev {
+  left: 2%;
+}
+
+.swiper-button-next {
+  right: 2%;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  color: #DE7915;
+  top: 70%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #DE7915;
+}
+
+/* Code CSS pour la modale */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 33%;
+  width: 70%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2%;
+  max-width: 60vw;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1vh;
+  right: 1vw;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 2%;
+}
+
+.modal h3 {
+  margin-top: 1%;
+  font-size: 2rem;
+}
+
+.modal p {
+  font-size: 1.5rem;
+  margin-top: 1%;
+  line-height: 1.5;
+}
+
+/* Adaptation pour les téléphones en portrait */
+@media (max-width: 480px) {
+  .swiper-container {
+    width: 100%;
+    /* Réduit le padding */
+    padding: 0;
+  }
+  .swiper-slide {
+    /* Assure que chaque slide occupe toute la largeur */
+    width: 100%;
+    /* Empêche la réduction des slides */
+    flex-shrink: 0;
+    /* Bordures arrondies */
+    border-radius: 8px;
+  }
+  .swiper-slide img {
+    /* L'image prend toute la largeur */
+    width: 100%;
+    height: auto;
+  }
+  /* Masquer les autres carrousels */
+  .other-carousel {
+    /* Cacher les autres carrousels sur mobile */
+    display: none;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    /* Centrage vertical parfait */
+    top: 50%;
+    /* Taille réduite pour les boutons */
+    font-size: 1.5rem;
+  }
+  .swiper-button-prev.swiper-button-disabled,
+  .swiper-button-next.swiper-button-disabled {
+    opacity: 0.5;
+  }
+  .modal {
+    /* Modifie la taille de la modale pour plus de flexibilité */
+    width: 90%;
+    /* Centre la modale horizontalement */
+    left: 5%;
+  }
+  .modal-content {
+    /* Réduit les espacements internes */
+    padding: 4%;
+  }
+  .modal img {
+    /* Limite la taille de l'image dans la modale */
+    max-width: 80%;
+  }
+  .modal h3 {
+    /* Taille de police réduite */
+    font-size: 1.5rem;
+  }
+}
+/* Adaptation pour les tablettes en portrait */
+@media (min-width: 481px) and (max-width: 768px) {
+  .swiper-container {
+    /* Carrousel sur toute la largeur */
+    width: 100%;
+    /* Padding modéré */
+    padding: 1.5% 0;
+  }
+  .swiper-slide {
+    /* Occupe toute la largeur de l'écran */
+    width: 100%;
+    border-radius: 10px;
+  }
+  /* Masquer les autres carrousels */
+  .other-carousel {
+    /* Cacher les autres carrousels sur les tablettes */
+    display: none;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    /* Positionnement ajusté pour les tablettes */
+    top: 65%;
+    /* Taille des boutons plus grande */
+    font-size: 1.5rem;
+  }
+  .swiper-button-prev.swiper-button-disabled,
+  .swiper-button-next.swiper-button-disabled {
+    opacity: 0.6;
+  }
+  .modal {
+    width: 80%;
+    /* Modale centrée avec une largeur adaptée */
+    left: 10%;
+  }
+  .modal-content {
+    padding: 5%;
+  }
+  .modal img {
+    max-width: 90%;
+  }
+  .modal h3 {
+    font-size: 1.5rem;
+  }
+}
+/* Adaptation pour les tablettes en paysage */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .swiper-container {
+    padding: 2% 0;
+  }
+  .swiper-slide {
+    /* Remplir toute la largeur de l'écran */
+    width: 100%;
+    border-radius: 12px;
+  }
+  /* Masquer les autres carrousels */
+  .other-carousel {
+    display: none;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 50%;
+    font-size: 1.5rem;
+  }
+  .modal {
+    width: 70%;
+    left: 15%;
+  }
+  .modal-content {
+    padding: 6%;
+  }
+  .modal img {
+    max-width: 95%;
+  }
+  .modal h3 {
+    font-size: 2rem;
+  }
+}
+/* Adaptation pour les téléphones en paysage */
+@media (max-width: 767px) and (orientation: landscape) {
+  .swiper-container {
+    padding: 10px 0;
+  }
+  .swiper-slide {
+    /* Remplir toute la largeur de l'écran */
+    width: 100%;
+    border-radius: 8px;
+  }
+  /* Masquer les autres carrousels */
+  .other-carousel {
+    display: none;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 50%;
+    font-size: 1.25rem;
+  }
+  .modal {
+    width: 85%;
+    left: 7%;
+  }
+  .modal-content {
+    padding: 4%;
+  }
+  .modal img {
+    max-width: 90%;
+  }
+  .modal h3 {
+    font-size: 1.5rem;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Styles Footer Global */
+footer {
+  background-color: #2F445C;
+  /* Ajustement pour un footer responsive */
+  width: 70%;
+  /* Décale le footer vers la droite */
+  margin-left: auto;
+  margin-right: 0;
+  color: #ffffff;
+  /* Augmente le padding pour les petites résolutions */
+  padding: 3rem 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* Centre le contenu */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenu principal du pied de page */
+.footer-content {
+  display: flex;
+  /* Distribue l'espace entre les sections */
+  justify-content: space-between;
+  gap: 2rem;
+  /* Réduit le padding pour éviter trop d'espace sur mobile */
+  padding: 2rem;
+  /* Permet aux sections de passer à la ligne en cas de petite taille d'écran */
+  flex-wrap: wrap;
+}
+
+/* Chaque section du footer */
+.footer-section {
+  flex: 1;
+  /* Garantit que chaque section ait une taille minimale */
+  min-width: 200px;
+  /* Ajoute de l'espace entre les sections */
+  margin: 0 1rem;
+}
+
+/* Titres des sections */
+footer h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-decoration: underline;
+  color: #C96B12;
+}
+
+/* Listes */
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  /* Espace plus important entre les éléments de liste */
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+footer ul li a {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #ffffff;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+footer ul li a:hover {
+  color: #E5AD36;
+  text-decoration: none;
+}
+
+footer ul li p {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+footer ul li p a {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #FFD580;
+  transition: color 0.3s ease;
+}
+footer ul li p a:hover {
+  color: #C96B12;
+}
+
+/* Texte simple */
+footer p {
+  margin-bottom: 1.5%;
+  color: #C96B12;
+}
+
+/* Bas de la section */
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  padding: 2%;
+  color: #C96B12;
+}
+
+/* Adaptation mobile */
+@media (max-width: 1024px) {
+  footer {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .footer-content {
+    /* Les sections s'affichent verticalement sur mobile */
+    flex-direction: column;
+    /* Réduit le padding */
+    padding: 1.5rem;
+  }
+  .footer-section {
+    /* Chaque section prend toute la largeur */
+    width: 100%;
+    /* Ajoute un espace vertical entre les sections */
+    margin: 0 0 1.5rem 0;
+  }
+  footer h3 {
+    /* Réduit la taille des titres pour les petits écrans */
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  footer ul li {
+    /* Réduit la taille des items de liste */
+    font-size: 1.25rem;
+  }
+  footer p {
+    /* Réduit la taille du texte simple */
+    font-size: 1.25rem;
+  }
+}
+/* Adaptation très petit écran (téléphones) */
+@media (max-width: 480px) {
+  footer {
+    padding: 2rem 0;
+  }
+  .footer-content {
+    /* Les sections s'affichent verticalement */
+    flex-direction: column;
+    padding: 1rem;
+  }
+  footer h3 {
+    /* Réduit encore la taille des titres */
+    font-size: 1.5rem;
+  }
+  footer ul li {
+    /* Réduit la taille des items de liste */
+    font-size: 1.25rem;
+  }
+  footer p {
+    /* Réduit la taille du texte simple */
+    font-size: 1.25rem;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Style général des formulaires */
+.annonce {
+  color: #000000;
+  border: 1px solid #E5AD36;
+  font-size: 2rem;
+  /* Ajout d'espacement interne */
+  padding: 2%;
+  /* Alignement justifié du texte */
+  text-align: justify;
+  /* Indentation de la première ligne */
+  text-indent: 2em;
+  /* Centrage horizontal */
+  justify-content: center;
+  /* Centrage vertical */
+  align-items: center;
+  /* Hauteur adaptable au contenu */
+  height: auto;
+  /* Centrage horizontal du conteneur */
+  margin: 0 auto;
+  /* Largeur maximale pour ne pas déborder */
+  max-width: 80%;
+  /* Ombre pour style */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Coins arrondis */
+  border-radius: 8px;
+  /* Fond optionnel */
+  background-color: #a9a9a9;
+}
+
+/* Styles du logo du formulaire. */
+.imgcontainer-form {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Image avatar dans le formulaire */
+img.avatar-form {
+  width: 45%;
+  align-items: center;
+  /* Animation fluide pour le zoom et l'ombre */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Effet de zoom au survol */
+}
+img.avatar-form:hover {
+  /* Agrandit l'image à 110% de sa taille originale */
+  transform: scale(1.1);
+  /* Ajoute une ombre au survol */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.space-form {
+  height: 5vh;
+}
+
+/* Titre du formulaire */
+.h2-form {
+  color: #DE7915;
+  text-align: center;
+}
+
+.h3-form {
+  text-decoration: underline;
+  color: #C96B12;
+  text-align: center;
+}
+
+/* Conteneur de l'image */
+.form-base {
+  background-color: #000000;
+  border: 2px solid #C96B12;
+  padding: 20px;
+  font-size: 1.5rem;
+  max-width: 30vw;
+  margin: 5% auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Conteneur des champs */
+.form-container {
+  margin-bottom: 1%;
+  display: flex;
+  flex-direction: column;
+  /* Augmente l'écart entre les champs */
+  gap: 15px;
+}
+.form-container .form-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Occupation de toute la largeur disponible */
+  width: 100%;
+}
+.form-container .form-group label {
+  display: block;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1.5%;
+  background-color: transparent;
+}
+.form-container .form-group input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 12px;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 1.5rem;
+  background-color: #f2f2f2;
+  color: #000000;
+}
+.form-container .form-group input:hover {
+  background-color: #a9a9a9;
+  border: 1px solid #E5AD36;
+}
+.form-container .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  margin-top: 7%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #000000;
+  font-size: 1.5rem;
+}
+
+/* Lien pour mot de passe oublié */
+.forgot-password {
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.forgot-password-a {
+  color: #C96B12;
+  padding: 2% 3%;
+}
+
+.container-btn {
+  border: 1px solid #f2f2f2;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .annonce {
+    /* Prend toute la largeur de l'écran */
+    max-width: 100%;
+    /* Espacement interne suffisant */
+    padding: 5%;
+    /* Pas de marges externes */
+    margin: 0;
+  }
+  /* Enlever les styles qui forcent les marges et la largeur pour mobile */
+  .form-base {
+    /* Laisser le formulaire occuper toute la largeur */
+    max-width: 100%;
+    /* Pas de marges externes */
+    margin: 0;
+  }
+  .form-container {
+    /* Espacement réduit pour les champs */
+    gap: 8px;
+  }
+  .form-group label {
+    /* Ajustement de la taille du texte */
+    font-size: 1.25rem;
+  }
+  .form-group input {
+    /* Ajuste la taille des champs */
+    font-size: 1.25rem;
+  }
+  .container-btn {
+    /* Ajustement du padding du bouton */
+    padding: 1.2%;
+  }
+}
+/* Tablettes en paysage */
+@media (max-width: 1024px) {
+  .annonce {
+    /* Réduction de la largeur par rapport aux tablettes en portrait */
+    max-width: 90%;
+    padding: 4%;
+  }
+  .form-base {
+    /* Ajuste la largeur pour ne pas trop prendre de place */
+    max-width: 90vw;
+    /* Ajuste la marge */
+    margin: 5% auto;
+  }
+  .form-container {
+    /* Espacement réduit entre les champs */
+    gap: 10px;
+  }
+  .form-group label {
+    font-size: 1.25rem;
+  }
+  .form-group input {
+    font-size: 1.25rem;
+  }
+  .container-btn {
+    padding: 1.4%;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 30%;
+  background-color: rgba(44, 62, 80, 0.95);
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+@media (max-width: 1024px) {
+  .header {
+    display: none;
+  }
+}
+
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1002;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.4rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.hamburger .line {
+  width: 2rem;
+  height: 0.3rem;
+  background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+@media (max-width: 1024px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+.hamburger.active + .header,
+.header.active {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: rgba(44, 62, 80, 0.95);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Permet le défilement si les liens débordent */
+  overflow-y: auto;
+}
+
+.main-content {
+  /* Animation fluide lors du changement */
+  transition: margin-top 0.3s ease;
+}
+
+/* Conteneur de navigation */
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  padding: 2rem 1rem;
+  gap: 2rem;
+}
+
+.nav-links ul {
+  list-style: none;
+  /* Centre horizontalement */
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  /* Place les liens verticalement */
+  flex-direction: column;
+  /* Centre verticalement si le parent a une hauteur définie */
+  justify-content: center;
+  align-items: center;
+}
+.nav-links ul li a {
+  font-size: 3rem;
+  color: #ffffff;
+  text-decoration: none;
+  margin: 1rem 0;
+}
+.nav-links ul li a:hover {
+  color: #E5AD36;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+.actions .logged {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.actions a {
+  text-align: center;
+  font-size: 1.25rem;
+  color: #ffffff;
+  padding: 0.8rem 1rem;
+  border-radius: 5px;
+  background-color: #DE7915;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.actions a:hover {
+  background-color: #ffffff;
+  color: #C96B12;
+  /* Légère mise en avant */
+  transform: scale(1.05);
+}
+
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Style pour la carte page d'accueil */
+.sethiarcart-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  background: linear-gradient(to bottom, #f8f9fa, #e0e0e0);
+  border: 1px solid #DE7915;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sethiarcart-pic img {
+  width: 50%;
+  height: auto;
+  border: 4px solid #DE7915;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.sethiarcart-pic img:hover {
+  /* Zoom au survol */
+  transform: scale(1.1);
+  /* Ombre au hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Queries pour les petits écrans */
+@media (max-width: 768px) {
+  /* Carte d'accueil */
+  .sethiarcart-pic {
+    /* Réduit la hauteur sur les écrans plus petits */
+    height: 40vh;
+    /* Ajoute un peu de marge */
+    margin: 1rem;
+  }
+  .sethiarcart-pic img {
+    /* Augmente la largeur de l'image pour une meilleure visibilité */
+    width: 80%;
+  }
+}
+/* Media Queries pour les très petits écrans (téléphones) */
+@media (max-width: 480px) {
+  /* Carte d'accueil */
+  .sethiarcart-pic {
+    /* Encore plus petite sur les téléphones */
+    height: 35vh;
+    /* Marge plus petite */
+    margin: 0.5rem;
+  }
+  .sethiarcart-pic img {
+    /* Largeur presque pleine sur les téléphones */
+    width: 90%;
+  }
+}
+/* Styles pour l'image de la zone commentaires*/
+/* Conteneur de l'image de la zone commentaires*/
+.comment-image-container {
+  /* Mise en place flexbox */
+  display: flex;
+  /* Centre horizontalement */
+  justify-content: center;
+  /* Centre verticalement */
+  align-items: center;
+  /* Ajoute de l'espace autour du conteneur */
+  margin: 2%;
+}
+
+/* Styles pour le cadre de l'image */
+.image-comment {
+  /* Adapte la taille du conteneur à celle de l'image */
+  display: inline-block;
+  /* Évite que l'image dépasse du cadre si elle est trop grande */
+  overflow: hidden;
+  /* Animation fluide pour le zoom et l'ombre */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.image-comment:hover {
+  /* Agrandit légèrement l'image */
+  transform: scale(1.1);
+}
+
+/* Image à l'intérieur */
+.image-comment img {
+  margin: 0 auto;
+  /* Coins arrondis pour un aspect élégant */
+  border-radius: 10px;
+  /* Supprime les espaces blancs sous l'image */
+  display: block;
+  /* Adapte la taille de l'image */
+  max-width: 60%;
+  /* Conserve le ratio de l'image */
+  height: auto;
+}
+
+/* Media Queries pour les petits écrans */
+@media (max-width: 768px) {
+  .image-comment img {
+    /* Agrandit l'image pour les tablettes et petits écrans */
+    max-width: 80%;
+  }
+}
+/* Media Queries pour les très petits écrans (téléphones) */
+@media (max-width: 480px) {
+  .image-comment img {
+    /* Agrandit encore l'image pour les téléphones */
+    max-width: 90%;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Links CSS - components/links.scss */
+/* Liens communs dans l'interface */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #C96B12;
+}
+
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Titre de la partie produits */
+.h1-product, .h2-product, .h3-product, .h4-product, .p-product {
+  margin: 1vw 0;
+}
+
+/*Titre principal */
+.product-h1 {
+  /* Active Flexbox */
+  display: flex;
+  /* Aligne les enfants en colonne */
+  flex-direction: column;
+  /* Centre horizontalement */
+  align-items: center;
+  font-size: 3rem;
+  color: #C96B12;
+  margin-bottom: 5%;
+}
+
+/* Titres principaux */
+.product-card h2 {
+  font-size: 2rem;
+  margin-bottom: 2%;
+  text-align: center;
+  color: #C96B12;
+  border-bottom: 2px solid #E5AD36;
+  padding-bottom: 1%;
+}
+
+/* Sous-titres */
+.product-card h3 {
+  font-size: 1.5rem;
+  margin-top: 2%;
+  margin-bottom: 1.5%;
+  color: #f4f4f4;
+  border-left: 4px solid #DE7915;
+  padding-left: 1%;
+}
+
+/* Titres mineurs */
+.product-card h4 {
+  font-size: 1.25rem;
+  margin-bottom: 1%;
+  color: #f2f2f2;
+  font-weight: 600;
+}
+
+/* Conteneur pour les produits de la page d'accueil. */
+.product-grid {
+  /* Mise en forme en grille */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 2%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grille principale */
+.product-card {
+  background-color: #1e1e1e;
+  color: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Texte */
+.product-p {
+  font-size: 1.5rem;
+  margin-bottom: 2%;
+  color: #ddd;
+  line-height: 1.6;
+}
+
+.space-product {
+  height: 2vh;
+}
+
+/* Media Queries pour les petits écrans */
+@media (max-width: 768px) {
+  .product-h1 {
+    font-size: 2rem;
+  }
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste les colonnes pour les petits écrans */
+    padding: 15px;
+  }
+  .product-card {
+    /* Moins de padding pour optimiser l'espace */
+    padding: 20px;
+  }
+  .product-card h2 {
+    /* Diminue la taille du titre principal */
+    font-size: 1.5rem;
+  }
+  .product-card h3 {
+    /* Réduit la taille des sous-titres */
+    font-size: 1.25rem;
+  }
+  .product-card h4 {
+    font-size: 1rem;
+    /* Réduit la taille des titres mineurs */
+  }
+  .product-p {
+    /* Diminue la taille du texte des descriptions */
+    font-size: 1.25rem;
+  }
+}
+/* Media Queries pour les très petits écrans (téléphones) */
+@media (max-width: 480px) {
+  .product-h1 {
+    font-size: 1.5rem;
+  }
+  .product-grid {
+    /* Une seule colonne pour les téléphones */
+    grid-template-columns: 1fr;
+    padding: 1%;
+  }
+  .product-card {
+    /* Réduit le padding pour les téléphones */
+    padding: 1.5%;
+  }
+  .product-card h2 {
+    /* Réduit encore la taille du titre principal */
+    font-size: 1.25rem;
+  }
+  .product-card h3 {
+    /* Réduit encore la taille des sous-titres */
+    font-size: 1.25rem;
+  }
+  .product-card h4 {
+    /* Réduit encore la taille des titres mineurs */
+    font-size: 1rem;
+  }
+  .product-p {
+    /* Réduit la taille du texte des descriptions */
+    font-size: 1.25rem;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Style pour la page d'accueil du baseback.html.jinja2 */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.header-backend {
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+}
+
+.nav-backend {
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+}
+.nav-backend:hover {
+  color: #ffffff;
+}
+
+.h1-backend {
+  font-size: 3rem;
+  color: #C96B12;
+  text-align: center;
+}
+
+.annonce-back p {
+  font-size: 2rem;
+  color: #DE7915;
+  background-color: #f2f2f2;
+  border: 1px solid #C96B12;
+  border-radius: 12px;
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.h4-backend {
+  margin-left: 10%;
+}
+
+.h5-backend {
+  padding-left: 5vw;
+  text-decoration: underline;
+  font-size: 1.25rem;
+  color: #E5AD36;
+}
+
+.table {
+  font-size: 1rem;
+  border: 1px solid #f2f2f2;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2%;
+}
+
+th {
+  color: #C96B12;
+  border: 1px solid #f2f2f2;
+  padding: 2%;
+}
+
+tr {
+  color: #ffffff;
+  padding: 1%;
+  border: 1px solid #f2f2f2;
+}
+
+td {
+  margin-right: 1%;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  border: 1px solid #f2f2f2;
+  padding: 2%;
+}
+
+.actions-buttons {
+  margin-right: 1rem;
+}
+
+.btn-suppression, .btn-valide {
+  width: 10vw;
+  border: 1px solid #F8C456;
+  background-color: #DE7915;
+}
+.btn-suppression:hover, .btn-valide:hover {
+  /* Ombre subtile */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Animation fluide */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #E5AD36;
+  background-color: #C96B12;
+}
+
+/* Sélection de tous les utilisateurs */
+.select-all-users {
+  color: #E5AD36;
+  font-size: 1.25rem;
+  transition: color 0.3s, transform 0.3s;
+}
+.select-all-users:hover {
+  font-size: 1.5rem;
+  color: #FFD580;
+}
+
+/* Présentation des premières lettres des pseudos des utilisateurs */
+.lettre-navigation {
+  padding-left: 20vw;
+  display: flex-column;
+}
+
+/* Sélection des lettres */
+.lettre a {
+  color: #DE7915;
+  margin-right: 4vw;
+  /* Animation fluide */
+  transition: color 0.3s, transform 0.3s;
+}
+.lettre a:hover {
+  color: #FFD580;
+  /* Légère mise en avan */
+  transform: scale(1.1);
+  text-decoration: underline;
+}
+
+.col-user {
+  width: 15vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.col-title {
+  width: 25vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.col-comment {
+  width: 40vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.col-actions {
+  width: 20vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.separation {
+  border: 1px solid #ffffff;
+}
+
+.container-category {
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid #C96B12;
+  font-size: 1rem;
+  width: 50%;
+}
+
+.label {
+  width: 40%;
+}
+
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Style de la page calendar.html du blog */
+#table-appointment {
+  color: #FFD580;
+  width: 90vw;
+  padding-left: 5vw;
+}
+
+h5 {
+  padding-left: 5vw;
+  text-decoration: underline;
+  font-size: 1.5rem;
+}
+
+th {
+  color: #DE7915;
+}
+
+tr {
+  color: #ffffff;
+}
+
+.link {
+  color: #E5AD36;
+}
+
+.link:hover {
+  color: #C96B12;
+}
+
+.btn-valide {
+  width: 10vw;
+  border: 1px solid #FFD580;
+  background-color: #DE7915;
+}
+.btn-valide:hover {
+  border: 1px solid #E5AD36;
+  background-color: #C96B12;
+}
+
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Styles de la section commentaire */
+.form-comment {
+  display: flex;
+  padding-left: 5%;
+}
+
+/* Conteneur des commentaires */
+.container-comment {
+  display: flex;
+  flex-direction: column;
+  margin: 5%;
+  padding: 2%;
+  background-color: #292929;
+  border: 1px solid #C96B12;
+  border-radius: 5px;
+  /* Ajoute une légère ombre */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Titre de la section laisser un commentaire */
+.comment-subtitle {
+  /* Centre le texte horizontalement */
+  text-align: center;
+}
+
+/* Section du titre */
+.comment-avis {
+  /* Ajoute un espacement sous le titre */
+  margin-bottom: 1.5rem;
+  /* Centre le texte horizontalement */
+  text-align: center;
+}
+
+.comment-avis h3 {
+  font-size: 1.5rem;
+  color: #000000;
+  background-color: #C96B12;
+  padding: 2%;
+  /* Coins arrondis */
+  border-radius: 5px;
+}
+
+/* Bouton postant le commentaire */
+.btn-comment {
+  background-color: #DE7915;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1%;
+  padding: 2%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-comment:hover {
+  /* Légère mise en avant */
+  transform: scale(1.1);
+}
+
+/* Conteneur du formulaire */
+.form-comment {
+  display: flex;
+  /* Aligne les éléments en colonne */
+  flex-direction: column;
+  /* Centre horizontalement les éléments */
+  align-items: center;
+  /* Ajoute un espace entre les éléments */
+  gap: 1rem;
+}
+
+/* Champ de texte */
+textarea {
+  width: 80%;
+  height: 15vh;
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 1.25rem;
+  border: 1px solid #C96B12;
+  /* Coins arrondis */
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+textarea:hover {
+  transform: scale(1.05); /* Agrandit légèrement */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Commentaire individuel */
+.comment {
+  background-color: #a9a9a9;
+  border: 1px solid #ddd;
+  color: #000000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
+  border-radius: 8px;
+  padding: 1%;
+  margin-bottom: 2%;
+}
+
+/* Photo des utilisateurs ayant posté */
+.comment-header {
+  background-color: #a9a9a9;
+  display: flex;
+  align-items: center;
+  gap: 1%;
+  color: #000000;
+  margin-bottom: 1%;
+}
+
+/* Photo Utilisateur */
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #a9a9a9;
+  border: 1px solid #C96B12;
+  object-fit: cover;
+}
+.profile-picture:hover {
+  /* Agrandit légèrement l'image */
+  transform: scale(1.1);
+}
+
+/* Info utilisateur */
+.comment-user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Pseudo de l'utilisateur */
+.user-enterprise-name {
+  font-weight: bold;
+  color: #000000;
+}
+
+/* Rôle de l'utilisateur */
+.user-role {
+  color: #000000;
+  background-color: transparent;
+  font-size: 1.5rem;
+}
+
+/* Date du commentaire */
+.comment-date {
+  color: #DE7915;
+  background-color: transparent;
+  border-top: 1px solid #FFD580;
+}
+
+/* Conteneur du contenu du commentaire */
+.comment-body {
+  margin-bottom: 1%;
+}
+
+/* Contenu du commentaire */
+.content-comment {
+  text-indent: 5%;
+  text-align: justify;
+  background-color: transparent;
+  color: #000000;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Conteneur des réponses */
+.comment-reply {
+  text-indent: 5%;
+  background-color: #f2f2f2;
+  color: #000000;
+  font-size: 1.5rem;
+  height: auto;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+/* Style des réponses aux commentaires */
+.reply-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Conteneur principal des réponses */
+.replies-container {
+  margin-top: 5%;
+  padding-left: 7%;
+  border-left: 2px solid #ddd;
+}
+
+/* Conteneur d'une réponse individuelle */
+.reply-card {
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1%;
+  margin-bottom: 1.5%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Entête des réponses */
+.reply-header {
+  background-color: #f2f2f2;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  gap: 1%;
+  margin-bottom: 1%;
+  margin-left: 10%;
+}
+
+/* Image de la section de réponse */
+.reply-profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #C96B12;
+  background-color: #f2f2f2;
+  color: #000000;
+  /* Animation fluide pour le zoom et l'ombre */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.reply-profile-picture:hover {
+  /* Agrandit légèrement l'image */
+  transform: scale(1.1);
+}
+
+/* Infos utilisateur */
+.reply-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-indent: 10%;
+  background-color: #f2f2f2;
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+.reply-user-enterprise-name {
+  font-weight: bold;
+  background-color: #f2f2f2;
+  font-size: 1.5rem;
+  color: #000000;
+}
+
+.reply-user-role {
+  font-size: 1.5rem;
+  background-color: #f2f2f2;
+  color: #000000;
+}
+
+.reply-date {
+  text-indent: 10%;
+  background-color: #f2f2f2;
+  font-size: 1.25rem;
+  color: #000000;
+  border-top: 1px solid #FFD580;
+}
+
+/* Contenu de la réponse */
+.reply-body {
+  margin-bottom: 1.2%;
+}
+
+.reply-content {
+  text-align: center;
+  background-color: #f2f2f2;
+  color: #000000;
+  line-height: 1.5;
+  padding-right: 4%;
+  padding-bottom: 2%;
+  font-size: 1.5rem;
+  margin-left: 7%;
+  margin-right: 7%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 0.8%;
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container-comment h2 {
+    width: 85%;
+    font-size: 1.5rem;
+  }
+  .profile-picture {
+    width: 40px;
+    height: 40px;
+  }
+  .comment {
+    font-size: 1.25rem;
+  }
+  .btn-comment {
+    font-size: 1.25rem;
+  }
+  textarea {
+    width: 90%;
+    height: 12vh;
+  }
+  .comment-avis h3 {
+    font-size: 1.25rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .container-comment h2 {
+    width: 95%;
+    font-size: 1.25rem;
+  }
+  .comment {
+    font-size: 1rem;
+  }
+  .btn-comment {
+    font-size: 1rem;
+  }
+  textarea {
+    width: 95%;
+    height: 10vh;
+  }
+  .comment-avis h3 {
+    font-size: 1rem;
+  }
+  .reply-profile-picture {
+    width: 35px;
+    height: 35px;
+  }
+  .reply-content {
+    font-size: 1.25rem;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .container-comment h2 {
+    width: 100%;
+    font-size: 1.25rem;
+  }
+  .comment {
+    font-size: 1rem;
+  }
+  .btn-comment {
+    font-size: 1rem;
+  }
+  textarea {
+    width: 100%;
+    height: 8vh;
+  }
+  .comment-avis h3 {
+    font-size: 1rem;
+  }
+  .reply-profile-picture {
+    width: 30px;
+    height: 30px;
+  }
+  .reply-content {
+    font-size: 0.875rem;
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* pages css - pages/home.scss */
+/* Titre de la page d'accueil */
+.title-container-landing {
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  align-items: center;
+  margin: 0;
+  height: 20vh;
+  border-radius: 8px;
+  text-align: center;
+  padding: 2% 3%;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+.title-container-landing:hover {
+  transform: scale(1.025);
+}
+
+/* Contenu centré avec dégradé */
+.content-section-landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+}
+
+.intro-landing {
+  opacity: 0;
+  transform: translateY(50px) scale(0.8);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  font-size: 3rem;
+  color: #f2f2f2;
+  text-align: center;
+  margin: 3% 0;
+  line-height: 1.4;
+}
+
+/* Conteneur pour le slogan de l'entreprise */
+.slogan-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #f2f2f2;
+  /* Style de base */
+  border: 2px solid #C96B12;
+  border-radius: 40px;
+  /* Animation fluide */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.slogan-container:hover {
+  transform: scale(1.02); /* Agrandir le conteneur */
+  border: 2px solid #E5AD36;
+}
+
+/* Texte du slogan */
+.slogan-text {
+  font-size: 2rem;
+  color: #DE7915;
+  font-weight: bold;
+  font-family: "Comfortaa", cursive;
+  /* Transition harmonisée */
+  transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
+.slogan-container:hover .slogan-text {
+  /* Grossir légèrement le texte */
+  font-size: 3rem;
+  -webkit-background-clip: text;
+}
+
+/* Animation principale : fadeInUp */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.registration-sentence-landing {
+  opacity: 0;
+  transform: translateY(50px) scale(0.8);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  font-size: 3rem;
+  color: #a9a9a9;
+  text-align: center;
+  margin: 3% 0;
+  line-height: 1;
+}
+
+/* Classe animée lors de l'apparition */
+p.appear {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Styles pour les paragraphes sans animation */
+p.animate {
+  animation: fadeInAndGrow 0.5s ease-out forwards;
+}
+
+/* Animation pour fade in */
+@keyframes fadeInAndGrow {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Animation pour fade in avec croissance */
+@keyframes fadeInAndGrow {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.wait-container {
+  color: #DE7915;
+  background-color: #000000;
+  border: 1px solid #E5AD36;
+  padding: 2%;
+  text-align: center;
+  max-width: 80%;
+}
+
+/* Media Queries pour la réactivité */
+@media (max-width: 768px) {
+  /* Ajustements pour les tablettes en portrait et les petits écrans */
+  .title-container-landing {
+    font-size: 2rem;
+    height: 12vh;
+  }
+  .content-section-landing {
+    width: 90%;
+    padding: 0.5rem;
+  }
+  .intro-landing {
+    font-size: 1.5rem;
+    margin: 2% 0;
+  }
+  .slogan-container {
+    width: 100%;
+    padding: 1%;
+  }
+  .slogan-text {
+    font-size: 1.5rem;
+  }
+  .registration-sentence-landing {
+    font-size: 1.5rem;
+  }
+  .wait-container {
+    max-width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  /* Ajustements pour les smartphones */
+  .title-container-landing {
+    font-size: 2rem;
+    height: 10vh;
+  }
+  .content-section-landing {
+    width: 100%;
+    padding: 0.25rem;
+  }
+  .intro-landing {
+    font-size: 1.5rem;
+    margin: 1% 0;
+  }
+  .slogan-container {
+    padding: 0.5%;
+  }
+  .slogan-text {
+    font-size: 1.5rem;
+  }
+  .registration-sentence-landing {
+    font-size: 1.5rem;
+  }
+  .wait-container {
+    max-width: 100%;
+    padding: 1rem;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Styles pour les pages Politique et Mentions Légales */
+/* Cadre principal */
+.outer-frame-politique {
+  border: 4px solid #C96B12;
+  border-radius: 15px;
+  padding: 2%;
+  margin: 10%;
+  background: #f2f2f2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.outer-frame-politique:hover {
+  /* Légère mise en avant */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Cadre interne */
+.inner-frame-politique {
+  border: 2px solid #E5AD36;
+  border-radius: 10px;
+  padding: 1.5%;
+  background: #000000;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.politique-main {
+  padding: 40px 20px;
+  font-family: "Anonymous Pro", sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+.politique-title {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3%;
+  color: #ffffff;
+}
+
+.politique-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.politique-header .politique-update {
+  font-size: 2rem;
+  color: #000000;
+}
+.politique-header .politique-home-link {
+  font-size: 1.5rem;
+  color: #F08C1C;
+  text-decoration: none;
+  margin-top: 1%;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.politique-header .politique-home-link:hover {
+  color: #E5AD36;
+  /* Légère mise en avant */
+  transform: scale(1.1);
+}
+
+.politique-divider {
+  border: none;
+  height: 2px;
+  background-color: #E5AD36;
+  margin: 20px 0;
+}
+
+.politique-logo {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+.politique-logo .politique-logo-img {
+  width: 20%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* Animation fluide */
+  transition: transform 0.3s ease;
+}
+.politique-logo .politique-logo-img:hover {
+  /* Légère mise en avant */
+  transform: scale(1.05);
+}
+
+.politique-content {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 4% 2%;
+  border: 1px solid #f2f2f2;
+}
+.politique-content .politique-section {
+  margin-bottom: 4%;
+}
+.politique-content .politique-section .politique-subtitle {
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 4%;
+  color: #ffffff;
+  margin-bottom: 1%;
+}
+.politique-content .politique-section p {
+  font-size: 1.5rem;
+  margin-bottom: 1.5%;
+  text-indent: 2em;
+  line-height: 1.8;
+}
+.politique-content .politique-section .politique-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: disc;
+  padding-left: 2%;
+  padding-right: 5%;
+}
+.politique-content .politique-section .politique-list li {
+  font-size: 1.5rem;
+  margin-bottom: 1%;
+}
+
+.intro-politique {
+  border: 2px dashed #C96B12;
+  border-radius: 10px;
+  padding: 2%;
+  background: #f2f2f2;
+  font-size: 2rem;
+  color: #DE7915;
+  text-align: justify;
+  line-height: 1.8;
+  margin-bottom: 3%;
+}
+.intro-politique:hover {
+  background: white;
+  border-color: #E5AD36;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.intro-politique p {
+  text-indent: 2em;
+}
+
+.links {
+  color: #FFD580 !important;
+}
+.links:hover {
+  color: #C96B12 !important;
+}
+
+.contact-content {
+  display: flex;
+  /* Centre le contenu horizontalement */
+  justify-content: center;
+  /* Aligne verticalement si nécessaire */
+  align-items: center;
+  position: relative;
+  /* Optionnel : pour s'assurer que le conteneur occupe toute la hauteur de la page */
+  height: 100vh;
+}
+
+/* Conteneur pour les images */
+.cart-sethiar {
+  /* Active le mode flexbox */
+  display: flex;
+  /* Centre les images horizontalement */
+  justify-content: center;
+  /* Espace entre les images */
+  gap: 20px;
+}
+
+/* Style pour la carte page d'accueil */
+.sethiarcart-pic-contact {
+  justify-content: center;
+  align-items: center;
+  /* Proportions 16:9 */
+  aspect-ratio: 16/9;
+  width: 100%;
+  border: 1px solid #C96B12;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  /* Animation fluide */
+  transition: transform 0.3s ease-in-out;
+}
+
+.sethiarcart-pic-contact img {
+  width: 100%;
+  height: auto;
+  /* Remplit l'espace sans déformation de l'image */
+  object-fit: cover;
+  border: 1px solid #C96B12;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Animation fluide */
+  transition: transform 0.3s ease-in-out;
+}
+.sethiarcart-pic-contact img:hover {
+  /* Légère mise en avant */
+  transform: scale(1.1);
+  /* Ombre subtile */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.politique-footer {
+  text-align: center;
+  margin-top: 20%;
+  font-size: 1.5rem;
+  color: #a9a9a9;
+}
+.politique-footer p {
+  font-style: italic;
+}
+
+/* Media Queries */
+/* Pour les écrans de 1200px et plus (tablettes et bureau) */
+@media (min-width: 1200px) {
+  .outer-frame-politique {
+    margin: 5%;
+    padding: 3%;
+  }
+  .politique-main {
+    padding: 4.5% 3%;
+  }
+  .politique-title {
+    font-size: 2rem;
+  }
+  .politique-content {
+    max-width: 75%;
+  }
+  .sethiarcart-pic-contact {
+    height: 45vh;
+  }
+}
+/* Pour les écrans de 768px à 1199px (tablettes) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .outer-frame-politique {
+    margin: 8%;
+    padding: 2.5%;
+  }
+  .politique-main {
+    padding: 4% 2.5%;
+  }
+  .politique-title {
+    font-size: 2rem;
+  }
+  .politique-content {
+    max-width: 85%;
+  }
+  .sethiarcart-pic-contact {
+    height: 40vh;
+  }
+}
+/* Pour les écrans de 480px à 767px (mobiles en paysage et petites tablettes) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .outer-frame-politique {
+    margin: 12%;
+    padding: 2%;
+  }
+  .politique-main {
+    padding: 3% 1.5%;
+  }
+  .politique-title {
+    font-size: 1.5rem;
+  }
+  .politique-content {
+    max-width: 90%;
+  }
+  .sethiarcart-pic-contact {
+    height: 35vh;
+  }
+}
+/* Pour les écrans de moins de 480px (mobiles) */
+@media (max-width: 479px) {
+  .outer-frame-politique {
+    margin: 10%;
+    padding: 1.5%;
+  }
+  .politique-main {
+    padding: 2% 1%;
+  }
+  .politique-title {
+    font-size: 1.5rem;
+  }
+  .politique-content {
+    max-width: 100%;
+  }
+  .sethiarcart-pic-contact {
+    height: 30vh;
+  }
+  .cart-sethiar {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sethiarcart-pic-contact img {
+    width: 100%;
+    height: auto;
+  }
+}

@@ -1,0 +1,293 @@
+{% extends 'base.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description" content="Site de l'entreprise SethiarWorks d'Arnaud Lefetey.">
+<title>{% block title %}SethiarWorks{% endblock %}</title>
+
+<!-- CSS Principal -->
+<link rel="stylesheet" href="{{ url_for('static', filename='gen/style.css') }}?v=1.0">
+{% endblock %}
+
+{% block header_content %}
+{% endblock %}
+
+{% block main_content %}
+<!-- Conteneur principal -->
+<div class="main-content">
+
+    <!-- Conteneur logo -->
+    <div class="logo-animation" id="logo">
+        <div class="sprite sprite1"></div>
+        <div class="sprite sprite2"></div>
+        <div class="sprite sprite3"></div>
+        <div class="sprite sprite4"></div>
+        <div class="sprite sprite5"></div>
+        <div class="sprite sprite6"></div>
+        <div class="sprite sprite7"></div>
+        <div class="sprite sprite8"></div>
+
+        <button id="btn-logo" class="btn-secondary" onclick="restartAnimation()">Rejouer l'animation</button>
+    </div>
+    <!--Conteneur titre -->
+    <div class="separation1"></div>
+    <div class="space"></div>
+    <div class="title-container-landing">
+        <p>Bienvenue sur le site de l'entreprise <i><b>SethiarWorks</b></i></p>
+    </div>
+    <div class="space"></div>
+    <div class="separation1"></div>
+    <div class="space"></div>
+
+    <section class="content-section-landing">
+        <div class="outer-frame">
+            <div class="inner-frame">
+                <!-- Logo de SethiarWorks -->
+                <div id="SethiarCart-pic" class="SethiarCart-pic">
+                    <img src="{{ url_for('static', filename='images/images_sethiarworks/cart_sethiar.png') }}"
+                         alt="Image représentant l'entreprise SethiarWorks">
+                </div>
+
+                <div class="space"></div>
+                <p class="intro-landing">
+                    Bonjour, vous voici sur le site de l'entreprise SethiarWorks.
+                </p>
+                <div class="space"></div>
+                <p class="intro-landing">
+                    Notre entreprise crée des solutions numériques sur mesure, adaptées à vos besoins.
+                </p>
+                <div class="space"></div>
+                <p class="intro-landing">
+                    Notre objectif est de vous accompagner dans la réalisation de vos projets web.
+                </p>
+                <p class="intro-landing">
+                    Cela permet de continuellement perfectionner les compétences de l'équipe de développement à travers
+                    les multiples attentes de notre clientèle dans la création et le développement de votre projet.
+                </p>
+                <div class="space"></div>
+                <p class="intro-landing">
+                    Répondre à vos attentes est notre priorité.
+                </p>
+                <div class="space"></div>
+                <p class="intro-landing">
+                    Chaque retour de nos clients nous permet d'affiner notre approche afin de
+                    vous offrir des solutions toujours plus adaptées.
+                </p>
+                <div class="space"></div>
+                <p class="intro-landing">
+                    Chaque client est différent, ce qui fait que chaque projet possède une unicité et une originalité
+                    que nous
+                    chercherons à personnaliser au sein d'une réalisation.
+                </p>
+                <p class="intro-landing">
+                    Cela marquera non seulement notre manière de coder, mais surtout,
+                    sera le reflet du besoin de ce que <b>vous</b>, en tant que client, voulez mettre en avant.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="space"></div>
+
+    <!--Slogan de SethiarWorks -->
+    <div class="slogan-container">
+        <p class="slogan-text">
+            Donner vie à votre imaginaire, c'est ce que nous savons faire.
+        </p>
+    </div>
+    <div class="space"></div>
+    <div id="registration" class="registration-wrapper">
+        <div class="outer-frame-registration">
+            <div class="inner-frame-registration">
+                <!-- Enregistrement possible ici -->
+                <div class="registration-landing">
+                    <p class="registration-sentence-landing">
+                        N'hésitez pas à demander un devis afin de donner vie à votre projet.
+                    </p>
+                    <div class="space2"></div>        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space"></div>
+    <div class="separation1"></div>
+    <div class="space"></div>
+
+    <!-- Section des produits du Site -->
+
+    <section id="products" class="products">
+        <h1 class="product-h1">Produits développés par l'entreprise SethiarWorks</h1>
+        
+        <!-- Swiper container -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+
+                <!-- Slide 1 : Développement sur mesure -->
+                <div class="swiper-slide product-card">
+                    <h3>Développement sur mesure</h3>
+                     
+                    <div class="space"></div>
+                    
+                    <div class="product-pic">
+                        <img src="{{ url_for('static', filename='images/images_produit/dev-web.png') }}"
+                             alt="Image représentant le développement et la conception d'application">
+                    </div>
+                    <div class="space-product"></div>
+                    <div class="space"></div>
+
+                    <h4>Applications Web :</h4>
+                    <div class="product-p">
+                        <p>Sites modernes et responsives, adaptés aux besoins de votre entreprise.</p>
+                        <p>Développement de blogs professionnels avec gestion de contenu simplifiée.</p>
+                        <p>Conception de sites de vente en ligne avec intégration de systèmes de paiement sécurisés.</p>
+                        <p>Création d’applications Django, Flask, ou FastAPI adaptées aux besoins des clients.</p>
+                    </div>
+
+                    <div class="space"></div>
+
+                    <h4>Scripts automatisés :</h4>
+                    <div class="product-p">
+                        <p>Automatisation de tâches répétitives (ex. : extraction de données, génération de
+                            rapports).</p>
+                    </div>
+
+                    <div class="space"></div>
+
+                    <h4>Applications d’analyse de données :</h4>
+                    <div class="product-p">
+                        <p>Développement d’outils pour manipuler, analyser et visualiser des données avec Python
+                            (pandas,
+                            Matplotlib, Dash).</p>
+                    </div>
+                </div>
+
+                <!-- Slide 2 : Consulting technique -->
+                <div class="swiper-slide product-card">
+                    <h3>Consulting technique</h3>
+                    
+                    <div class="space"></div>
+
+                    <div class="product-pic">
+                        <img src="{{ url_for('static', filename='images/images_produit/consulting.png') }}"
+                             alt="Image représentant le consulting et l'analyse">
+                    </div>
+                    <div class="space-product"></div>
+                    <div class="space"></div>
+                    
+                    <div class="product-p">
+                        <p>Analyse des besoins techniques d’un projet.</p>
+                        <p>Recommandations sur l’architecture, les outils, ou les technologies Python à utiliser.</p>
+                        <p>Audit et optimisation de code existant.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3 : Maintenance et support -->
+                <div class="swiper-slide product-card">
+                    <h3>Maintenance et support</h3>
+
+                    <div class="space"></div>
+
+                    <div class="product-pic">
+                        <img src="{{ url_for('static', filename='images/images_produit/maintenance.png') }}"
+                             alt="Image représentant la maintenance">
+                    </div>
+                    <div class="space-product"></div>
+                    <div class="space"></div>
+
+                    <div class="product-p">
+                        <p>Résolution de bugs dans des applications existantes.</p>
+                        <p>Amélioration de la performance d’une application.</p>
+                        <p>Migration vers des technologies modernes.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 4 : Templates et outils -->
+                <div class="swiper-slide product-card">
+                    <h3>Templates et outils</h3>
+
+                    <div class="space"></div>
+
+                    <div class="product-pic">
+                        <img src="{{ url_for('static', filename='images/images_produit/templating.png') }}"
+                             alt="Image représentant la création de templates">
+                    </div>
+                    <div class="space"></div>
+                    <div class="space-product"></div>
+
+                    <h4>Scripts préconstruits :</h4>
+                    <div class="product-p">
+                        <p>Scripts pour extraire des données d’un site (web scraping avec BeautifulSoup/Scrapy).</p>
+                        <p>Gestion d’API REST.</p>
+                        <p>Générateur de rapports Excel/CSV automatisés.</p>
+                    </div>
+
+                    <div class="space"></div>
+
+                    <h4>Templates de projet Python :</h4>
+                    <div class="product-p">
+                        <p>Boilerplate pour des projets Django, Flask ou FastAPI.</p>
+                    </div>
+
+                    <div class="space"></div>
+
+                    <h4>Dashboards ou applications clés en main :</h4>
+                    <div class="product-p">
+                        <p>Dashboards interactifs avec Plotly/Dash ou Streamlit pour les entreprises.</p>
+                    </div>
+
+                    <div class="space"></div>
+
+                    <h4>Gestion simplifiée :</h4>
+                    <div class="product-p">
+                        <p>Outils comme un gestionnaire de tâches, un CRM de base ou une application de facturation.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 5 : Produits SaaS -->
+                <div class="swiper-slide product-card">
+                    <h3>Produits SaaS</h3>
+
+                    <div class="space"></div>
+
+                    <div class="product-pic">
+                        <img src="{{ url_for('static', filename='images/images_produit/saas.png') }}"
+                             alt="Image représentant la création de Saas">
+                    </div>
+                    <div class="space-product"></div>
+                    <div class="space"></div>
+
+                    <h4>Micro-SaaS :</h4>
+                    <div class="product-p">
+                        <p>Une application en ligne qui utilise Python pour résoudre un problème précis.</p>
+                    </div>
+
+                    <div class="space"></div>
+                    
+                    <h4>API :</h4>
+                    <div class="product-p">
+                        <p>Une API facile à intégrer pour des tâches spécifiques (ex. : nettoyage ou formatage de
+                            données).</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- Flèches de navigation -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </section>
+
+    <!-- Initialisation de la modale pour carrousel -->
+    <div id="slide-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img id="modal-image" src="" alt="Image agrandie du slide">
+            <h3 id="modal-title"></h3>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

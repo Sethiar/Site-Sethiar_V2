@@ -1,0 +1,122 @@
+// Importation des variables.
+@import '../base/variables';
+
+/* Style pour la carte page d'accueil */
+.sethiarcart-pic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  background: linear-gradient(to bottom, #f8f9fa, #e0e0e0);
+  border: 1px solid $color-primary;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sethiarcart-pic img {
+  width: 50%;
+  height: auto;
+  border: 4px solid $color-primary;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
+  &:hover {
+    /* Zoom au survol */
+    transform: scale(1.1);
+    /* Ombre au hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Media Queries pour les petits écrans */
+@media (max-width: 768px) {
+  /* Carte d'accueil */
+  .sethiarcart-pic {
+    /* Réduit la hauteur sur les écrans plus petits */
+    height: 40vh;
+    /* Ajoute un peu de marge */
+    margin: 1rem; 
+  }
+
+  .sethiarcart-pic img {
+    /* Augmente la largeur de l'image pour une meilleure visibilité */
+    width: 80%; 
+  }
+}
+
+/* Media Queries pour les très petits écrans (téléphones) */
+@media (max-width: 480px) {
+  /* Carte d'accueil */
+  .sethiarcart-pic {
+    /* Encore plus petite sur les téléphones */
+    height: 35vh;
+    /* Marge plus petite */
+    margin: 0.5rem; 
+  }
+
+  .sethiarcart-pic img {
+    /* Largeur presque pleine sur les téléphones */
+    width: 90%; 
+  }
+}
+
+/* Styles pour l'image de la zone commentaires*/
+
+/* Conteneur de l'image de la zone commentaires*/
+.comment-image-container {
+  /* Mise en place flexbox */
+  display: flex; 
+  /* Centre horizontalement */
+  justify-content: center;
+  /* Centre verticalement */
+  align-items: center; 
+  /* Ajoute de l'espace autour du conteneur */
+  margin: 2%; 
+}
+
+/* Styles pour le cadre de l'image */
+.image-comment{
+  /* Adapte la taille du conteneur à celle de l'image */
+  display: inline-block; 
+  /* Évite que l'image dépasse du cadre si elle est trop grande */
+  overflow: hidden; 
+  /* Animation fluide pour le zoom et l'ombre */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+
+  &:hover {
+    /* Agrandit légèrement l'image */
+    transform: scale(1.1); 
+  }
+}
+
+/* Image à l'intérieur */
+.image-comment img {
+  margin: 0 auto;
+  /* Coins arrondis pour un aspect élégant */
+  border-radius: 10px; 
+  /* Supprime les espaces blancs sous l'image */
+  display: block; 
+  /* Adapte la taille de l'image */
+  max-width: 60%;
+  /* Conserve le ratio de l'image */
+  height: auto; 
+}
+
+/* Media Queries pour les petits écrans */
+@media (max-width: 768px) {
+  .image-comment img {
+    /* Agrandit l'image pour les tablettes et petits écrans */
+    max-width: 80%; 
+  }
+}
+
+/* Media Queries pour les très petits écrans (téléphones) */
+@media (max-width: 480px) {
+  .image-comment img {
+    /* Agrandit encore l'image pour les téléphones */
+    max-width: 90%; 
+  }
+}

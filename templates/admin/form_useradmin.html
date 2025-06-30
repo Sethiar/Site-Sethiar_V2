@@ -1,0 +1,146 @@
+{% extends 'baseform.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description" content="Formulaire qui permet à un utilisateur de s'inscrire en tant qu'administrateur.">
+<title>{% block title %}Formulaire d'adhésion pour s'inscrire en tant qu'administrateur{% endblock %}</title>
+{% endblock %}
+
+{% block body_content %}
+
+<form method="POST" action="{{ url_for('admin.user_recording') }}" class="form-base"
+      enctype="multipart/form-data">
+
+    <!-- Image du logo -->
+    <div class="imgcontainer-form">
+        <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
+             class="avatar-form">
+    </div>
+
+    <!-- Titre du formulaire -->
+    <h3 class="h3-form">Enregistrement Utilisateur</h3>
+
+    <!-- Token CSRF pour la sécurité -->
+    {{ formuser.csrf_token }}
+
+    <div class="space-form"></div>
+
+    <!-- Conteneur des champs du formulaire -->
+    <div class="form-container">
+
+       <!-- Champ pour le nom et le prénom -->
+        <div class="form-group">
+            {{ formuser.lastname.label }} {{ formuser.lastname() }}
+            {% if formuser.lastname.errors %}
+            <ul>
+                {% for error in formuser.lastname.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {{ formuser.firstname.label }} {{ formuser.firstname() }}
+            {% if formuser.firstname.errors %}
+            <ul>
+                {% for error in formuser.firstname.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <!-- Champ pour le nom de l'entreprise -->
+        <div class="form-group">
+            {{ formuser.enterprise_name.label }} {{ formuser.enterprise_name()}}
+            {% if formuser.enterprise_name.errors %}
+            <ul>
+                {% for error in formuser.enterprise_name.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ formuser.role.label }} {{ formuser.role() }}
+            {% if formuser.role.errors %}
+            <ul>
+                {% for error in formuser.role.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <!-- Champ pour le téléphone -->
+        <div class="form-group">
+            {{ formuser.phone.label }} {{ formuser.phone() }}
+            {% if formuser.phone.errors %}
+            <ul>
+                {% for error in formuser.phone.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <!-- Champ pour le mail -->
+                <div class="form-group">
+            {{ formuser.email.label }} {{ formuser.email() }}
+            {% if formuser.email.errors %}
+            <ul>
+                {% for error in formuser.email.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <!-- Champ pour le mot de passe -->
+        <div class="form-group">
+            {{ formuser.password.label }} {{ formuser.password() }}
+            <span class="toggle-password" onclick="togglePassword('password')" aria-controls="password">
+                <i class="fas fa-eye"></i>
+            </span>
+            {% if formuser.password.errors %}
+            <ul>
+                {% for error in formuser.password.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <!-- Champ pour la vérification du mot de passe -->
+        <div class="form-group">
+            {{ formuser.password2.label }} {{ formuser.password2() }}
+            <span class="toggle-password" onclick="togglePassword('password2')"><i
+                    class="fas fa-eye"></i></span>
+            {% if formuser.password2.errors %}
+
+            <ul>{% for error in formuser.password2.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <!-- Champ pour la photo de profil -->
+        <div class="form-group">
+            <ul>
+                {{ formuser.profil_photo.label }}
+                {{ formuser.profil_photo }}
+            </ul>
+        </div>
+    </div>
+
+    <div class="separation1"></div>
+
+    <!-- Champ pour les boutons du formulaire -->
+    <div class="container-btn">
+        <button type="submit" class="validated-btn" aria-label="Valider l'inscription">Validation de la
+            souscription
+        </button>
+        <a href="{{ url_for('admin.backend') }}" class="cancelled-bttn">Annulation et retour au backend</a>
+    </div>
+</form>
+{% endblock %}

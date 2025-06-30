@@ -1,0 +1,80 @@
+{% extends 'baseform.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description" content="Connexion utilisateur au site de l'entreprise SethiarWorks">
+<title>{% block title %}Authentification Utilisateur{% endblock %}</title>
+{% endblock %}
+
+{% block header_content %}
+{% endblock %}
+
+{% block body_content %}
+<div class="outer-frame">
+    <div class="inner-frame">
+        <form method="POST" action="{{ url_for('auth.login', next_url=next_url) }}" class="form-base"
+              enctype="multipart/form-data">
+
+            <!-- Image du logo -->
+            <div class="imgcontainer-form">
+                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
+                     class="avatar-form">
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            {% if category == 'login' %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <!-- Titre du formulaire -->
+            <h3 class="h3-form">Authentification Utilisateur</h3>
+
+            <!-- Token CSRF pour la sécurité -->
+            {{ form_loginuser.csrf_token }}
+
+            <div class="space-form"></div>
+
+            <!-- Conteneur des champs du formulaire -->
+            <div class="form-container">
+                <!-- Champ pour le nom de l'entreprise -->
+                <div class="form-group">
+                    {{ form_loginuser.enterprise_name.label }}
+                    {{ form_loginuser.enterprise_name() }}
+                </div>
+
+                <!-- Champ pour le mot de passe -->
+                <div class="form-group">
+                    {{ form_loginuser.password.label }}
+                    {{ form_loginuser.password(class="form-group", id="password") }}
+                    <span class="toggle-password" onclick="togglePassword('password')">
+                    <i class="fas fa-eye"></i>
+                </span>
+                </div>
+            </div>
+
+            <!-- Lien pour le mot de passe oublié -->
+            <div class="forgot-password">
+                <a class="forgot-password-a" href="{{ url_for('auth.password_reset') }}">Mot de passe oublié</a>
+            </div>
+
+            <!-- Séparation -->
+            <div class="separation1"></div>
+
+            <!-- Boutons d'action -->
+            <div class="space-form"></div>
+            <div class="container-btn">
+                <button type="submit" class="validated-btn" aria-label="Valider la connexion">Connexion au compte utilisateur</button>
+                <a href="{{ url_for('landing_page') }}" class="cancelled-btn">Annulation et retour à l'accueil</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_content %}
+{% endblock %}

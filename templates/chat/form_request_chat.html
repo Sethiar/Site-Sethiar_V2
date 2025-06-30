@@ -1,0 +1,155 @@
+{% extends 'baseform.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description"
+      content="Formulaire permettant de demander un chat vidéo avec l'administrateur du site entreprise SethiarWorks.">
+<title>{% block title %}Formulaire de demande de chat avec <b>SethiarWorks</b>>.{% endblock %}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{% endblock %}
+
+{% block body_content %}
+<div class="outer-frame">
+    <div class="inner-frame">
+        <!--Titre premier de la section du chat vidéo.-->
+        <h2 class="h2-form">Informations concernant la demande de chat vidéo.</h2>
+
+        <div class="space-form"></div>
+
+        <!-- Salutations -->
+        <h3 class="h3-form">Bienvenue</h3>
+
+        <div class="annonce">
+            <p>
+                Si vous souhaitez vous entretenir avec un membre de l'équipe de l'entreprise SethiarWorks
+                directement en chat vidéo, vous pouvez remplir ce formulaire.
+                Votre demande sera traitée dans les plus brefs délais,
+                et nous ferons tout notre possible pour vous aider.
+            </p>
+            <p>
+                Afin de vous faciliter la démarche, nous vous proposons de faire ainsi :
+            </p>
+            <ul>
+                <li>
+                    1 - Vous devez préciser une date (Ex : le 15 février)
+                    et l'heure à laquelle vous serez disponible.
+                </li>
+                <li>
+                    2 - Après l'envoi de la demande de chat vidéo, vous recevrez un mail vous avertissant que
+                    la demande a bien été effectuée et qu'elle est prise en charge.
+                </li>
+                <li>
+                    3 - Suite aux informations données, un membre de SethiarWorks validera le rendez-vous
+                    ou vous proposera de renouveler votre demande s'il ne peut se rendre disponible à l'heure choisie.
+                </li>
+            </ul>
+        </div>
+
+        <form method="POST" action="{{ url_for('chat.send_request') }}" class="form-base"
+              enctype="multipart/form-data">
+
+            <!-- Image du logo -->
+            <div class="imgcontainer-form">
+                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
+                     class="avatar-form">
+            </div>
+
+            <!-- Titre du formulaire -->
+            <h3 class="h3-form">Demande de chat vidéo</h3>
+
+            <!-- Token CSRF pour la sécurité -->
+            {{ formrequest.csrf_token }}
+
+            <!-- Conteneur des champs du formulaire -->
+            <div class="form-container">
+
+                <!-- Champ pour le nom de l'entreprise -->
+                <div class="form-group">
+                    {{ formrequest.enterprise_name.label }}
+                    {{ formrequest.enterprise_name() }}
+                    {% if formrequest.enterprise_name.errors %}
+                    <ul>
+                        {% for error in formrequest.enterprise_name.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Champ pour l'email -->
+                <div class="form-group">
+                    {{ formrequest.email.label }}
+                    {{ formrequest.email() }}
+                    {% if formrequest.email.errors %}
+                    <ul>
+                        {% for error in formrequest.email.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div> 
+
+                <!-- Champ pour le contenu de requête -->
+                <div class="form-group">
+                    {{ formrequest.request_content.label }} {{ formrequest.request_content(rows=20, cols=20) }}
+                    {% if formrequest.request_content.errors %}
+                    <ul>
+                        {% for error in formrequest.request_content.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Champ pour la date de visio -->
+                <div class="form-group">
+                    {{ formrequest.date_rdv.label }} {{ formrequest.date_rdv() }}
+                    {% if formrequest.date_rdv.errors %}
+                    <ul>
+                        {% for error in formrequest.date_rdv.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <!-- Champ pour la date de visio -->
+                <div class="form-group">
+                    {{ formrequest.heure.label }}
+                    {{ formrequest.heure() }}
+                    {% if formrequest.heure.errors %}
+                    <ul>
+                        {% for error in formrequest.heure.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="separation1"></div>
+            <div class="container-btn">
+                <button type="submit" class="validated-btn" aria-label="Valider la visio">
+                    Validation de la demande
+                </button>
+                <a href="{{ url_for('landing_page') }}" class="cancelled-btn">
+                    Annulation de la demande
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("input[type='time']", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            time_24hr: true
+        });
+    });
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,355 @@
+// Importation des variables
+@import '../base/variables';
+
+/* Styles pour les pages Politique et Mentions Légales */
+
+// Cadres
+/* Cadre principal */
+.outer-frame-politique {
+  border: 4px solid $color-decline-orange2;
+  border-radius: 15px;
+  padding: 2%;
+  margin: 10%;
+  background: $color-lightgrey;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    /* Légère mise en avant */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Cadre interne */
+.inner-frame-politique {
+  border: 2px solid $color-decline-gold2;
+  border-radius: 10px;
+  padding: 1.5%;
+  background: $color-black;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+// Général
+.politique-main {
+  padding: 40px 20px;
+  font-family: 'Anonymous Pro', sans-serif;
+  background-color: $color-black;
+  color: $color-white;
+  line-height: 1.6;
+}
+
+// Titre principal
+.politique-title {
+  font-size: $font-size-xxxl;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 3%;
+  color: $color-white;
+}
+
+// En-tête
+.politique-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+
+  .politique-update {
+    font-size: $font-size-xxl;
+    color: $color-black;
+  }
+
+  .politique-home-link {
+    font-size: $font-size-xl;;
+    color: $color-decline-orange1;
+    text-decoration: none;
+    margin-top: 1%;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      color: $color-decline-gold2;
+      /* Légère mise en avant */
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Barre de séparation
+.politique-divider {
+  border: none;
+  height: 2px;
+  background-color: $color-decline-gold2;
+  margin: 20px 0;
+}
+
+// Logo
+.politique-logo {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+
+  .politique-logo-img {
+    width: 20%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Animation fluide */
+    transition: transform 0.3s ease;
+
+    &:hover {
+      /* Légère mise en avant */
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Contenu principal
+.politique-content {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 4% 2%;
+  border: 1px solid $color-lightgrey;
+
+  .politique-section {
+    margin-bottom: 4%;
+
+    .politique-subtitle {
+      font-size: $font-size-xxl;
+      font-weight: bold;
+      text-decoration: underline;
+      padding: 4%;
+      color: $color-white;
+      margin-bottom: 1%;
+    }
+
+    p {
+      font-size: $font-size-xl;;
+      margin-bottom: 1.5%;
+      text-indent: 2em;
+      line-height: 1.8;
+    }
+
+    .politique-list {
+      margin: 0;
+      padding: 0;
+      list-style-type: disc;
+      padding-left: 2%;
+      padding-right: 5%;
+
+      li {
+        font-size: $font-size-xl;
+        margin-bottom: 1%;
+      }
+    }
+  }
+}
+
+// Introduction politique avec cadre
+.intro-politique {
+  border: 2px dashed $color-decline-orange2;
+  border-radius: 10px;
+  padding: 2%;
+  background: $color-lightgrey;
+  font-size: $font-size-xxl;
+  color: $color-primary;
+  text-align: justify;
+  line-height: 1.8;
+  margin-bottom: 3%;
+
+  &:hover {
+    background: lighten($color-lightgrey, 10%);
+    border-color: $color-decline-gold2;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  p {
+    text-indent: 2em;
+  }
+}
+
+// liens
+.links {
+  color: $color-decline-gold1 !important;
+
+  &:hover {
+    color: $color-decline-orange2 !important;
+  }
+}
+
+// Style de la page de contact
+
+.contact-content {
+  display: flex;
+  /* Centre le contenu horizontalement */
+  justify-content: center;
+  /* Aligne verticalement si nécessaire */
+  align-items: center; 
+  position: relative;
+  /* Optionnel : pour s'assurer que le conteneur occupe toute la hauteur de la page */
+  height: 100vh; 
+}
+
+/* Conteneur pour les images */
+.cart-sethiar {
+  /* Active le mode flexbox */
+  display: flex; 
+  /* Centre les images horizontalement */
+  justify-content: center; 
+  /* Espace entre les images */
+  gap: 20px; 
+}
+
+/* Style pour la carte page d'accueil */
+.sethiarcart-pic-contact {
+  justify-content: center;
+  align-items: center;
+  /* Proportions 16:9 */
+  aspect-ratio: 16 / 9; 
+  width: 100%;
+  border: 1px solid $color-decline-orange2;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  /* Animation fluide */
+  transition: transform 0.3s ease-in-out;
+}
+
+.sethiarcart-pic-contact img {
+  width: 100%;
+  height: auto;;
+  /* Remplit l'espace sans déformation de l'image */
+  object-fit: cover; 
+  border: 1px solid $color-decline-orange2;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Animation fluide */
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    /* Légère mise en avant */
+    transform: scale(1.1); 
+    /* Ombre subtile */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Footer
+.politique-footer {
+  text-align: center;
+  margin-top: 20%;
+  font-size: $font-size-xl;
+  color: $color-neutral-darkgrey;
+
+  p {
+    font-style: italic;
+  }
+}
+
+/* Media Queries */
+
+/* Pour les écrans de 1200px et plus (tablettes et bureau) */
+@media (min-width: 1200px) {
+  .outer-frame-politique {
+    margin: 5%;
+    padding: 3%;
+  }
+
+  .politique-main {
+    padding: 4.5% 3%;
+  }
+
+  .politique-title {
+    font-size: $font-size-xxl;
+  }
+
+  .politique-content {
+    max-width: 75%;
+  }
+
+  .sethiarcart-pic-contact {
+    height: 45vh;
+  }
+}
+
+/* Pour les écrans de 768px à 1199px (tablettes) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .outer-frame-politique {
+    margin: 8%;
+    padding: 2.5%;
+  }
+
+  .politique-main {
+    padding: 4% 2.5%;
+  }
+
+  .politique-title {
+    font-size: $font-size-xxl;
+  }
+
+  .politique-content {
+    max-width: 85%;
+  }
+
+  .sethiarcart-pic-contact {
+    height: 40vh;
+  }
+}
+
+/* Pour les écrans de 480px à 767px (mobiles en paysage et petites tablettes) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .outer-frame-politique {
+    margin: 12%;
+    padding: 2%;
+  }
+
+  .politique-main {
+    padding: 3% 1.5%;
+  }
+
+  .politique-title {
+    font-size: $font-size-xl;
+  }
+
+  .politique-content {
+    max-width: 90%;
+  }
+
+  .sethiarcart-pic-contact {
+    height: 35vh;
+  }
+}
+
+/* Pour les écrans de moins de 480px (mobiles) */
+@media (max-width: 479px) {
+  .outer-frame-politique {
+    margin: 10%;
+    padding: 1.5%;
+  }
+
+  .politique-main {
+    padding: 2% 1%;
+  }
+
+  .politique-title {
+    font-size: $font-size-xl;
+  }
+
+  .politique-content {
+    max-width: 100%;
+  }
+
+  .sethiarcart-pic-contact {
+    height: 30vh;
+  }
+
+  .cart-sethiar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sethiarcart-pic-contact img {
+    width: 100%;
+    height: auto;
+  }
+}

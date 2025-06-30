@@ -1,0 +1,183 @@
+/* Variables CSS - base/variables.scss */
+//---------------------------------------------------------------
+
+
+
+// Variables globales.
+
+//---------------------------------------------------------------
+// Taille des polices
+//---------------------------------------------------------------
+
+$font-size-small: 0.8rem;    // Taille petite (12.8px)
+$font-size-sm: 0.875rem;     // Taille petite (14px)
+$font-size-base: 1rem;       // Taille de base (16px)
+$font-size-lg: 1.25rem;      // Taille grande (20px)
+$font-size-xl: 1.5rem;       // Taille extra-large (24px)
+$font-size-xxl: 2rem;        // Taille super large (32px)
+$font-size-xxxl: 3rem;       // Taille extra-super large (40px)
+$font-size-title: 4rem;      // Taille de caractères de titre (48px)
+//---------------------------------------------------------------
+
+
+//---------------------------------------------------------------
+// === Couleurs globales ===
+//---------------------------------------------------------------
+
+//------------------------
+// Couleurs principales
+//------------------------
+/* Orange Sethiar */
+$color-primary: #DE7915;
+
+/* Noir */
+$color-black: #000000;
+
+/* Blanc */
+$color-white: #ffffff;
+//---------------------------------------------------------------
+
+//------------------------
+// Couleurs secondaires
+//------------------------
+
+/* Couleur footer Bleu Sethiar */
+$color-footer: #3D5776; 
+
+/* Orange classique */
+$color-secondary-orange: #FF8C11;
+
+/* Jaune Or */
+$color-secondary-gold: #F8C456; 
+//---------------------------------------------------------------
+
+//------------------------
+// Couleurs déclinées
+//------------------------
+
+// Déclinaisons orange
+/* Plus clair */
+$color-decline-orange1: #F08C1C;
+/* Plus foncé */
+$color-decline-orange2: #C96B12;
+
+
+// Déclinaisons Bleu Sethiar
+/* Plus clair */
+$color-decline-blue1: #4A6C91;
+/* Plus foncé */
+$color-decline-blue2: #2F445C;
+
+
+// Déclinaisons Jaune Or
+/* Plus clair */
+$color-decline-gold1: #FFD580;
+/* Plus foncé */
+$color-decline-gold2: #E5AD36; 
+//---------------------------------------------------------------
+
+// Neutres
+/* Gris foncé */
+$color-neutral-darkgrey: #a9a9a9; // Gris foncé
+
+/* Gris clair */
+$color-lightgrey: #f2f2f2; // Gris clair
+
+
+// Accents
+/* Orange */
+$color-accent-orange: #FF8C11; 
+
+/* Rouge foncé */
+$color-accent-darkred: #D32F2F; 
+/* Rouge foncé hover cancelled */
+$color-accent-darkred2: #6b1919;
+
+/* Orange foncé */
+$color-accent-darkorange: #C96B12; 
+
+
+//---------------------------------------------------------------
+// Couleur background produits
+//---------------------------------------------------------------
+
+/* Antracite */
+$color-background-product: #1e1e1e;
+
+// Couleur Texte produits
+/* Blanc pur */
+$color-text-product: #fff;
+
+/* Blanc cassé */
+$color-text-product-card-h3: #f4f4f4;
+
+/* Gris très très clair */
+$color-text-product-p: #ddd;
+//---------------------------------------------------------------
+
+
+// Couleur background hover
+
+/* Gris foncé */
+$color-background-product-hover:#292929;
+
+// Couleur background card hover
+/* Orange plus clair */
+$color-background-productcard-hover: #F08C1C;
+//---------------------------------------------------------------
+
+
+//---------------------------------------------------------------
+// === Couleurs d'alerte ===
+//---------------------------------------------------------------
+
+// Erreur
+//------------------------
+/* Texte */
+$color-alert-error-text: #a94442; 
+
+/* Fond */
+$color-alert-error-background: #f2dede; 
+
+/* Bordure */
+$color-alert-error-border: #ebccd1; 
+//------------------------
+
+
+// Avertissement
+//------------------------
+/* Texte */
+$color-alert-warning-text: #8a6d3b; 
+
+/* Fond */
+$color-alert-warning-background: #fcf8e3; 
+
+/* Bordure */
+$color-alert-warning-border: #faebcc;
+//------------------------
+
+
+// Succès
+//------------------------
+/* Texte */
+$color-alert-success-text: #3c763d;
+
+/* Fond */
+$color-alert-success-background: #dff0d8;
+
+/* Bordure */
+$color-alert-success-border: #d6e9c6;
+//------------------------
+
+
+// Polices
+//------------------------
+/* Police principale */
+$font-primary: 'Lato', sans-serif;
+
+/* Police secondaire */
+$font-secondary: 'Anonymous Pro', cursive;
+
+/* Police tertiare */
+$font-tertiary: 'Libre Baskerville';
+//------------------------

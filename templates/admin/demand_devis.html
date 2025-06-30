@@ -1,0 +1,75 @@
+{% extends 'baseback.html.jinja2' %}
+
+{% block head_content %}
+    <meta name="description" content="Page du backend afin d'afficher la liste des devis de SethiarWorks.">
+    <title>{% block title %}Page administrateur - Liste des devis{% endblock %}</title>
+{% endblock %}
+
+{% block body_content %}
+<div class="space"></div>
+<div class="backend-container">
+    <h5 class="h5-devis">Liste des demandes de devis</h5>
+    <div class="space2"></div>
+    
+    {% for status, devis_list in grouped_devis.items() %}
+    <h6 class="mt-4"> {{ status|capitalize }}</h6>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Nom de l'entreprise</th>
+                <th>Téléphone</th>
+                <th>Email</th>
+                <th>Statut de la demande de devis</th>
+                <th>Type de projet</th>
+                <th>Contenu de la demande de devis</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for devis in devis_list %}
+            <tr>
+                <td>{{ devis.lastname }}</td>
+                <td>{{ devis.firstname }}</td>
+                <td>{{ devis.enterprise_name }}</td>
+                <td>{{ devis.phone }}</td>
+                <td>{{ devis.email }}</td>
+                <td>{{ devis.status }}</td>
+                <td>{{ devis.project_type }}</td>
+                <td>{{ devis.devis_content }}</td>
+                <td>
+                    <!-- Suppression de la demande -->
+                    <form action="{{ url_for('devis.suppress_devis', id=devis.id) }}" method="POST" class="btn-valide">
+                        {{ formdevis.csrf_token }}
+                        <button type="submit">
+                            Supprimer   <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+
+                    <!-- Validation du devis -->
+                     {% if devis.status.value == 'en attente' %}
+                    <form action="{{url_for('devis.valide_devis', id=devis.id) }}" method="POST" class="btn-valide">
+                        {{ formdevis.csrf_token }}
+                        <button type="submit">
+                            Valider la requête   <i class="fas fa-thumbs-up"></i>
+                        </button>
+                    </form>
+                    
+                    <!-- Refus du devis -->
+                    <form action="{{url_for('devis.refuse_devis', id=devis.id) }}" method="POST" class="btn-valide">
+                        {{ formdevis.csrf_token }}
+                        <button type="submit">
+                            Refuser la requête   <i class="fas fa-thumbs-down"></i>
+                        </button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base2.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description" content="Page de contacts du site de l'entreprise SethiarWorks.">
+<title>{% block title %}Contacts{% endblock %}</title>
+{% endblock %}
+
+{% block main_content %}
+<div class="outer-frame-politique">
+    <div class="inner-frame-politique">
+        <main class="politique-main">
+            <div class="politique-border">
+
+                <!--titre -->
+                <h1 class="politique-title">Contacts</h1>
+
+                <!-- Section : Mise à jour et retour -->
+                <div class="politique-header">
+                    <p class="politique-update">Dernière mise à jour : 1 juillet 2025</p>
+                    <a href="{{ url_for('landing_page') }}" class="politique-home-link">Retour à l'accueil</a>
+                </div>
+            </div>
+
+            <!-- Séparation -->
+            <hr class="politique-divider">
+
+            <!-- Logo -->
+            <div class="politique-logo">
+                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}"
+                     alt="Logo de SethiarWorks"
+                     class="politique-logo-img">
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="contact-content">
+
+                <!-- Carte de visite SethiarWorks -->
+                <div class="cart-sethiar">
+                    
+                    <!-- Verso -->
+                    <img src="{{ url_for('static', filename='images/images_sethiarworks/cart_sethiar.png') }}"
+                         alt="carte de visite de SethiarWorks verso"
+                         class="SethiarCart-pic-contact">
+
+                    <div class="space2"></div>
+                    
+                    <!-- Recto -->
+                    <img src="{{ url_for('static', filename='images/images_sethiarworks/cart_sethiar2.png') }}"
+                         alt="carte de visite de SethiarWorks recto"
+                         class="SethiarCart-pic-contact">
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
+{% block footer_content %}
+{% endblock %}

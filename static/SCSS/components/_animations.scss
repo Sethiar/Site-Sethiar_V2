@@ -1,0 +1,232 @@
+/* Animation CSS - components/animations.css */
+
+// Style concernant les animations du site entreprise SethiarWorks
+
+
+/* Configuration du bouton */
+#btn-logo {
+  position: absolute;
+  /* Position du bouton */
+  bottom: 10%; 
+  left: 50%;
+  /* Centrer horizontalement */
+  transform: translateX(-50%);
+  /* Bouton au-dessus des autres éléments */
+  z-index: 10; 
+}
+
+
+// Configuration des sprites de l'animation
+/*  Conteneur globale du logo */
+#logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  height: 569px;
+  background-repeat: no-repeat;
+  margin: auto;
+}
+
+/* Conteneur de l'animation */
+.logo-animation {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  height: 569px;
+  overflow: hidden;
+}
+
+/* Base commune pour tous les sprites */
+.sprite {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  background-repeat: no-repeat;
+  animation-fill-mode: forwards;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Animation pour chaque sprite */
+.sprite1 { background-image: url('/static/images/images_spritesheet/sprite_1.png'); }
+.sprite2 { background-image: url('/static/images/images_spritesheet/sprite_2.png'); }
+.sprite3 { background-image: url('/static/images/images_spritesheet/sprite_3.png'); }
+.sprite4 { background-image: url('/static/images/images_spritesheet/sprite_4.png'); }
+.sprite5 { background-image: url('/static/images/images_spritesheet/sprite_5.png'); }
+.sprite6 { background-image: url('/static/images/images_spritesheet/sprite_6.png'); }
+.sprite7 { background-image: url('/static/images/images_spritesheet/sprite_7.png'); }
+.sprite8 { background-image: url('/static/images/images_spritesheet/sprite_8.png'); }
+
+/* Keyframes pour chaque animation de sprite */
+@keyframes animateLogo1 {
+    from { background-position: 0 0; }
+    to { background-position: -11000px 0; }
+}
+@keyframes animateLogo2 {
+    from { background-position: 0 0; }
+    to { background-position: -11000px 0; }
+}
+@keyframes animateLogo3 {
+    from { background-position: 0 0; }
+    to { background-position: -11000px 0; }
+}
+@keyframes animateLogo4 {
+    from { background-position: 0 0; }
+    to { background-position: -11000px 0; }
+}
+@keyframes animateLogo5 {
+    from { background-position: 0 0; }
+    to { background-position: -11000px 0; }
+}
+@keyframes animateLogo6 {
+    from { background-position: 0 0; }
+    to { background-position: -11000px 0; }
+}
+@keyframes animateLogo7 {
+    from { background-position: 0 0; }
+    to { background-position: -11000px 0; }
+}
+@keyframes animateLogo8 {
+    from { background-position: 0 0; }
+    to { background-position: -11000px 0; }
+}
+
+/* Animation Responsive */
+
+/* Pour les tablettes portrait */
+@media (max-width: 768px) {
+  body, #logo, .logo-animation {
+    /* Logo positionné par rapport au body */
+    position: relative;
+  }
+
+  #logo, .logo-animation {
+    position: absolute;
+    /* Positionné tout en haut */
+    top: 0; 
+    left: 50%;
+    /* Centré horizontalement */
+    transform: translateX(-50%); 
+    /* Adaptation responsive */
+    width: 70%; 
+    /* Limite la taille maximale */
+    max-width: 550px; 
+    /* Ajuste la hauteur proportionnellement */
+    height: auto; 
+    /* URL d'image */
+    background-image: url('/static/images/images_accueil/logo_png.png');
+    /* Redimensionne l'image en maintenant ses proportions */
+    background-size: contain; 
+    /* Centré dans son conteneur */
+    background-position: center; 
+    /* Une seule image */
+    background-repeat: no-repeat;
+    margin: 0;
+    /* Logo au-dessus d'autres éléments */
+    z-index: 10; 
+  }
+}
+
+
+// Pour les tablettes paysage
+@media (max-width: 1024px) {
+  body, #logo, .logo-animation {
+    /* Logo est positionné par rapport au body */
+    position: relative; 
+  }
+  #logo, .logo-animation {
+    position: absolute;
+    /* Positionné tout en haut */
+    top: 0; 
+    left: 50%;
+    /* Centré horizontalement */
+    transform: translateX(-50%);
+    /* Adaptation responsive */
+    width: 70%;
+    /* Limite la taille maximale */
+    max-width: 550px;
+     /* Ajuste la hauteur proportionnellement */
+    height: auto; 
+    /* URL d'image */
+    background-image: url('/static/images/images_accueil/logo_png.png'); 
+    /* Redimensionne l'image en maintenant ses proportions */
+    background-size: contain; 
+    /* Centré dans son conteneur */
+    background-position: center; 
+    background-repeat: no-repeat;
+    margin: 0;
+    /* Logo au-dessus d'autres éléments */
+    z-index: 10; 
+  }
+}
+
+
+// Pour les téléphones portrait
+@media (max-width: 480px) {
+  body, #logo, .logo-animation {
+    /* Logo est positionné par rapport au body */
+    position: relative; 
+  }
+  #logo, .logo-animation {
+    position: absolute;
+    /* Positionné tout en haut */
+    top: 0; 
+    left: 50%;
+    /* Centré horizontalement */
+    transform: translateX(-50%); 
+    /* Adaptation responsive */
+    width: 80%; 
+    /* Limite la taille maximale */
+    max-width: 400px;
+     /* Ajuste la hauteur proportionnellement */
+    height: auto; 
+    /* URL d'image */
+    background-image: url('/static/images/images_accueil/logo_png.png');
+    /* Redimensionne l'image en maintenant ses proportions */
+    background-size: contain;
+    /* Centré dans son conteneur */
+    background-position: center; 
+    background-repeat: no-repeat;
+    margin: 0;
+    /* Logo au-dessus d'autres éléments */
+    z-index: 10; 
+  }
+}
+
+
+// Pour les téléphones paysage
+@media (max-width: 600px) {
+  body, #logo, .logo-animation {
+    /* Logo est positionné par rapport au body */
+    position: relative; 
+  }
+  #logo, .logo-animation {
+    position: absolute;
+    /* Positionné tout en haut */
+    top: 0; 
+    left: 50%;
+    /* Centré horizontalement */
+    transform: translateX(-50%); 
+    /* Adaptation responsive */
+    width: 80%; 
+    /* Limite la taille maximale */
+    max-width: 400px; 
+    /* Ajuste la hauteur proportionnellement */
+    height: auto; 
+    /* URL d'image */
+    background-image: url('/static/images/images_accueil/logo_png.png'); 
+    /* Redimensionne l'image en maintenant ses proportions */
+    background-size: contain; 
+    /* Centré dans son conteneur */
+    background-position: center; 
+    background-repeat: no-repeat;
+    margin: 0;
+    /* Assure que le logo reste au-dessus d'autres éléments */
+    z-index: 10; 
+  }
+}

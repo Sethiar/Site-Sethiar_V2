@@ -1,0 +1,45 @@
+// Importation de variables.scss
+@import '../base/variables';
+
+
+/* Style de la page calendar.html du blog */
+
+#table-appointment {
+  color: $color-decline-gold1;
+  width: 90vw;
+  padding-left: 5vw;
+}
+
+h5 {
+  padding-left: 5vw;
+  text-decoration: underline;
+  font-size: $font-size-xl;
+}
+
+th {
+  color: $color-primary;
+}
+
+tr {
+  color: $color-white;
+}
+
+.link {
+  color: $color-decline-gold2;
+}
+
+.link:hover {
+  color: $color-decline-orange2;
+}
+
+.btn-valide {
+  width: 10vw;
+  border: 1px solid $color-decline-gold1;
+  background-color: $color-primary;
+
+  &:hover {
+    border: 1px solid $color-decline-gold2;
+    background-color: $color-decline-orange2;
+  }
+}
+

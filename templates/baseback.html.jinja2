@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='gen/style.css') }}?v=1.0">
+    {{ moment.include_moment() }}
+    {% block head_content %}
+    {% endblock %}
+</head>
+
+<!-- body -->
+<body>
+    <div class="space"></div>
+    <h1 class="h1-backend">Bienvenue sur la page administrateur</h1>
+    
+    <header class="header-backend">
+        {% block header_content %}
+            <nav class="nav-backend">
+                <a class="button-primary" href="{{ url_for('auth.logout_admin') }}">Se déconnecter en tant qu'administrateur</a>
+                <a class="button-primary" href="{{ url_for('landing_page') }}">Aller sur la page d'accueil du site entreprise</a>
+                <a class="button-primary" href="{{ url_for('admin.backend') }}">Retour au back-end</a>
+                <a class="button-primary" href="{{ url_for('admin.create_user_form') }}">Créer l'utilisateur administrateur</a>
+            </nav>
+        {% endblock %}
+    </header>
+
+    {% block body_content %}
+        <div class="space"></div>
+
+        <!-- Salutations administrateur -->
+        <div class="annonce-back">
+            {% if logged_in %}
+                    <p>Bienvenue, {{ admin.pseudo }} ! Vous êtes connecté en tant que : <b>{{ admin.role }}</b>.</p>
+            {% endif %}
+        </div>
+        <div class="space"></div>
+        
+        <!-- Actions de l'administrateur -->
+        <div class="button-container">
+            <a href="{{ url_for('admin.calendar') }}" class="button-primary">Aller au calendrier des rendez-vous du chat vidéo</a>
+            <a href="{{ url_for('admin.list_devis') }}" class="button-primary"> Aller à la liste des devis</a>
+            <a href="{{ url_for('admin.users_list') }}" class="button-primary">Aller à la liste des utilisateurs</a>
+            <a href="{{ url_for('admin.list_comments_customer') }}" class="button-primary">Aller à la liste des commentaires</a>
+            <a href="{{ url_for('auth.logout_admin') }}" class="button-secondary">Se déconnecter du back end</a>
+        </div>
+    {% endblock %}
+
+    <div class="space"></div>
+
+    </body>
+</html>

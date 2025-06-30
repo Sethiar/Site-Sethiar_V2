@@ -1,0 +1,225 @@
+// Importation de variables.scss
+@import '../base/variables';
+
+
+/* Button CSS - Components/Buttons.scss */
+
+/* Regroupement des styles communs aux boutons */
+%btn-common {
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+}
+
+/* Bouton primaire pour les commentaires */
+.btn-primary-comment {
+  display: flex;
+  margin: 0 auto;
+}
+
+.btn-primary, .btn-primary-comment, .btn-primary-registration {
+  @extend %btn-common;
+  padding: 2% 4%;
+  font-size: $font-size-base;
+  background-color: $color-primary;
+  color: $color-white;
+
+  &:hover {
+    /* Légère mise en avant du cadre interne */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+    background-color: $color-decline-orange2;
+    border: 2px solid $color-white;
+    color: $color-white;
+  }
+}
+
+.btn-primary-registration {
+  display: block;
+  margin: 0 auto;
+  /* Ajuste pour des écrans plus larges */
+  width: 60%;  
+}
+
+.btn-secondary, .btn-secondary-comment, .reply-button, .change-button, .delete-comment-form button {
+  @extend %btn-common;
+  padding: 2% 3%;
+  font-size: $font-size-base;
+  background-color: $color-white;
+  color: $color-primary;
+
+  &:hover {
+    /* Légère mise en avant du cadre interne */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: $color-neutral-darkgrey;
+    color: $color-decline-orange2;
+  }
+}
+
+.delete-comment-form button {
+  background-color: $color-primary;
+  &:hover {
+    /* Légère mise en avant du cadre interne */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: $color-decline-orange2;
+    color: $color-white;
+  }
+}
+
+.back-comment {
+  @extend %btn-common;
+  background-color: $color-primary;
+  color: $color-white;
+  padding: 1% 1.5%;
+  text-align: center;
+  font-style: italic;
+  font-size: $font-size-lg;
+  box-shadow: 2px 2px 10px rgba(255, 165, 0, 0.5);
+  cursor: pointer;
+
+  &:hover {
+    /* Légère mise en avant du cadre interne */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    /* Pas de transformation de texte */
+    text-decoration: none;
+    background-color: $color-decline-orange2;
+    color: $color-white;
+  }
+}
+
+
+// Bouton des formulaires 
+.cancelled-btn, .validated-btn {
+  @extend %btn-common;
+  display: inline-block;
+  width: 80%;
+  padding: 2% 3%;
+  text-align: center;
+  font-size: $font-size-xl;
+  cursor: pointer;
+}
+
+.cancelled-btn {
+  background-color: $color-accent-darkred;
+  color: $color-white;
+
+  &:hover {
+    /* Légère mise en avant du cadre interne */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: $color-accent-darkred2;
+    color: $color-white;
+  }
+}
+
+.validated-btn {
+  background-color: $color-primary;
+  color: $color-white;
+  
+  &:hover {
+    /* Légère mise en avant du cadre interne */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: $color-decline-orange2;
+    border: 1px solid $color-decline-gold2;
+  }
+}
+
+
+// Boton du backend
+nav button {
+  @extend %btn-common;
+  background-color: $color-primary;
+  color: $color-white;
+  border: 2px solid $color-white;
+  padding: 1% 2%;
+
+  &:hover {
+    /* Légère mise en avant du cadre interne */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: $color-decline-orange2;
+    border: 2px solid $color-decline-gold1;
+  }
+}
+
+// Button containers
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.button-container button {
+  width: 70%;
+  padding: 10px 20px;
+  background-color: $color-primary;
+  color: $color-white;
+  border: none;
+  font-size: $font-size-base;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button a {
+  text-decoration: none;
+  color: $color-white;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  &:hover {
+    /* Légère mise en avant du cadre interne */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: $color-decline-orange2;
+    border: 2px solid $color-decline-gold2;
+  }
+}
+
+
+// Responsive design
+/* Tablette */
+@media (max-width: 1024px) {
+  .btn-primary-registration {
+    /* Plus large sur les tablettes */
+    width: 80%;  
+  }
+
+  .btn-primary, .btn-secondary, .reply-button, .change-button, .cancelled-btn, .validated-btn {
+    padding: 2% 5%;
+    font-size: $font-size-base;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .btn-primary-registration {
+    /* S'adapte complètement sur mobile */
+    width: 100%;  
+  }
+
+  .btn-primary, .btn-secondary, .reply-button, .change-button, .cancelled-btn, .validated-btn {
+    font-size: $font-size-base;
+  }
+
+  .button-container button {
+    /* Les boutons prennent toute la largeur de l'écran */
+    width: 100%;  
+  }
+}

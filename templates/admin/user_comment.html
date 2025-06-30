@@ -1,0 +1,55 @@
+{% extends 'baseback.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description"
+      content="Page du backend afin d'afficher la liste des commentaires des utilisateurs.">
+<title>{% block title %}Page administrateur - Liste des utilisateurs et de leurs commentaires{% endblock %}</title>
+{% endblock %}
+
+{% block body_content %}
+<div class="space"></div>
+<div class="lettre-navigation">
+    <h5>Liste des commentaires des utilisateurs</h5>
+    <div class="space2"></div>
+
+    <a href="{{ url_for('admin.list_comments_customer') }}" class="select-all-users">Tous</a>
+    <div class="space2"></div>
+    <div class="lettre">
+        {% for lettre in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' %}
+        <a href="{{ url_for('admin.list_comments_customer', lettre=lettre) }}">{{ lettre }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="space2"></div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom de l'entreprise</th>
+            <th>Commentaires</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user, comments in user_comment.items() %}
+        {% for item in comments %}
+        <tr>
+            <td>{{ user["enterprise_name"] }}</td>
+            <td class="comment-backend">{{ item.comment.comment_content }}</td>
+            <td>
+                <form action="{{ url_for('admin.suppress_comment', id=item.comment.id) }}" method="POST"
+                      class="btn-suppression">
+                    {{ suppressform.csrf_token }}
+                    <input type="hidden" name="comment_id" value="{{ item.comment.id }}">
+                    <button type="submit" class="btn-suppression">Supprimer <i class="fas fa-trash"></i></button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

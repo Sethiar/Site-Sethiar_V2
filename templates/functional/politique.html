@@ -1,0 +1,137 @@
+{% extends 'base2.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description" content="La politique de confidentialité du site de l'entreprise SethiarWorks.">
+<title>{% block title %}Politique de confidentialité{% endblock %}</title>
+{% endblock %}
+
+{% block main_content %}
+<div class="outer-frame-politique">
+    <div class="inner-frame-politique">
+        <main class="politique-main">
+            <div class="politique-border">
+
+                <!--titre -->
+                <h1 class="politique-title">Politique de Confidentialité</h1>
+
+                <!-- Section : Mise à jour et retour -->
+                <div class="politique-header">
+                    <p class="politique-update">Dernière mise à jour : 1 juillet 2025</p>
+                    <a href="{{ url_for('landing_page') }}" class="politique-home-link">Retour à l'accueil</a>
+                </div>
+            </div>
+
+            <!-- Séparation -->
+            <hr class="politique-divider">
+
+            <!-- Logo -->
+            <div class="politique-logo">
+                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}"
+                     alt="Logo de SethiarWorks"
+                     class="politique-logo-img">
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="politique-content">
+
+                <!-- Introduction -->
+                <section class="politique-section">
+                    <p class="politique-intro">
+                        Bienvenue sur notre site de l'entreprise <strong>SethiarWorks</strong>.
+                        Nous nous engageons à protéger votre vie privée et à respecter vos droits en matière de
+                        confidentialité.
+                        Votre confidentialité est importante pour nous. Cette politique décrit les informations
+                        que nous collectons, comment nous les utilisons, et comment nous protégeons vos données
+                        personnelles pour garantir une expérience sûre et respectueuse.
+                    </p>
+                </section>
+
+                <!-- Sections des informations -->
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">1. Informations que nous Collectons</h2>
+                    <ul class="politique-list">
+                        <li>Informations d'identification personnelle : adresse email, pseudo.</li>
+                        <li>Informations non personnelles : adresse IP, type de navigateur, informations de navigation,
+                            etc.
+                        </li>
+                        <li>Nous ne collectons aucune information bancaire ou financière.</li>
+                    </ul>
+                </section>
+
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">2. Utilisation des Informations</h2>
+                    <ul class="politique-list">
+                        <li>Fournir et gérer nos services.</li>
+                        <li>Améliorer l'expérience utilisateur sur notre site.</li>
+                        <li>Communiquer avec vous pour répondre à vos demandes de support.</li>
+                        <li>Envoyer des newsletters, mises à jour, et autres communications (avec votre consentement).
+                        </li>
+                        <li>Analyser l'utilisation de notre site pour améliorer nos services.</li>
+                    </ul>
+                </section>
+
+                <!-- Ajout des autres sections -->
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">3. Gestion des Identifiants</h2>
+                    <p>Les identifiants (pseudo et mot de passe) sont stockés de manière sécurisée en utilisant des
+                        techniques de hachage et de salage.</p>
+                </section>
+
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">4. Partage des Informations</h2>
+                    <p><strong>Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des
+                        tiers.</strong></p>
+                    <p>Toutefois, nous pouvons les partager avec :</p>
+                    <ul class="politique-list">
+                        <li>Fournisseurs de services (hébergement web, analyse, assistance client).</li>
+                        <li>Autorités légales si nécessaire.</li>
+                    </ul>
+                </section>
+
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">5. Cookies et Technologies Similaires</h2>
+                    <ul class="politique-list">
+                        <li>Mémoriser vos préférences et paramètres.</li>
+                        <li>Analyser l'utilisation de notre site pour l'améliorer.</li>
+                        <li>Améliorer votre expérience utilisateur.</li>
+                    </ul>
+                </section>
+
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">6. Sécurité des Informations</h2>
+                    <p>Nous mettons en œuvre des mesures de sécurité pour protéger vos informations. Cependant, aucune
+                        méthode n'est totalement sécurisée.</p>
+                </section>
+
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">7. Vos Droits</h2>
+                    <ul class="politique-list">
+                        <li>Accéder à vos informations personnelles.</li>
+                        <li>Demander la correction d'informations inexactes.</li>
+                        <li>Demander la suppression de vos données, sous réserve d'exceptions légales.</li>
+                    </ul>
+                </section>
+
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">8. Modifications de cette Politique</h2>
+                    <p>Nous pouvons mettre à jour cette politique en publiant la nouvelle version sur notre site.</p>
+                </section>
+
+                <section class="politique-section">
+                    <h2 class="politique-subtitle">9. Nous Contacter</h2>
+                    <p>Pour toute question, contactez-nous à <a href="mailto:sethiarworks@gmail.com">sethiarworks@gmail.com</a>.
+                    </p>
+                </section>
+
+                <div class="politique-footer">
+                    <p>Merci d'utiliser notre site et de nous faire confiance.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer_content %}
+{% endblock %}

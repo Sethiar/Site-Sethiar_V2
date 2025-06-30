@@ -1,0 +1,326 @@
+// Importation des variables
+@import '../base/variables';
+
+/* Pages CSS du composant carrousel */
+
+/* Images du carrousel */
+.product-pic {
+  border: 1px solid $color-decline-orange2;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1); /* Zoom au survol */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Conteneur principal du swiper */
+.swiper-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 2% 0;
+}
+
+.swiper-slide {
+  text-align: center;
+  background: $color-neutral-darkgrey;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid $color-primary;
+}
+
+/* Boutons de navigation du swiper */
+.swiper-button-prev {
+  left: 2%;
+}
+
+.swiper-button-next {
+  right: 2%;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  color: $color-primary;
+  top: 70%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%);
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.swiper-pagination-bullet-active {
+  background-color: $color-primary;
+}
+
+/* Code CSS pour la modale */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 33%;
+  width: 70%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2%;
+  max-width: 60vw;
+  background-color: $color-background-product;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1vh;
+  right: 1vw;
+  font-size: $font-size-xl;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 2%;
+}
+
+.modal h3 {
+  margin-top: 1%;
+  font-size: $font-size-xxl;
+}
+
+.modal p {
+  font-size: $font-size-xl;
+  margin-top: 1%;
+  line-height: 1.5;
+}
+
+/* Adaptation pour les téléphones en portrait */
+@media (max-width: 480px) {
+  .swiper-container {
+    width: 100%;
+    /* Réduit le padding */
+    padding: 0; 
+  }
+
+  .swiper-slide {
+    /* Assure que chaque slide occupe toute la largeur */
+    width: 100%;
+    /* Empêche la réduction des slides */
+    flex-shrink: 0;
+    /* Bordures arrondies */
+    border-radius: 8px;
+  }
+
+  .swiper-slide img {
+    /* L'image prend toute la largeur */
+    width: 100%; 
+    height: auto;
+  }
+
+  /* Masquer les autres carrousels */
+  .other-carousel {
+    /* Cacher les autres carrousels sur mobile */
+    display: none; 
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    /* Centrage vertical parfait */
+    top: 50%; 
+    /* Taille réduite pour les boutons */
+    font-size: $font-size-xl; 
+  }
+
+  .swiper-button-prev.swiper-button-disabled,
+  .swiper-button-next.swiper-button-disabled {
+    opacity: 0.5;
+  }
+
+  .modal {
+    /* Modifie la taille de la modale pour plus de flexibilité */
+    width: 90%; 
+    /* Centre la modale horizontalement */
+    left: 5%; 
+  }
+
+  .modal-content {
+    /* Réduit les espacements internes */
+    padding: 4%; 
+  }
+
+  .modal img {
+    /* Limite la taille de l'image dans la modale */
+    max-width: 80%; 
+  }
+
+  .modal h3 {
+    /* Taille de police réduite */
+    font-size: $font-size-xl; 
+  }
+}
+
+/* Adaptation pour les tablettes en portrait */
+@media (min-width: 481px) and (max-width: 768px) {
+  .swiper-container {
+    /* Carrousel sur toute la largeur */
+    width: 100%; 
+    /* Padding modéré */
+    padding: 1.5% 0; 
+  }
+
+  .swiper-slide {
+    /* Occupe toute la largeur de l'écran */
+    width: 100%; 
+    border-radius: 10px;
+  }
+
+  /* Masquer les autres carrousels */
+  .other-carousel {
+    /* Cacher les autres carrousels sur les tablettes */
+    display: none; 
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    /* Positionnement ajusté pour les tablettes */
+    top: 65%; 
+    /* Taille des boutons plus grande */
+    font-size: $font-size-xl; 
+  }
+
+  .swiper-button-prev.swiper-button-disabled,
+  .swiper-button-next.swiper-button-disabled {
+    opacity: 0.6;
+  }
+
+  .modal {
+    width: 80%;
+    /* Modale centrée avec une largeur adaptée */
+    left: 10%; 
+  }
+
+  .modal-content {
+    padding: 5%;
+  }
+
+  .modal img {
+    max-width: 90%;
+  }
+
+  .modal h3 {
+    font-size: $font-size-xl;
+  }
+}
+
+/* Adaptation pour les tablettes en paysage */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .swiper-container {
+    padding: 2% 0;
+  }
+
+  .swiper-slide {
+    /* Remplir toute la largeur de l'écran */
+    width: 100%; 
+    border-radius: 12px;
+  }
+
+  /* Masquer les autres carrousels */
+  .other-carousel {
+    display: none;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 50%;
+    font-size: $font-size-xl;
+  }
+
+  .modal {
+    width: 70%;
+    left: 15%;
+  }
+
+  .modal-content {
+    padding: 6%;
+  }
+
+  .modal img {
+    max-width: 95%;
+  }
+
+  .modal h3 {
+    font-size: $font-size-xxl;
+  }
+}
+
+/* Adaptation pour les téléphones en paysage */
+@media (max-width: 767px) and (orientation: landscape) {
+  .swiper-container {
+    padding: 10px 0;
+  }
+
+  .swiper-slide {
+    /* Remplir toute la largeur de l'écran */
+    width: 100%; 
+    border-radius: 8px;
+  }
+
+  /* Masquer les autres carrousels */
+  .other-carousel {
+    display: none;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 50%;
+    font-size: $font-size-lg;
+  }
+
+  .modal {
+    width: 85%;
+    left: 7%;
+  }
+
+  .modal-content {
+    padding: 4%;
+  }
+
+  .modal img {
+    max-width: 90%;
+  }
+
+  .modal h3 {
+    font-size: $font-size-xl;
+  }
+}

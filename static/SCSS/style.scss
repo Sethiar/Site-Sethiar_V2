@@ -1,0 +1,23 @@
+// Variables et styles de base
+@import 'base/base-reset';
+@import 'base/layout';
+@import 'base/typography';
+@import 'base/variables';
+
+// Composants
+@import 'components/animations';
+@import 'components/buttons';
+@import 'components/carrousel';
+@import 'components/footer';
+@import 'components/forms';
+@import 'components/header';
+@import 'components/images';
+@import 'components/links';
+@import 'components/products';
+
+// Pages
+@import 'pages/backend';
+@import 'pages/calendar';
+@import 'pages/comment';
+@import 'pages/landing';
+@import 'pages/politique';

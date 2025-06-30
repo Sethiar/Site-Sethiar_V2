@@ -1,0 +1,122 @@
+{% extends 'base.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description"
+      content="Forum du site permettant de discuter, interagir et donner son avis sur le site de l'entreprise SethiarWorks.">
+<title>{% block title %}Bienvenue sur le forum du blog{% endblock %}</title>
+
+<!-- CSS Principal -->
+<link rel="stylesheet" href="{{ url_for('static', filename='gen/style.css') }}?v=1.0">
+{% endblock %}
+
+{% block header_content %}
+{% endblock %}
+
+{% block main_content %}
+
+<!-- conteneur principal -->
+<div class="main-content">
+
+    <!-- cadre extérieur -->
+    <div class="outer-frame-politique">
+
+        <!-- cadre intérieur -->
+        <div class="inner-frame-politique">
+            <!-- division de retour à la page d'accueil -->
+            <div class="back-link-comment">
+                <a class="btn-primary" href="{{ url_for('landing_page') }}">Retour à la page d'accueil</a>
+            </div>
+            <!-- Image du logo -->
+            <div class="imgcontainer-form">
+                <img src="{{ url_for('static', filename='Images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
+                     class="avatar-form">
+            </div>
+
+            <!--titre -->
+            <h1 class="comment-title">Espace de commentaires</h1>
+
+            <!-- division pour image forum -->
+            <div class="comment-image-container">
+
+                <!-- image centrale -->
+                <div class="image-comment">
+                    <img src="{{ url_for('static', filename='images/images_comment/comment1.png') }}"
+                         alt="Image comment">
+                </div>
+            </div>
+
+            <div class="space-form"></div>
+
+            <!-- conteneur d'ajout de catégories -->
+            <div class="form-container">
+                <h4 class="section-title">Ajouter un sujet</h4>
+
+                <!-- formulaire d'ajout de sujet -->
+                <form id="addSubjectForm" method="POST" action="{{ url_for('user.add_subject_comment') }}">
+
+                    <!-- Token CSRF pour la sécurité -->
+                    {{ formsubjectcomment.csrf_token }}
+
+                    <!-- Champ pour le nouveau sujet -->
+                    <div class="form-group">
+                        {{ formsubjectcomment.nom.label }}
+                        {{ formsubjectcomment.nom(size=20) }}
+                    </div>
+
+                    <!-- bouton de soumission du formulaire -->
+                    <button type="submit" class="btn-primary-comment">
+                        {{ formsubjectcomment.submit.label }}
+                    </button>
+                </form>
+            </div>
+            <div class="space2"></div>
+
+            <!-- Liste des sujets -->
+            <div class="subjects-container">
+                <h4 class="section-title">Sujets disponibles</h4>
+
+                <!--tableau des sujets -->
+                <table class="subjects-table">
+                    <thead>
+                    <tr>
+                        <th>Sujet</th>
+                        <th>Auteur</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for subject in subjects %}
+                    <tr>
+                        <td class="subject-name">{{ subject.nom }}</td>
+                        <td class="subject-author">{{ subject.author }}</td>
+                        <td><a href="{{ url_for('frontend.subject_comment', subject_id=subject.id) }}"
+                               class="btn-secondary-comment">Voir</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_content %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('addSubjectForm');
+
+    // Variable JavaScript indiquant si l'utilisateur est connecté
+    var isAuthenticated = {{ is_authenticated|tojson }};
+
+    form.addEventListener('submit', function(event) {
+        if (!isAuthenticated) {
+            // Afficher une alerte si l'utilisateur n'est pas connecté
+            alert("Vous devez être connecté pour ajouter un sujet.");
+            event.preventDefault(); // Empêche la soumission du formulaire
+            }
+    });
+});
+</script>
+
+{% endblock %}

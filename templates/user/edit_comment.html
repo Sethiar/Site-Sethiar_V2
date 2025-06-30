@@ -1,0 +1,51 @@
+{% extends 'baseform.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description" content="Formulaire de modification d'un commentaire par l'utilisateur.">
+<title>{% block title %}Modification d'un commentaire{% endblock %}</title>
+{% endblock %}
+
+{% block header_content %}
+
+{% endblock %}
+
+{% block body_content %}
+<div class="outer-frame">
+    <div class="inner-frame">
+
+        <!-- Titre du formulaire -->
+        <h2 class="h2-form">Voici le formulaire pour modifier un commentaire.</h2>
+
+        <form method="POST" action="{{ url_for('user.change_comment', id=comment.id) }}" class="form-base">
+
+            <!-- Image du logo -->
+            <div class="imgcontainer-form">
+                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}"
+                     alt="Logo de SethiarWorks"
+                     class="avatar-form">
+            </div>
+
+            <!-- Titre de la section du formulaire -->
+            <h3 class="h3-form">Modification du commentaire</h3>
+
+            <!-- hidden_tag pour génération du token CSRF pour la sécurité -->
+            {{ formchange.hidden_tag() }}
+
+            <div class="space-form"></div>
+
+            <!-- Conteneur de la modification du commentaire -->
+            <div class="form-group">
+                {{ formchange.comment_content.label }} {{ formchange.comment_content() }}
+                <input type="hidden" name="subject_id" value="{{ comment.subject_id }}">
+                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+
+                <div class="container-btn">
+                    <button type="submit" class="validated-btn" aria-label="Valider la modification">Soumettre la
+                        réponse
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

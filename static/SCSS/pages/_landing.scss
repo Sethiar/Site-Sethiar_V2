@@ -1,0 +1,229 @@
+// Importation des variables.
+@import '../base/variables';
+
+/* pages css - pages/home.scss */
+
+// Styles du contenu de la page d'accueil.
+
+/* Titre de la page d'accueil */
+.title-container-landing {
+  display: flex;
+  justify-content: center;
+  font-size: $font-size-title;
+  align-items: center;
+  margin: 0;
+  height: 20vh;
+  border-radius: 8px;
+  text-align: center;
+  padding: 2% 3%;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+
+  &:hover {
+  transform: scale(1.025);
+  }
+}
+
+/* Contenu centré avec dégradé */
+.content-section-landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem;
+  position: relative;
+}
+
+.intro-landing {
+  opacity: 0;
+  transform: translateY(50px) scale(0.8);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  font-size: $font-size-xxxl;
+  color: $color-lightgrey;
+  text-align: center;
+  margin: 3% 0;
+  line-height: 1.4;
+}
+
+/* Conteneur pour le slogan de l'entreprise */
+.slogan-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: $color-lightgrey;
+
+  /* Style de base */
+  border: 2px solid $color-decline-orange2;
+  border-radius: 40px;
+
+  /* Animation fluide */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02); /* Agrandir le conteneur */
+    border: 2px solid $color-decline-gold2;
+  }
+}
+
+/* Texte du slogan */
+.slogan-text {
+  font-size: $font-size-xxl;
+  color: $color-primary;
+  font-weight: bold;
+  font-family: 'Comfortaa', cursive;
+
+  /* Transition harmonisée */
+  transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
+.slogan-container:hover .slogan-text {
+  /* Grossir légèrement le texte */
+  font-size: $font-size-xxxl; 
+  -webkit-background-clip: text;
+}
+
+// Animation concernant l'apparition des phrases de l'accueil.
+/* Animation principale : fadeInUp */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.registration-sentence-landing {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    font-size: $font-size-xxxl;
+    color: $color-neutral-darkgrey;
+    text-align: center;
+    margin: 3% 0;
+    line-height: 1;
+}
+
+/* Classe animée lors de l'apparition */
+p.appear {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Styles pour les paragraphes sans animation */
+p.animate {
+  animation: fadeInAndGrow 0.5s ease-out forwards;
+}
+
+/* Animation pour fade in */
+@keyframes fadeInAndGrow {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation pour fade in avec croissance */
+@keyframes fadeInAndGrow {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+// Styles pour la page wait.
+.wait-container {
+  color: $color-primary;
+  background-color: $color-black;
+  border: 1px solid $color-decline-gold2;
+  padding: 2%;
+  text-align: center;
+  max-width: 80%;
+}
+
+/* Media Queries pour la réactivité */
+
+@media (max-width: 768px) {
+  /* Ajustements pour les tablettes en portrait et les petits écrans */
+  .title-container-landing {
+    font-size: $font-size-xxl;
+    height: 12vh;
+  }
+
+  .content-section-landing {
+    width: 90%;
+    padding: 0.5rem;
+  }
+
+  .intro-landing {
+    font-size: $font-size-xl;
+    margin: 2% 0;
+  }
+
+  .slogan-container {
+    width: 100%;
+    padding: 1%;
+  }
+
+  .slogan-text {
+    font-size: $font-size-xl;
+  }
+
+  .registration-sentence-landing {
+    font-size: $font-size-xl;
+  }
+
+  .wait-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajustements pour les smartphones */
+  .title-container-landing {
+    font-size: $font-size-xxl;
+    height: 10vh;
+  }
+
+  .content-section-landing {
+    width: 100%;
+    padding: 0.25rem;
+  }
+
+  .intro-landing {
+    font-size: $font-size-xl;
+    margin: 1% 0;
+  }
+
+  .slogan-container {
+    padding: 0.5%;
+  }
+
+  .slogan-text {
+    font-size: $font-size-xl;
+  }
+
+  .registration-sentence-landing {
+    font-size: $font-size-xl;
+  }
+
+  .wait-container {
+    max-width: 100%;
+    padding: 1rem;
+  }
+}

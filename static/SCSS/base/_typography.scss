@@ -1,0 +1,154 @@
+// Importation des variables.
+@import 'variables';
+
+/* typography css - base/typography.scss */
+
+/* Personnalisation des titres, paragraphes et éléments de contenus */
+
+// Gestion des titres et des tableaux de la section forum et subject-forum
+
+/*h1*/
+h1.comment-title {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: $font-size-xxxl;
+  text-decoration: underline;
+}
+
+/*h4*/
+.section-title {
+  font-size: $font-size-xl;
+  color: $color-decline-gold2;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+
+// Gestion des titres et paragraphes des pages mentions et politiques.
+
+.h1-politique {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  font-size: $font-size-xxxl;
+  text-decoration: underline;
+  }
+
+.h2-politique {
+  font-size: $font-size-xxl;
+}
+
+.h1-devis {
+  font-size: $font-size-xxxl;
+  color: $color-decline-gold2;
+  display: flex;
+  /* Centre verticalement */
+  align-items: center;
+  /* Centre horizontalement */
+  justify-content: center;
+  /* Optionnel, pour garantir que le texte est bien centré */
+  text-align: center; 
+}
+
+.h2-devis {
+  font-size: $font-size-xxl;
+  /* Centrage horizontal du conteneur */
+  margin: 0 auto; 
+  /* Bordure */
+  border: 1px solid $color-decline-orange2;
+  display: flex;
+  /* Centre verticalement */
+  align-items: center;
+  /* Centre horizontalement */
+  justify-content: center; 
+  /* Assure que le texte est bien centré */
+  text-align: center; 
+}
+
+// Typography Responsive
+
+/* Pour les tablettes portrait */
+@media (max-width: 768px) {
+  .comment-title {
+    width: 80%;
+    font-size: $font-size-xxl;
+  }
+
+  .section-title {
+    font-size: $font-size-xl;
+  }
+
+  .h1-politique {
+    width: 80%;
+    font-size: $font-size-xxl;
+  }
+
+  .h2-politique {
+    font-size: $font-size-xl;
+  }
+}
+
+/* Pour les tablettes paysage */
+@media (max-width: 1024px) {
+  .comment-title {
+    width: 70%;
+    font-size: $font-size-xxl;
+  }
+
+  .section-title {
+    font-size: $font-size-xl;
+  }
+
+  .h1-politique {
+    width: 70%;
+    font-size: $font-size-xxxl;
+  }
+
+  .h2-politique {
+    font-size: $font-size-xl;
+  }
+}
+
+/* Pour les téléphones portrait */
+@media (max-width: 480px) {
+  .comment-title {
+    width: 90%;
+    font-size: $font-size-xl;
+  }
+
+  .section-title {
+    font-size: $font-size-lg;
+  }
+
+  .h1-politique {
+    width: 90%;
+    font-size: $font-size-xl;
+  }
+
+  .h2-politique {
+    font-size: $font-size-lg;
+  }
+}
+
+/* Pour les téléphones paysage */
+@media (max-width: 600px) {
+  .comment-title {
+    width: 90%;
+    font-size: $font-size-xl;
+  }
+
+  .section-title {
+    font-size: $font-size-lg;
+  }
+
+  .h1-politique {
+    width: 90%;
+    font-size: $font-size-xl;
+  }
+
+  .h2-politique {
+    font-size: $font-size-lg;
+  }
+}

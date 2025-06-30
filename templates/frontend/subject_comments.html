@@ -1,0 +1,228 @@
+{% extends 'base.html.jinja2' %}
+
+{% block head_content %}
+<meta name="description"
+      content="Espace du site permettant de discuter, interagir et donner son avis sur le site de l'entreprise SethiarWorks.">
+<title>{% block title %}Bienvenue sur l'espace de commentaire du site SethiarWorks{% endblock %}</title>
+<!-- CSS Principal -->
+<link rel="stylesheet" href="{{ url_for('static', filename='gen/style.css') }}?v=1.0">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+
+{{ moment.include_moment() }}
+
+{% endblock %}
+
+{% block header_content %}
+{% endblock %}
+
+{% block main_content %}
+
+<!-- Conteneur principal -->
+<div class="main-content">
+
+    <!-- Cadre extérieur -->
+    <div class="outer-frame-politique">
+
+        <!-- Cadre intérieur -->
+        <div class="inner-frame-politique">
+
+            <!-- Image du logo -->
+            <div class="imgcontainer-form">
+                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
+                     class="avatar-form">
+            </div>
+
+            <!--Titre -->
+            <h1 class="comment-title">Espace de commentaires</h1>
+
+            <!-- Division pour image forum -->
+            <div class="comment-image-container">
+
+                <!-- Image centrale -->
+                <div class="image-comment">
+                    <img src="{{ url_for('static', filename='images/images_comment/comment1.png') }}"
+                         alt="Image comment">
+                </div>
+            </div>
+         
+            <div class="space-form"></div>
+            
+            <!-- Séparation -->
+            <hr class="politique-divider">
+
+            <!-- Conteneur du sujet -->
+            <div class="container-subject-forum">
+                <h2 class="forum-subtitle">
+                    Discussion sur le sujet : <span class="subject-name">{{ subject.nom }}</span>
+                </h2>
+            </div>
+
+            <!-- Conteneur principal des commentaires -->
+            <div class="container-comment">
+
+                <!-- Conteneur commentaire -->
+                <div class="comment-avis">
+                    <h3 class="comment-subtitle">Vous pouvez laisser un commentaire :</h3>
+                </div>
+
+                <!-- Conteneur formulaire du commentaire -->
+                <div class="form-comment">
+                    <form method="POST"
+                          action="{{ url_for('user.comment_enterprise', user_enterprise_name=current_user.enterprise_name) }}">
+                        {{ formcomment.csrf_token }}
+
+                        <input type="hidden" name="subject_id" value="{{ subject_id }}">
+                        <input type="hidden" name="user_enterprise_name" value="{{ current_user.enterprise_name }}">
+                        
+                        <textarea name="comment_content" placeholder="Votre commentaire" required></textarea>
+                        <div class="container-btn">
+                            <button class="btn-comment" type="submit">Poster le commentaire</button>
+                            <a class="btn-comment" href="{{ url_for('auth.user_connection') }}">Se connecter</a>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+
+            {% for comment in comment_subject %}
+
+            <!-- Conteneur pour poster un commentaire -->
+            <div class="comment">
+
+                <!-- Conteneur de la photo de l'utilisateur -->
+                <div class="comment-header">
+                    <img src="{{ url_for('user.profil_photo', user_id=comment.user_id) }}" alt="Photo de profil"
+                         class="profile-picture">
+                    <div class="comment-user-info">
+                        <strong class="user-enterprise_name">{{ comment.user.enterprise_name }}</strong>
+                        <span class="user-role">{{ comment.user.role }} a commenté :</span>
+                        <small class="comment-date">
+                            Le {{ moment(comment.comment_date).format('DD-MM-YYYY à HH:mm') }}
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Conteneur du contenu du commentaire -->
+                <div class="comment-body">
+                    <p class="content-comment">
+                        {{ comment.comment_content | replace('\n', '<br>') | safe }}
+                    </p>
+                </div>
+
+                <!-- Conteneur des modifications au commentaire -->
+                {% if comment.user_id == current_user.id %}
+                <div class="comment-actions">
+
+                    <!-- Lien vers la modification du commentaire -->
+                    <a href="{{ url_for('user.change_comment', id=comment.id) }}" class="change-button">
+                        Modifier le commentaire
+                    </a>
+
+                    <!-- Formulaire de suppression du commentaire -->
+                    <form action="{{ url_for('user.delete_comment', id=comment.id) }}" method="POST"
+                          class="delete-comment-form" style="margin-left:10%;display:inline;">
+                        
+                          <!-- Token CSRF pour la sécurité -->
+                        {{ formsuppress.csrf_token }}
+
+                        <!-- Utilisation d'un bouton pour la suppression -->
+                        <button type="submit" class="suppress-button"
+                                onclick="return confirm('Êtes-vous certain-e de vouloir supprimer votre commentaire ?'); ">
+                            Supprimer le commentaire
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Conteneur de réponse à un commentaire -->
+            <div class="reply-button-container">
+
+                <!-- lien permettant de répondre à un commentaire -->
+                <a href="{{ url_for('user.comment_replies', comment_id=comment.id) }}"
+                   class="reply-button">
+                    Répondre
+                </a>
+
+                
+            </div>
+
+            <!-- Conteneur principal de réponses au commentaire -->
+            <div class="replies-container">
+                {% for reply in comment.replies %}
+
+                <!-- Conteneur d'une réponse individuelle -->
+                <div class="reply-card">
+
+                    <!-- Conteneur de la photo de l'utilisateur qui a répondu -->
+                    <div class="reply-header">
+                        <img src="{{ url_for('user.profil_photo', user_id=reply.user_id) }}"
+                             alt="Photo de profil" class="reply-profile-picture">
+
+                        <!-- Conteneur du nom de l'entreprise de l'utilisateur qui a répondu -->
+                        <div class="reply-info">
+                            <strong class="reply-user-pseudo">{{ reply.user.enterprise_name }}</strong>
+                            <span class="reply-user-role">{{ reply.user.role }} a répondu :</span>
+                            <small class="reply-date">
+                                Le {{ moment(reply.reply_date).format('DD-MM-YYYY à HH:mm') }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Contenu de la réponse -->
+                    <div class="reply-body">
+                        <p class="reply-content">
+                            {{ reply.reply_content | replace('\n', '<br>') | safe }}
+                        </p>
+                    </div>
+
+                    <!-- conteneur permettant de changer le contenu de la réponse -->
+                    <div class="reply-actions">
+                        {% if reply.user_id == current_user.id %}
+
+                        <!-- lien vers la modification de la réponse -->
+                        <a href="{{ url_for('user.change_reply', id=reply.id) }}" class="change-button"
+                           style="margin-left:10%;">
+                            Modifier la réponse
+                        </a>
+
+                        <!-- formulaire de suppression de la réponse -->
+                        <form action="{{ url_for('user.delete_reply', id=reply.id) }}" method="POST"
+                              class="delete-comment-form" style="margin-left:10%;display:inline;">
+                            <!-- Token CSRF pour la sécurité -->
+                            {{ formsuppressreply.csrf_token }}
+
+                            <!-- Utilisation d'un bouton pour la suppression -->
+                            <button type="submit" class="suppress-button"
+                                    onclick="return confirm('Êtes-vous certain-e de vouloir supprimer votre réponse ?');">
+                                Supprimer le commentaire
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Séparation -->
+        <hr class="politique-divider">
+
+        <!-- division de retour à la page d'accueil -->
+        <div class="back-link-comment">
+            <a class="btn-primary" href="{{ url_for('landing_page') }}">Retour à l'accueil</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footer_content %}
+
+
+{% endblock %}
