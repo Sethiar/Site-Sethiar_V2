@@ -9,7 +9,9 @@
 {% endblock %}
 
 {% block body_content %}
+<!-- Cadre externe -->
 <div class="outer-frame">
+    <!-- Cadre interne -->
     <div class="inner-frame">
         <form method="POST" action="{{ url_for('auth.login', next_url=next_url) }}" class="form-base"
               enctype="multipart/form-data">

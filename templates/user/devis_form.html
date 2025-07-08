@@ -9,25 +9,26 @@
 {% block body_content %}
 <div class="outer-frame">
     <div class="inner-frame">
-        <h1 class="h1-devis">Demande de devis</h1>
-        <div class="space2"></div>
-        <div class="annonce">
 
-            <!-- Titre -->
-            <h2 class="h2-devis">
-                Bienvenue sur la demande de devis.
-            </h2>
-            <div class="space2"></div>
+        <div class="space-form"></div>
+        
+        <h1 class="h1-devis">
+            Informations concernant la demande de devis
+        </h1>
+        
+        <div class="space"></div>
+
+        <div class="annonce">
 
             <!-- Présentation -->
             <ul>
-                <li><b>Rapidité :</b> Réponse garantie sous une semaine.</li>
-                <li><b>Clarté :</b> Décrivez votre projet avec les fonctionnalités attendues.</li>
-                <li><b>Transparence :</b> Consultez nos <a href="{{url_for('functional.politique')}}">conditions
+                <li><b>* Rapidité :</b> Réponse garantie sous une semaine.</li>
+                <li><b>* Clarté :</b> Décrivez votre projet avec les fonctionnalités attendues.</li>
+                <li><b>* Transparence :</b> Consultez nos <a href="{{url_for('functional.politique')}}">conditions
                     générales</a>.
                 </li>
             </ul>
-            <div class="space2"></div>
+            <div class="space-form"></div>
 
             <!--Champ de précision -->
             <p>
@@ -42,24 +43,27 @@
 
             <!-- Image du logo -->
             <div class="imgcontainer-form">
-                <img src="{{ url_for('static', filename='Images/images_accueil/logo.jpg') }}" alt="Logo de SethiarWorks"
+                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
                      class="avatar-form">
             </div>
+
+            <div class="space-form"></div>
 
             <!-- Titre du formulaire -->
             <h3 class="h3-form">Demande de devis</h3>
 
+            <div class="space-form"></div>
+
             <!-- Token CSRF pour la sécurité -->
             {{ form_devis.csrf_token }}
-
-            <div class="space-form"></div>
 
             <!-- Conteneur des champs du formulaire -->
             <div class="form-container">
 
                 <!-- Champ pour le nom et le prénom -->
                 <div class="form-group">
-                    {{ form_devis.lastname.label }} {{ form_devis.lastname() }}
+                    {{ form_devis.lastname.label }} 
+                    {{ form_devis.lastname() }}
                     {% if form_devis.lastname.errors %}
                     <ul>
                         {% for error in form_devis.lastname.errors %}
@@ -68,7 +72,10 @@
                     </ul>
                     {% endif %}
 
-                    {{ form_devis.firstname.label }} {{ form_devis.firstname() }}
+                    <div class="space-inter-form"></div>
+
+                    {{ form_devis.firstname.label }} 
+                    {{ form_devis.firstname() }}
                     {% if form_devis.firstname.errors %}
                     <ul>
                         {% for error in form_devis.firstname.errors %}
@@ -78,9 +85,12 @@
                     {% endif %}
                 </div>
 
+                <div class="space-inter-form"></div>
+
                 <!-- Champ pour le numéro de téléphone -->
                 <div class="form-group">
-                    {{ form_devis.phone.label }} {{ form_devis.phone() }}
+                    {{ form_devis.phone.label }} 
+                    {{ form_devis.phone() }}
                     {% if form_devis.phone.errors %}
                     <ul>
                         {% for error in form_devis.phone.errors %}
@@ -90,9 +100,12 @@
                     {% endif %}
                 </div>
 
+                <div class="space-inter-form"></div>
+
                 <!-- Champs pour le nom de l'entreprise-->
                 <div class="form-group">
-                    {{ form_devis.enterprise_name.label }} {{ form_devis.enterprise_name() }}
+                    {{ form_devis.enterprise_name.label }} 
+                    {{ form_devis.enterprise_name() }}
                     {% if form_devis.enterprise_name.errors %}
                     <ul>
                         {% for error in form_devis.enterprise_name %}
@@ -102,9 +115,12 @@
                     {% endif %}
                 </div>
 
-                <!-- Champ pour le mail -->
+                <div class="space-inter-form"></div>
+
+                <!-- Champ pour l'email -->
                 <div class="form-group">
-                    {{ form_devis.email.label }} {{ form_devis.email() }}
+                    {{ form_devis.email.label }} 
+                    {{ form_devis.email() }}
                     {% if form_devis.email.errors %}
                     <ul>
                         {% for error in form_devis.email.errors %}
@@ -114,9 +130,22 @@
                     {% endif %}
                 </div>
 
+                <div class="space-inter-form"></div>
+
                 <!-- Champ pour le type de projet -->
                 <div class="form-group">
-                    {{ form_devis.project_type.label }} {{ form_devis.project_type() }}
+                    <u>{{ form_devis.project_type.label }}</u>
+                    
+                    <div style="margin-bottom: 3%;"></div>
+                    
+                    <div class="checkbox-group">
+                        {% for subfield in form_devis.project_type %}
+                            <div style="margin-bottom: 3% ">
+                                <label style="display: inline-block;">{{subfield.label }}</label>
+                                <label style="display: inline-block; margin-left: 10px;">{{ subfield }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
                     {% if form_devis.project_type.errors %}
                     <ul>
                         {% for error in form_devis.project_type.errors %}
@@ -126,11 +155,12 @@
                     {% endif %}
                 </div>
 
+                <div class="space-inter-form"></div>
+
                 <!-- Conteneur du contenu de la demande de devis -->
                 <div class="form-group">
                     {{ form_devis.devis_content.label }}
-                    {{ form_devis.devis_content(class="form-control",
-                    placeholder="Votre description de votre projet") }}
+                    {{ form_devis.devis_content(class="form-control") }}
                     {% if form_devis.devis_content.errors %}
                     <ul>
                         {% for error in form_devis.demand_content.errors %}
@@ -141,16 +171,15 @@
                 </div>
 
             </div>
-            <div class="space2"></div>
 
             <div class="separation1"></div>
 
-            <div class="space2"></div>
+            <div class="space-form"></div>
 
             <!-- Conteneur des boutons du formulaire -->
             <div class="container-btn">
-                <button type="submit" class="validated-btn" aria-label="Valider la demande de devis">Validation de la
-                    demande de devis
+                <button type="submit" class="validated-btn" aria-label="Valider la demande de devis">
+                    Validation de la demande de devis
                 </button>
                 <a href="{{ url_for('landing_page') }}" class="cancelled-btn">Annulation et retour à l'accueil</a>
             </div>
