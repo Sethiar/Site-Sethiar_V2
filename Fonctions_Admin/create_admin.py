@@ -22,8 +22,8 @@ from database_config.db_sethiarworks import conn
 
 
 # Si besoin de changer les identifiants, c'est ici : 
-pseudo = "Nosiris"
-password = "Monolithe8"
+pseudo = "Sethiar1er"
+password = "Carmelithe3"
 role = "SuperAdmin"
 
 # Généraion d'un sel aléatoire pour le hachage du mot de passe.c
