@@ -21,6 +21,16 @@ from app.mail.routes import send_mail_validate_request, send_mail_refusal_reques
 from app.extensions import create_whereby_meeting_admin
 
 
+# Route pour la page de remerciement de la demande de chat vidéo.
+@chat_bp.route("/demande-de-chat-remerciement")
+def user_chat_thanks():
+    """
+    Page affichée après l'envoi réussi d'une demande de devis.
+    """
+    
+    return render_template("chat/chat_form_thanks.html")
+
+
 # Route permettant d'afficher la vidéo du chat vidéo.
 @chat_bp.route('/video_chat/<int:request_id>')
 def video_chat(request_id):
@@ -139,7 +149,7 @@ def send_request():
 
 # Méthode supprimant la demande de chat vidéo du tableau administrateur.
 @chat_bp.route('/suppression-demande-chat/<int:id>', methods=['POST'])
-def suppress_request(id):
+def suppress_chat(id):
     """
     Supprime une demande de chat vidéo du tableau des demandes administratives.
 
@@ -154,15 +164,19 @@ def suppress_request(id):
         Response: Redirection vers la page du calendrier d'administration après la suppression de la demande.
     """
     # Récupération de la requête à supprimer.
-    request = ChatRequest.query.get(id)
+    chat = ChatRequest.query.get(id)
 
     # Vérification de l'existence de la requête.
-    if request:
+    if chat:
+        
+        # Affichage d'un message avant suppression, incluant le nom de l'entreprise.
+        enterprise_name = chat.enterprise_name
+        
         # Suppression de la requête.
-        db.session.delete(request)
+        db.session.delete(chat)
         # Enregistrement au sein de la base de données.
         db.session.commit()
-        flash(f"La requête de l'utilisateur : {request.pseudo} a été supprimée.")
+        flash(f"La requête de l'entreprise : {enterprise_name} a été supprimée.")
         
         # Fermeture de la connexion.
         db.session.close()
@@ -172,7 +186,7 @@ def suppress_request(id):
 
 # Méthode traitant la demande en attente et la validant.
 @chat_bp.route('/validation-demande-chat/<int:id>', methods=['POST'])
-def valide_request(id):
+def valide_chat(id):
     """
     Valide une demande de chat vidéo spécifique et en informe l'utilisateur par e-mail.
 
@@ -186,22 +200,24 @@ def valide_request(id):
     Returns:
         Response: Redirection vers la page du calendrier d'administration après la validation de la demande.
     """
-
+    # Récupération de la requête à supprimer.
+    chat = ChatRequest.query.get(id)
+    
     # Vérification de l'existence de la requête.
-    if request:
+    if chat:
         try:
             # Récupération de la requête à valider.
-            request = ChatRequest.query.get_or_404(id)
+            chat = ChatRequest.query.get_or_404(id)
 
             # Vérification de l'existence de l'utilisateur.
-            if not request:
+            if not chat:
                 flash("Utilisateur non trouvé.", "danger")
                 return redirect(url_for("admin.calendar"))
 
             # Validation de la requête.
-            request.accept_chat_request()
+            chat.accept_chat_request()
             # Envoi du mail de validation.
-            send_mail_validate_request(request)
+            send_mail_validate_request(chat)
 
             flash("La demande de chat vidéo a été traitée et validée.", "success")
         except Exception as e:
@@ -214,7 +230,7 @@ def valide_request(id):
 
 # Méthode traitant la demande en attente et la refusant.
 @chat_bp.route('/refus-demande-chat/<int:id>', methods=['POST'])
-def refuse_request(id):
+def refuse_chat(id):
     """
     Refuse une demande de chat vidéo spécifique et en informe l'utilisateur par e-mail.
 
@@ -229,23 +245,23 @@ def refuse_request(id):
         Response: Redirection vers la page du calendrier d'administration après le traitement de la demande.
     """
     # Récupération de la requête à refuser.
-    request = ChatRequest.query.get_or_404(id)
+    chat = ChatRequest.query.get_or_404(id)
 
     # Vérification de l'existence de la requête.
-    if request:
+    if chat:
         try:
-            # Récupération de l'utilisateur avec son pseudo.
-            request = ChatRequest.query.get_or_404(id)
+            # Récupération de la requête utilisateur avec les données.
+            chat = ChatRequest.query.get_or_404(id)
 
             # Vérification de l'existence de l'utilisateur.
-            if not request:
+            if not chat:
                 flash("Utilisateur non trouvé.", "danger")
                 return redirect(url_for("admin.calendar"))
 
             # Refus de la requête.
-            request.refuse_chat_request()
+            chat.refuse_chat_request()
             # Envoi du mail de refus.
-            send_mail_refusal_request(request)
+            send_mail_refusal_request(chat)
 
             flash("La demande de chat vidéo a été traitée et refusée.", "success")
         except Exception as e:
@@ -280,20 +296,15 @@ def send_user_link(id):
         chat_link = form.chat_link.data
 
         # Récupération de la requête de chat vidéo associée à l'ID fourni.
-        request_data = ChatRequest.query.get(id)
+        chat = ChatRequest.query.get(id)
 
-        if request_data:
-            # Récupération de l'email de l'utilisateur demandeur du chat.
-            email = ChatRequest.query.get(email=request_data.email).first()
-
-            if email:
-                # Appel de la fonction pour envoyer l'e-mail avec le lien du chat vidéo.
-                send_mail_validate_request(email, request_data, chat_link)
-                flash("Le lien a été envoyé à l'utilisateur avec succès.", "success")
-            else:
-                flash("Erreur : utilisateur introuvable.", "danger")
+        if chat:
+            send_mail_validate_request(chat, chat_link)
+            flash("Le lien a été envoyé à l'utilisateur avec succès.", "success")
+        
         else:
-            flash("Erreur : requête de chat vidéo introuvable.", "danger")
+            flash("Erreur : utilisateur introuvable.", "danger")
+    
     else:
         flash("Erreur dans le formulaire, veuillez vérifier les champs.", "danger")
 
