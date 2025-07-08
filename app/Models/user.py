@@ -75,6 +75,23 @@ class User(db.Model, UserMixin):
     #---------------------------------------------------------------
 
 
+    #----------------------------------------#
+    # Fonction qui redéfinit un mot de passe #
+    #----------------------------------------#
+    
+    def set_password(self, new_password):
+        """
+        Redéfinit le mot de passe de l'utilisateur.
+
+        Args:
+            new_password (str) : Le nouveau mot de passe de l'utilisateur.
+        """
+        self.password_hash = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+        db.session.add(self)
+        db.session.commit()
+    #---------------------------------------------------------------    
+
+
     #----------------------------------------------------------------------------------------------
     # Fonctions utilisées par Flask-Login pour gérer l'authentification.    
     #----------------------------------------------------------------------------------------------
@@ -126,6 +143,7 @@ class User(db.Model, UserMixin):
             str : L'identifiant de l'utilisateur.
         """
         return str(self.id)
+
 
     # Fonction qui vérifie le rôle de l'utilisateur.
     def has_role(self, role):

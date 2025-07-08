@@ -17,9 +17,9 @@ class ChatRequestStatus(Enum):
         ACCEPTEE (str): Requête acceptée par l'administrateur.
         REFUSEE (str): Requête refusée par l'administrateur.
     """
-    EN_ATTENTE = 'en attente'
-    ACCEPTEE = 'acceptée'
-    REFUSEE = 'refusée'
+    EN_ATTENTE = "En attente"
+    ACCEPTEE = "Acceptée"
+    REFUSEE = "Refusée"
 
 
 from sqlalchemy import Enum as PgEnum
@@ -63,7 +63,7 @@ class ChatRequest(BaseModel):
     __table_args__ = {'extend_existing': True}
     
     id = db.Column(db.Integer, primary_key=True)
-    enterprise_name = db.Column(db.String(30), nullable=False)
+    enterprise_name = db.Column(db.String(30), nullable=True, default="Particulier")
     email = db.Column(db.String(50), nullable=False)
     request_content = db.Column(db.Text, nullable=False)
     date_rdv = db.Column(db.DateTime(timezone=True), nullable=True)
@@ -115,7 +115,31 @@ class ChatRequest(BaseModel):
             data['admin_id'] = self.admin_id
         return data
 
-
+    
+    # Focntion qui permet d'accepter un chat vidéo et ainsi de modifier le statut de la demande.
+    def accept_chat_request(self):
+        """
+        Accepte la requête de chat en modifiant son statut à 'acceptée'.
+        """
+        self.status = ChatRequestStatus.ACCEPTEE
+        
+        # Sauvegarde des changements dans la base de données. 
+        self.save_data()
+        logging.info(f"ChatRequest {self.id} a été acceptée.")
+    
+    
+    # Fonction qui permet de refuser un chat vidéo et ainsi de modifier le statut de la demande.
+    def refuse_chat_request(self):
+        """
+        Refuse la requête de chat en modifiant son statut à 'refusée'.
+        """
+        self.status = ChatRequestStatus.REFUSEE
+        
+        # Sauvegarde dans la base de données.
+        self.save_data()
+        logging.info(f"ChatRequest {self.id} a été refusée.")
+    
+    
     # Fonction qui permet de valider un chat vidéo et ainsi de modifier le statut de la demande.
     def validate_chat_request(self, new_status=ChatRequestStatus.EN_ATTENTE):
         """
@@ -131,22 +155,9 @@ class ChatRequest(BaseModel):
         self.save_data()
     
         # Commit des changements dans la base de données.
-        logging.info(f"ChatRequest {self.id} status updated to {self.status}.")
-        logging.debug(f"ChatRequest {self.id} updated in the database.")
-        logging.debug(f"ChatRequest {self.id} committed to the database.")
+        logging.info(f"ChatRequest {self.id} traité avec le statut {self.status}.")
         
-    # Focntion qui pemret d'accepter un chat vidéo et ainsi de modifier le statut de la demande.
-    def accept_chat_request(self):
-        """
-        Accepte la requête de chat en modifiant son statut à 'acceptée'.
-        """
-        return self.validate_chat_request(new_status=ChatRequestStatus.ACCEPTEE)
+        
     
-    # Fonction qui permet de refuser un chat vidéo et ainsi de modifier le statut de la demande.
-    def refuse_chat_request(self):
-        """
-        Refuse la requête de chat en modifiant son statut à 'refusée'.
-        """
-        return self.validate_chat_request(new_status=ChatRequestStatus.REFUSEE) 
                 
                         

@@ -18,7 +18,7 @@ class SubjectComment(db.Model):
     __table_args__ = {"extend_existing": True}
     
     id = db.Column(db.Integer, primary_key=True)
-    nom = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
     author = db.Column(db.String(50), nullable=False)
     
     # Relation avec la table customer_comment.
@@ -33,6 +33,6 @@ class SubjectComment(db.Model):
         Returns:
             str: Chaîne représentant l'objet SubjectComment.
         """
-        return f"<SubjectComment(nom='{self.nom}')"
+        return f"<SubjectComment(nom='{self.name}')"
     
     
