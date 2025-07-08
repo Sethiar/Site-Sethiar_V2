@@ -1,0 +1,69 @@
+{% extends 'baseback.html.jinja2' %}
+
+{% block head_content %}
+<meta name="'description" content="Page du backend renvoyant la liste de tous les sujets de la table de données SubjectComment.">
+<title>{% block title %}Page Administratuer - Liste des sujets de l'espace de commentaire{% endblock %}</title>
+{% endblock %}
+
+{% block body_content %}
+<div class="space"></div>
+
+<h4 class="h4-backend">Ajouter un sujet sur l'espace de commentaire</h4>
+
+<div class="space2"></div>
+
+<!-- Conteneur de formulaire -->
+<form method="POST" action="{{ url_for('admin.add_subject_admin') }}" class="form-base">
+    {{ formsubjectcomment.csrf_token }}
+    
+    <!-- Conteneur des champs du formulaire -->
+     <div class="form-container">
+        <div class="form-group">
+            {{ formsubjectcomment.label }} 
+            {{ formsubjectcomment.name() }}
+            <button type="submit" class="validated-btn" aria-label="Ajouter un sujet à l'espace de commentaire">
+                Ajouter le sujet
+            </button>
+        </div>
+     </div>
+</form>
+
+<div class="container">
+    
+    <h4 class="h4-backend">Liste des sujets</h4>
+
+    <div class="space2"></div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Identifiants</th>
+                <th>Sujets de l'espace de commentaire</th>
+                <th>Auteur du sujet</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for subject in subject_data %}
+            <tr>
+                <td>{{ subject.id }}</td>
+                <td>{{ subject.name }}</td>
+                <td>{{ subject.author }}</td>
+                <td>
+                    <form action="{{ url_for('admin.suppress_subject', id=subject.id) }}" method="POST"
+                        class="btn-suppression">
+
+                        {{ formsuppresssubject.csrf_token}}
+
+                        <button type="submit" class="btn-suppression" data-name="le sujet {{ subject.name }}">
+                            Supprimer <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

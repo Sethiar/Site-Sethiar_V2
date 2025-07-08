@@ -23,67 +23,72 @@
         <thead>
         <tr>
             <th>Nom de l'entreprise</th>
-            <th>Date choisie par l'utilisateur</th>
-            <th>heure choisie par l'utilisateur</th>
-            <th>Statue de la requête</th>
+            <th>Date choisie</th>
+            <th>Heure choisie</th>
+            <th>Statut de la requête</th>
             <th>Lien de connexion Administrateur</th>
             <th>Envoi du lien utilisateur</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        {% for request in requests %}
+        {% for chat in chats %}
         <tr>
-            <td>{{ request.enterprise_name }}</td>
-            <td>{{ moment(request.date_rdv).format("DD/MM/YYYY") }}</td>
-            <td>{{ moment(request.heure).format("HH:00") }}</td>
-            <td>{{ request.status }}</td>
+            <td>{{ chat.enterprise_name }}</td>
+            <td>{{ moment(chat.date_rdv).format("DD/MM/YYYY") }}</td>
+            <td>{{ moment(chat.heure).format("HH:00") }}</td>
             <td>
-                {% if request.status == ChatRequestStatus.ACCEPTEE %}
-                {% set rdv = rdv_data | selectattr("enterprise_name", "equalto", request.enterprise_name) | first %}
-                {% if rdv %}
-                <a href="{{ rdv.link }}" target="_blank" class="link">Lien de connexion</a>
+                {% if chat.status == ChatRequestStatus.ACCEPTEE %}
+                    "Validée"
+                {% elif chat.status == ChatRequestStatus.REFUSEE %}
+                    "Refusée"
                 {% else %}
-                Non disponible
-                {% endif %}
+                    "En attente" 
+                {% endif %}       
+            </td>
+            <td>
+                {% if chat.status == ChatRequestStatus.ACCEPTEE %}
+                    <a href="{{ admin_room_url }}" target="_blank" class="link">Lien de connexion</a>
                 {% else %}
-                Non disponible
+                    Lien non disponible
                 {% endif %}
             </td>
             <td>
-                {% if request.status == ChatRequestStatus.ACCEPTEE %}
-                <form action="{{ url_for('chat.send_user_link', id=request.id) }}" method="POST" class="btn_send">
-                    {{ formlink.csrf_token }}
-                    <input type="text" name="chat_link" placeholder="Lien pour l'utilisateur" required>
-                    <button type="submit">Envoyer</button>
-                </form>
+                {% if chat.status == ChatRequestStatus.ACCEPTEE %}
+                    <form action="{{ url_for('chat.send_user_link', id=chat.id) }}" method="POST" class="btn-send">
+                        {{ formlink.csrf_token }}
+                        <input type="text" name="chat_link" placeholder="Lien pour l'utilisateur" required>
+                        <button type="submit" class="btn-valide">
+                            Envoyer
+                        </button>
+                    </form>
                 {% else %}
-                Non disponible
+                    Non disponible
                 {% endif %}
             </td>
             <td>
-                <div class="actions-buttons">
+                <div class="actions-button">
                     <!-- Bouton de suppression de la requête -->
-                    <form action="{{ url_for('chat.suppress_request', id=request.id) }}" method="POST">
+                    <form action="{{ url_for('chat.suppress_chat', id=chat.id) }}" method="POST">
                         {{ formrequest.csrf_token }}
-                        <button type="submit">
+                        <button type="submit" class="btn-suppression">
                             Supprimer <i class="fas fa-trash"></i>
                         </button>
                     </form>
 
                     <!-- Bouton de validation de la requête -->
-                    <form action="{{ url_for('chat.valide_request', id=request.id) }}" method="POST">
+                    <form action="{{ url_for('chat.valide_chat', id=chat.id) }}" method="POST">
                         {{ formrequest.csrf_token }}
-                        <button type="submit">
-                            Valider la requête <i class="fas fa-thumbs-up"></i>
+                        <button type="submit" class="btn-valide">
+                            Valider le chat <i class="fas fa-thumbs-up"></i>
                         </button>
                     </form>
 
                     <!-- Bouton de refus de la requête -->
-                    <form action="{{ url_for('chat.refuse_request', id=request.id) }}" method="POST">
+                    <form action="{{ url_for('chat.refuse_chat', id=chat.id) }}" method="POST">
                         {{ formrequest.csrf_token }}
-                        <button type="submit">
-                            Refuser la requête <i class="fas fa-thumbs-down"></i>
+                        <button type="submit" class="btn-valide">
+                            Refuser le chat <i class="fas fa-thumbs-down"></i>
                         </button>
                     </form>
                 </div>
@@ -105,8 +110,9 @@
     var rdvData = [
         {% for rdv in rdv_data %}
         {
-            title: '{{ rdv.pseudo|replace("'", "\\'") }} - {{ rdv.status|replace("'", "\\'") }}',
+            title: '{{ rdv.enterprise_name|replace("'", "\\'") }} - {{ rdv.status|replace("'", "\\'") }}',
             start: '{{ rdv.date_rdv.strftime("%Y-%m-%dT%H:%M:%S") }}',
+            url: '{{ rdv.link }}',
             allDay: false,
             content: '{{ rdv.content|replace("'", "\\'") }}'
         }{% if not loop.last %},{% endif %}
@@ -127,7 +133,6 @@
         calendar.render();
     });
 </script>
-
 
 <script src="{{ url_for('static', filename='javascript/calendar.js') }}" defer></script>
 

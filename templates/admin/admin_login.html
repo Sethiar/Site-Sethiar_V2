@@ -19,6 +19,9 @@
                 <img src="{{ url_for('static', filename='Images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
                      class="avatar-form">
             </div>
+
+            <div class="space-form"></div>
+
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
             {% for category, message in messages %}
@@ -31,6 +34,8 @@
             {% endif %}
             {% endwith %}
 
+            <div class="space-form"></div>
+
             <!-- Titre du formulaire -->
             <h3 class="h3-form">Authentification Administrateur</h3>
 
@@ -39,15 +44,22 @@
 
             <!-- Conteneur des champs du formulaire -->
             <div class="form-container">
+
+                <div class="space-form"></div>
+
                 <!-- Champ pour le pseudo -->
                 <div class="form-group">
                     {{ form_admin.pseudo.label }} {{ form_admin.pseudo() }}
                 </div>
 
+                <div class="space-form"></div>
+
                 <!--Renseignement du rôle -->
                 <div class="form-group">
                     {{ form_admin.role.label }} {{ form_admin.role() }}
                 </div>
+
+                <div class="space-form"></div>
 
                 <!-- Champ pour le mot de passe -->
                 <div class="form-group">
@@ -58,9 +70,10 @@
                 </div>
 
                 <div class="separation1"></div>
+                
+                <div class="space-form"></div>
 
                 <!-- Champ pour les boutons du formulaire -->
-
                 <div class="container-btn">
                     <button type="submit" class="validated-btn" aria-label="Valider l'authentification">
                         Validation de l'authentification
