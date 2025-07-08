@@ -10,7 +10,10 @@ from collections import defaultdict
 
 from datetime import datetime
 
-from flask import render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, request, \
+    flash
+
+from flask_login import current_user    
 
 from app.admin import admin_bp
 
@@ -23,6 +26,9 @@ from app.Models.chat_request import ChatRequest, ChatRequestStatus
 from app.Models.devis_request import DevisRequest
 
 from app.Models.comment_customer import CustomerComment
+
+from app.Models.subject_comment import SubjectComment
+from app.forms.subject_comment import NewSubjectCommentForm, SuppressSubject
 
 from app.forms.form_comment import SuppressCommentForm
 from app.forms.user_registration import UserRecording
@@ -48,8 +54,8 @@ def backend():
 
     :return: admin/backend.html
     """
-    # Récupération du nom et des informations de l'administrateur.
-    admin = Admin.query.all()
+    # Récupération des informations de l'administrateur.
+    admin = current_user
 
     return render_template("admin/backend.html", admin=admin, logged_in=True)
 
@@ -139,6 +145,126 @@ def suppress_user(id):
     return redirect(url_for("admin.users_list"))
 
 
+# Route permettant d'afficher la liste des sujets ans le backend.
+@admin_bp.route('/liste-sujets')
+@admin_required
+def list_subjects_admin():
+    """
+    Affichage de la liste des sujets enregistrés dans la table de données SubjectComment.
+    
+    Cette route permet à l'administrateur de visualiser tous les sujets présents dans la table de données SubjectComment.
+    Cette liste s'affiche dans le template 'admin/subject_list.html'. 
+    Est également inclus un formulaire de suppression des sujets.
+    
+    Context: 
+        FormSuppressSubjectForm: Formulaire gérant la délétion d'un sujet dans la base de données.
+        subject_data (list of dict): Liste de dsctionnaires où chaque dictionnaire renvoie le nom et l'auteur du sujet.
+    
+    Return:
+        Response: Page html listant les sujets.
+        
+    Templates:
+        admin/subject_list.html    
+    """
+    # Instanciation des formulaires.
+    formsuppresssubject = SuppressSubject()
+    formsubjectcomment = NewSubjectCommentForm()
+    
+    # Récupération des sujets du forum.
+    subjects = db.session.query(SubjectComment.id, SubjectComment.name, SubjectComment.author).all()
+
+    # Création d'un dictionnaire permettant de récupérer les informations des sujets.
+    subject_data = [
+        {'id': subject_id, 'name': name, 'author': author}
+        for subject_id, name, author in subjects
+    ]
+    
+    return render_template('admin/subjects_list.html', formsubjectcomment=formsubjectcomment, formsuppresssubject=formsuppresssubject,
+                           subject_data=subject_data)
+
+
+# Route permettant d'ajouter un sujet à l'espace de commentaire.
+@admin_bp.route('/ajouter-sujet', methods=['GET', 'POST'])
+@admin_required
+def add_subject_admin():
+    """
+    Ajout d'un sujet à l'espace de commentaire depuis le backend.
+    
+    Cette route permet à l'administrateur d'ajouter un sujet à l'espace de commentaire.
+    
+    Context:
+        NewSubjectCommentForm: Formulaire gérant l'ajout d'un sujet dans la base de données.
+        FormSuppressSubjectForm: Formulaire gérant la délétion d'un sujet dans la base de données.
+    
+    Attributes:
+    
+    Returns: Retour sur la page de la liste des sujets. admin/subjects_list.html
+    """
+    
+    # Création des instances des formulaires.
+    formsubjectcomment = NewSubjectCommentForm()
+    formsuppresssubject = SuppressSubject()
+    
+    if formsubjectcomment.validate_on_submit():
+        # Saisie du sujet.
+        name_subject = formsubjectcomment.name.data
+        subject_comment = SubjectComment(name=name_subject, author='Sethiar')
+        
+        # Enregistrement dans la base de données.
+        db.session.add(subject_comment)
+        db.session.commit()
+    
+    # Récupération de tous les sujets de la base de données.
+    subjects = db.session.query(SubjectComment.id, SubjectComment.name, SubjectComment.author).all()
+    
+    subject_data = [
+        {'id': subject_id, 'name': name, 'author': author}
+        for subject_id, name, author in subjects
+    ]
+    
+    # Fermeture de la session.
+    db.session.close()
+    
+    return render_template("admin/subjects_list.html", formsubjectcomment=formsubjectcomment, formsuppresssubject=formsuppresssubject,
+                           subject_data=subject_data)
+
+
+# Route supprimant un sujet de l'espace de commentaire del a tale de données.
+@admin_bp.route('/suppression-sujet/<int:id>', methods=['POST'])
+@admin_required
+def suppress_subject(id):
+    """
+    Suppression d'un sujet de l'espae de commentaire.
+    
+    Cette route supprime un sujet et met à jour la table de données depuis SubjectComment.
+    
+    Args: 
+        id (int): L'idenifiant du sujet à supprimer.
+    
+    Context:
+        subject (SubjectComment): Sujet de l'esace de commentaires récupéré qui va être supprimé.
+    
+    Returns:
+        Response: Redirection vers la page du backend qui affiche les sujet 'admin/subjects_list.html'.    
+    """
+    # Récupération de tous les sujets de la table de données.
+    subject = SubjectComment.query.get_or_404(id)
+    
+    if subject:
+        # Suppression du sujet.
+        db.session.delete(subject)
+        
+        # Validation de l'action.
+        db.session.commit()
+        
+        flash("Le sujet a été supprimé avec succès.")
+    else:
+        # Message levant l'erreur.
+        flash("Le sujet n'existe pas.", "error")
+        
+    return redirect(url_for("admin.list_subjects_admin"))   
+   
+   
 # Route permettant d'afficher la liste des commentaires des utilisateurs, avec option de filtrage.
 @admin_bp.route('/liste-commentaires', methods=['GET', 'POST'])
 @admin_required
@@ -230,7 +356,7 @@ def suppress_comment(id):
         # Si le commentaire n'est pas trouvé, un message d'erreur peut être affiché.
         flash("Le commentaire demandé n'existe pas.", 'error')
 
-    return redirect(url_for("admin.list_comments"))
+    return redirect(url_for("admin.list_comments_customer"))
 
 
 # Route permettant d'accéder aux événements du calendrier du chat vidéo et de générer le lien administrateur.
@@ -257,37 +383,45 @@ def calendar():
     """
     # Instanciation des formulaires.
     formrequest = ChatRequestForm()
+    
     # Récupération de toutes les requêtes.
-    requests = ChatRequest.query.all()
+    chats = ChatRequest.query.all()
     
     # Instanciation du formulaire pour le lien su chat vidéo.
     formlink = UserLink()
 
     # Préparation des données des rendez-vous pour le calendrier.
     rdv_data = []
+    
+    # Définition de admin_room_url avec une valeur par défaut (None).
+    admin_room_url = None
 
     # Filtrage et préparation des données pour chaque demande validée.
-    for request in requests:
-        if request.status == ChatRequestStatus.ACCEPTEE:
-            # Génération du lien administrateur pour la réunion.
-            admin_room_url = create_whereby_meeting_admin()
-
+    for chat in chats:
+        try:
+            
+            if chat.status == ChatRequestStatus.ACCEPTEE:
+                # Génération du lien administrateur pour la réunion.
+                admin_room_url = create_whereby_meeting_admin()
+            
+            else:
+                admin_room_url = None
+        
+        except Exception as e:
+            print(f"Erreur lors de la génération du lien administrateur: {e}")
+            admin_room_url = None
+            
+            # Préparation des données pour le calendrier.
             rdv_data.append({
-                'Nom de l\'entreprise': request.enterprise_name,
-                'status': request.status,
-                'content': request.request_content,
-                'date_rdv': datetime.combine(request.date_rdv, request.heure),
+                'Nom de l\'entreprise': chat.enterprise_name,
+                'status': chat.status,
+                'content': chat.request_content,
+                'date_rdv': datetime.combine(chat.date_rdv, chat.heure),
                 'link': admin_room_url
             })
 
-            return render_template('admin/calendar.html',
-                                   formrequest=formrequest,
-                                   requests=requests,
-                                   formlink=formlink,
-                                   rdv_data=rdv_data)
-
-    return render_template('admin/calendar.html', formrequest=formrequest, requests=requests,
-                           rdv_data=rdv_data, formlink=formlink, ChatRequestStatus=ChatRequestStatus)
+    return render_template('admin/calendar.html', formrequest=formrequest, admin_room_url=admin_room_url, chats=chats, rdv_data=rdv_data, 
+                           formlink=formlink, ChatRequestStatus=ChatRequestStatus)
 
 
 # Route permettant d'afficher les devis reçus par l'entreprise SethiarWorks.
