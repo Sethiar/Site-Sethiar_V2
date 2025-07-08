@@ -31,12 +31,17 @@
 
             <!-- Image du logo -->
             <div class="imgcontainer-form">
-                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
-                     class="avatar-form">
+                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}" 
+                    alt="Logo de SethiarWorks"
+                    class="avatar-form">
             </div>
+
+            <div class="space"></div>
 
             <!--Titre -->
             <h1 class="comment-title">Espace de commentaires</h1>
+
+            <div class="space"></div>
 
             <!-- Division pour image forum -->
             <div class="comment-image-container">
@@ -46,28 +51,53 @@
                     <img src="{{ url_for('static', filename='images/images_comment/comment1.png') }}"
                          alt="Image comment">
                 </div>
+
+                
             </div>
-         
+
+            <!-- Séparation -->
+            <div class="space-form"></div>
+
+            <!-- Annonce de connexion pour commenter -->
+            {% if not logged_in %}
+
+            <hr class="politique-divider">
+            
+            <div class="annonce-comment">
+                <p>
+                    Pour participer aux commentaires, vous devez être connecté-e.
+                </p>
+
+                <div class="space-form"></div>
+            
+                <div class="btn-annonce">
+                    <a class="btn-primary" href="{{ url_for('auth.user_connection') }}">Se connecter</a>  
+                </div>    
+            </div>
+            {% endif %}
+            
             <div class="space-form"></div>
             
             <!-- Séparation -->
             <hr class="politique-divider">
 
             <!-- Conteneur du sujet -->
-            <div class="container-subject-forum">
-                <h2 class="forum-subtitle">
-                    Discussion sur le sujet : <span class="subject-name">{{ subject.nom }}</span>
-                </h2>
+            <div class="container-subject-comment">
+                <h3 class="comment-subtitle">
+                    Discussion sur le sujet : <span class="subject-name"><u>{{ subject.name }}</u></span>
+                </h3>
             </div>
 
             <!-- Conteneur principal des commentaires -->
-            <div class="container-comment">
+            <div class="comment">
 
                 <!-- Conteneur commentaire -->
                 <div class="comment-avis">
                     <h3 class="comment-subtitle">Vous pouvez laisser un commentaire :</h3>
                 </div>
 
+                <div class="space-form"></div>
+                
                 <!-- Conteneur formulaire du commentaire -->
                 <div class="form-comment">
                     <form method="POST"
@@ -78,9 +108,11 @@
                         <input type="hidden" name="user_enterprise_name" value="{{ current_user.enterprise_name }}">
                         
                         <textarea name="comment_content" placeholder="Votre commentaire" required></textarea>
-                        <div class="container-btn">
+                        
+                        <div class="space-form"></div>
+
+                        <div>
                             <button class="btn-comment" type="submit">Poster le commentaire</button>
-                            <a class="btn-comment" href="{{ url_for('auth.user_connection') }}">Se connecter</a>
                         </div>
                         
                     </form>
@@ -90,14 +122,16 @@
             {% for comment in comment_subject %}
 
             <!-- Conteneur pour poster un commentaire -->
-            <div class="comment">
+            <div class="container-comment">
 
                 <!-- Conteneur de la photo de l'utilisateur -->
                 <div class="comment-header">
-                    <img src="{{ url_for('user.profil_photo', user_id=comment.user_id) }}" alt="Photo de profil"
-                         class="profile-picture">
+                    <img src="{{ url_for('user.profil_photo', user_id=comment.user_id) }}" 
+                        alt="Photo de profil"
+                        class="profile-picture">
+                    
                     <div class="comment-user-info">
-                        <strong class="user-enterprise_name">{{ comment.user.enterprise_name }}</strong>
+                        <strong class="user-enterprise-name">{{ comment.user.enterprise_name }}</strong>
                         <span class="user-role">{{ comment.user.role }} a commenté :</span>
                         <small class="comment-date">
                             Le {{ moment(comment.comment_date).format('DD-MM-YYYY à HH:mm') }}
@@ -112,24 +146,37 @@
                     </p>
                 </div>
 
+                <div class="politique-divider"></div>
+
                 <!-- Conteneur des modifications au commentaire -->
                 {% if comment.user_id == current_user.id %}
                 <div class="comment-actions">
 
                     <!-- Lien vers la modification du commentaire -->
-                    <a href="{{ url_for('user.change_comment', id=comment.id) }}" class="change-button">
-                        Modifier le commentaire
-                    </a>
+                    <button>
+                        <a href="{{ url_for('user.change_comment', id=comment.id) }}" class="change-comment-btn">
+                            Modifier le commentaire
+                        </a>
+                    </button>
+
+                    <!-- Conteneur de réponse à un commentaire -->
+                    <div class="reply-btn-container">
+                        <!-- lien permettant de répondre à un commentaire -->
+                        <a href="{{ url_for('user.comment_replies', comment_id=comment.id) }}"
+                            class="reply-btn">
+                            Répondre
+                        </a>
+                   </div>
 
                     <!-- Formulaire de suppression du commentaire -->
                     <form action="{{ url_for('user.delete_comment', id=comment.id) }}" method="POST"
-                          class="delete-comment-form" style="margin-left:10%;display:inline;">
+                          class="delete-comment-form">
                         
                           <!-- Token CSRF pour la sécurité -->
                         {{ formsuppress.csrf_token }}
 
                         <!-- Utilisation d'un bouton pour la suppression -->
-                        <button type="submit" class="suppress-button"
+                        <button type="submit" class="suppress-comment-btn"
                                 onclick="return confirm('Êtes-vous certain-e de vouloir supprimer votre commentaire ?'); ">
                             Supprimer le commentaire
                         </button>
@@ -138,17 +185,6 @@
                 {% endif %}
             </div>
 
-            <!-- Conteneur de réponse à un commentaire -->
-            <div class="reply-button-container">
-
-                <!-- lien permettant de répondre à un commentaire -->
-                <a href="{{ url_for('user.comment_replies', comment_id=comment.id) }}"
-                   class="reply-button">
-                    Répondre
-                </a>
-
-                
-            </div>
 
             <!-- Conteneur principal de réponses au commentaire -->
             <div class="replies-container">
@@ -163,8 +199,8 @@
                              alt="Photo de profil" class="reply-profile-picture">
 
                         <!-- Conteneur du nom de l'entreprise de l'utilisateur qui a répondu -->
-                        <div class="reply-info">
-                            <strong class="reply-user-pseudo">{{ reply.user.enterprise_name }}</strong>
+                        <div class="reply-user-info">
+                            <strong class="reply-user-enterprise-name">{{ reply.user.enterprise_name }}</strong>
                             <span class="reply-user-role">{{ reply.user.role }} a répondu :</span>
                             <small class="reply-date">
                                 Le {{ moment(reply.reply_date).format('DD-MM-YYYY à HH:mm') }}
@@ -179,24 +215,28 @@
                         </p>
                     </div>
 
+                    <div class="politique-divider"></div>
+
                     <!-- conteneur permettant de changer le contenu de la réponse -->
-                    <div class="reply-actions">
+                    <div class="comment-actions">
                         {% if reply.user_id == current_user.id %}
 
                         <!-- lien vers la modification de la réponse -->
-                        <a href="{{ url_for('user.change_reply', id=reply.id) }}" class="change-button"
-                           style="margin-left:10%;">
-                            Modifier la réponse
-                        </a>
+                        <button>
+                            <a href="{{ url_for('user.change_reply', id=reply.id) }}" class="change-comment-btn"
+                                style="margin-left:10%;">
+                                Modifier la réponse
+                            </a>
+                        </button>
 
                         <!-- formulaire de suppression de la réponse -->
                         <form action="{{ url_for('user.delete_reply', id=reply.id) }}" method="POST"
-                              class="delete-comment-form" style="margin-left:10%;display:inline;">
+                              class="delete-comment-form">
                             <!-- Token CSRF pour la sécurité -->
                             {{ formsuppressreply.csrf_token }}
 
                             <!-- Utilisation d'un bouton pour la suppression -->
-                            <button type="submit" class="suppress-button"
+                            <button type="submit" class="suppress-comment-btn"
                                     onclick="return confirm('Êtes-vous certain-e de vouloir supprimer votre réponse ?');">
                                 Supprimer le commentaire
                             </button>
@@ -206,6 +246,9 @@
                 </div>
                 {% endfor %}
             </div>
+            
+            <div class="space2"></div>
+            
             {% endfor %}
         </div>
 
@@ -214,8 +257,22 @@
 
         <!-- division de retour à la page d'accueil -->
         <div class="back-link-comment">
-            <a class="btn-primary" href="{{ url_for('landing_page') }}">Retour à l'accueil</a>
-        </div>
+            <a class="btn-primary desktop-only" href="{{ url_for('landing_page') }}">
+                Retour à l'accueil
+            </a>
+            <a class="btn-primary desktop-only" href="{{ url_for('frontend.comments') }}" >
+                Retour à la sélection des sujets
+            </a>
+        
+            <!-- Version icône <768px -->
+            <a class="btn-icon mobile-only" href="{{ url_for('landing_page') }}">
+                <img src="{{ url_for('static', filename='icons/home_1.svg') }}" alt="Retour à l'accueil">
+            </a>
+            <a class="btn-icon mobile-only" href="{{ url_for('frontend.comments') }}">
+                <img src="{{ url_for('static', filename='icons/subject.svg') }}" alt="Retour à la sélection des sujets">
+            </a>
+
+            </div>
     </div>
 </div>
 

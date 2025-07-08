@@ -22,19 +22,33 @@
 
         <!-- cadre intérieur -->
         <div class="inner-frame-politique">
+
             <!-- division de retour à la page d'accueil -->
             <div class="back-link-comment">
-                <a class="btn-primary" href="{{ url_for('landing_page') }}">Retour à la page d'accueil</a>
+                <a class="btn-primary desktop-only" href="{{ url_for('landing_page') }}">
+                    Retour à la page d'accueil
+                </a>
+                
+                <!-- Version icône (<768px) -->
+                <a class="btn-icon mobile-only" href="{{ url_for('landing_page') }}">
+                    <img src="{{ url_for('static', filename='icons/home_1.svg') }}" 
+                    alt="Retour à l'accueil">
+                </a>
             </div>
+            
             <!-- Image du logo -->
             <div class="imgcontainer-form">
                 <img src="{{ url_for('static', filename='Images/images_accueil/logo_png.png') }}" alt="Logo de SethiarWorks"
                      class="avatar-form">
             </div>
 
+            <div class="space-form"></div>
+
             <!--titre -->
             <h1 class="comment-title">Espace de commentaires</h1>
 
+            <div class="space-form"></div>
+            
             <!-- division pour image forum -->
             <div class="comment-image-container">
 
@@ -46,29 +60,55 @@
             </div>
 
             <div class="space-form"></div>
+            <!-- Annonce de connexion pour commenter -->
+            {% if not logged_in %}
+
+            <hr class="politique-divider">
+            
+            <div class="annonce-comment">
+                <p>
+                    Pour participer aux commentaires, vous devez être connecté-e.
+                </p>
+
+                <div class="space-form"></div>
+            
+                <div class="btn-annonce">
+                    <a class="btn-primary" href="{{ url_for('auth.user_connection') }}">Se connecter</a>  
+                </div>    
+            </div>
+            {% endif %}
+
+            <div class="space-form"></div>
+            
+            <!-- Séparation -->
+            <hr class="politique-divider">
 
             <!-- conteneur d'ajout de catégories -->
             <div class="form-container">
-                <h4 class="section-title">Ajouter un sujet</h4>
 
                 <!-- formulaire d'ajout de sujet -->
                 <form id="addSubjectForm" method="POST" action="{{ url_for('user.add_subject_comment') }}">
 
                     <!-- Token CSRF pour la sécurité -->
                     {{ formsubjectcomment.csrf_token }}
-
-                    <!-- Champ pour le nouveau sujet -->
-                    <div class="form-group">
-                        {{ formsubjectcomment.nom.label }}
-                        {{ formsubjectcomment.nom(size=20) }}
+                    
+                    <div class="form flex-container">
+                        <!-- Champ pour le nouveau sujet -->
+                        <div class="field">
+                            {{ formsubjectcomment.name.label }}
+                            {{ formsubjectcomment.name(size=20) }}
+                        </div>
+                    
+                         <!-- Conteneur du bouton de soumission au sujet -->
+                        <div class="container-btn-comment">
+                            <img src="../../static/icons/plus_1.svg" class="btn-icon" 
+                            onclick="document.getElementById('addSubjectForm').submit();" 
+                            alt="Envoyer">  
+                        </div>
                     </div>
-
-                    <!-- bouton de soumission du formulaire -->
-                    <button type="submit" class="btn-primary-comment">
-                        {{ formsubjectcomment.submit.label }}
-                    </button>
                 </form>
             </div>
+
             <div class="space2"></div>
 
             <!-- Liste des sujets -->
@@ -87,10 +127,10 @@
                     <tbody>
                     {% for subject in subjects %}
                     <tr>
-                        <td class="subject-name">{{ subject.nom }}</td>
+                        <td class="subject-name">{{ subject.name }}</td>
                         <td class="subject-author">{{ subject.author }}</td>
-                        <td><a href="{{ url_for('frontend.subject_comment', subject_id=subject.id) }}"
-                               class="btn-secondary-comment">Voir</a></td>
+                        <td class="subject-btn"><a href="{{ url_for('frontend.subject_comment', subject_id=subject.id) }}"
+                               class="btn-secondary">Voir</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>
@@ -107,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var form = document.getElementById('addSubjectForm');
 
     // Variable JavaScript indiquant si l'utilisateur est connecté
-    var isAuthenticated = {{ is_authenticated|tojson }};
+    var isAuthenticated = {is_authenticated, tojson };
 
     form.addEventListener('submit', function(event) {
         if (!isAuthenticated) {
