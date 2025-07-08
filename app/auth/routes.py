@@ -275,7 +275,7 @@ def password_reset():
         # Vérification de l'existence de l'utilisateur avec cet e-mail.
         if user:
             # Génération d'un token de réinitialisation du mot de passe.
-            serializer = current_app.config['serializer']
+            serializer = current_app.config['SECURITY_TOKEN_SERIALIZER']
             token = serializer.dumps(email, salt='password-reset-salt')
             reset_url = url_for('auth.recording_new_password', token=token, _external=True)
 
@@ -326,7 +326,7 @@ def recording_new_password(token):
     """
     try:
         # Tentative de décryptage du token pour récupérer l'email associé.
-        email = current_app.config['serializer'].loads(token, salt='password-reset-salt', max_age=3600)
+        email = current_app.config['SECURITY_TOKEN_SERIALIZER'].loads(token, salt='password-reset-salt', max_age=3600)
     except Exception:
         flash('Le lien de réinitialisation du mot de passe est invalide ou a expiré.', 'danger')
         return redirect(url_for('landing_page'))
@@ -344,7 +344,7 @@ def recording_new_password(token):
         # Recherche de l'utilisateur dans la base de données en fonction de son email.
         user = User.query.filter_by(email=email).first()
 
-        # Si l'utilisateur est trouvé, on met à jour son mot de passe.
+        # Si l'utilisateur est trouvé, mise à jour du mot de passe.
         if user:
             user.set_password(formpassword.new_password.data)
             db.session.commit()
