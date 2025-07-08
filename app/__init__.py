@@ -160,7 +160,7 @@ def create_app(config_class=Config):
     
     
     #------------------------------------------------------
-    # Déclaration des dononées secrêtes.
+    # Déclaration des dononées secrètes.
     #------------------------------------------------------
 
     # Configuration de la clé secrète pour les sessions.
@@ -217,8 +217,6 @@ def create_app(config_class=Config):
     login_manager.needs_refresh_message = "Veuillez vous reconnecter pour continuer."  
     # Catégorie du message de rafraîchissement
     login_manager.needs_refresh_message_category = "warning" 
-    # Protection de session renforcée
-    login_manager.session_protection = 'strong' 
     # Redirection vers la page de connexion
     login_manager.login_view = 'auth.login'  
     
