@@ -30,7 +30,6 @@ from app.Models.devis_request import DevisRequest
 from app.mail.routes import mail_reply_comment, \
     send_mail_validate_demand, send_mail_inform_demand, send_confirmation_email_admin
 
-from app.extensions import allowed_file
 
 
 # Méthode permettant de visualiser la photo de l'utilisateur.
@@ -63,6 +62,7 @@ def add_subject_comment():
 
     # Création de l'instance du formulaire.
     formsubjectcomment = NewSubjectCommentForm()
+    formcomment = CommentForm()
 
     # Passage de la valeur booléenne d'authentification au template.
     is_authenticated = current_user.is_authenticated
@@ -73,8 +73,8 @@ def add_subject_comment():
 
     if request.method == "POST":
         # Saisie du nom du sujet.
-        nom_subject_comment = escape(request.form.get("nom"))
-        subject_comment = SubjectComment(nom=nom_subject_comment, author=current_user.enterprise_name)
+        nom_subject_comment = formsubjectcomment.name.data
+        subject_comment = SubjectComment(name=nom_subject_comment, author=current_user.enterprise_name)
 
         # Enregistrement du sujet dans la base de données.
         db.session.add(subject_comment)
@@ -83,8 +83,8 @@ def add_subject_comment():
     # Récupération de tous les sujets après l'ajout du nouveau sujet.
     subjects = SubjectComment.query.all()
 
-    return render_template("frontend/subject_comments.html", formsubjectcomment=formsubjectcomment, subjects=subjects,
-                           is_authenticated=is_authenticated) + '#sujet'
+    return render_template("frontend/subject_comments.html", formsubjectcomment=formsubjectcomment, formcomment=formcomment,
+                           subjects=subjects, is_authenticated=is_authenticated, subject=subject_comment) + '#sujet'
 
 
 # Route permettant à un utilisateur connecté de poster un commentaire.
@@ -352,6 +352,7 @@ def user_devis_demand():
     form_devis = DevisRequestForm()
 
     if form_devis.validate_on_submit():
+        
         # Création d'un nouvel objet Devis avec les données du formulaire.
         new_devis = DevisRequest(
             lastname=form_devis.lastname.data,
@@ -359,9 +360,7 @@ def user_devis_demand():
             phone=form_devis.phone.data,
             enterprise_name=form_devis.enterprise_name.data,
             email=form_devis.email.data,
-            
             project_type=form_devis.project_type.data,
-            
             devis_content=form_devis.devis_content.data
         )
 
@@ -378,7 +377,7 @@ def user_devis_demand():
             flash("Votre demande de devis a été envoyée avec succès !!", "success")
             return redirect(url_for('user.user_devis_thanks'))
     else:
-        # Afficher les erreurs de validation du formulaire
+        # Affichage des erreurs de validation du formulaire.
         for field, errors in form_devis.errors.items():
             for error in errors:
                 flash(f"Erreur dans le champ {field}: {error}", "error")
