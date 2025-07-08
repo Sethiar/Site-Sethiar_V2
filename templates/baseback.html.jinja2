@@ -16,16 +16,18 @@
 
 <!-- body -->
 <body>
+
     <div class="space"></div>
+
     <h1 class="h1-backend">Bienvenue sur la page administrateur</h1>
     
     <header class="header-backend">
         {% block header_content %}
             <nav class="nav-backend">
-                <a class="button-primary" href="{{ url_for('auth.logout_admin') }}">Se déconnecter en tant qu'administrateur</a>
-                <a class="button-primary" href="{{ url_for('landing_page') }}">Aller sur la page d'accueil du site entreprise</a>
-                <a class="button-primary" href="{{ url_for('admin.backend') }}">Retour au back-end</a>
-                <a class="button-primary" href="{{ url_for('admin.create_user_form') }}">Créer l'utilisateur administrateur</a>
+                <a class="btn-primary" href="{{ url_for('auth.logout_admin') }}">Se déconnecter en tant qu'administrateur</a>
+                <a class="btn-primary" href="{{ url_for('landing_page') }}">Aller sur la page d'accueil du site entreprise</a>
+                <a class="btn-primary" href="{{ url_for('admin.backend') }}">Retour au back-end</a>
+                <a class="btn-primary" href="{{ url_for('admin.create_user_form') }}">Créer l'utilisateur administrateur</a>
             </nav>
         {% endblock %}
     </header>
@@ -36,18 +38,26 @@
         <!-- Salutations administrateur -->
         <div class="annonce-back">
             {% if logged_in %}
-                    <p>Bienvenue, {{ admin.pseudo }} ! Vous êtes connecté en tant que : <b>{{ admin.role }}</b>.</p>
+                <div class="logged">
+                    <p>
+                        Bienvenue {{ current_user.pseudo }}<br>
+                    
+                        Vous êtes connecté en tant que : <b>{{ current_user.role }}</b>
+                    </p>
+                    
             {% endif %}
         </div>
+
         <div class="space"></div>
         
         <!-- Actions de l'administrateur -->
-        <div class="button-container">
-            <a href="{{ url_for('admin.calendar') }}" class="button-primary">Aller au calendrier des rendez-vous du chat vidéo</a>
-            <a href="{{ url_for('admin.list_devis') }}" class="button-primary"> Aller à la liste des devis</a>
-            <a href="{{ url_for('admin.users_list') }}" class="button-primary">Aller à la liste des utilisateurs</a>
-            <a href="{{ url_for('admin.list_comments_customer') }}" class="button-primary">Aller à la liste des commentaires</a>
-            <a href="{{ url_for('auth.logout_admin') }}" class="button-secondary">Se déconnecter du back end</a>
+        <div class="btn-container">
+            <a href="{{ url_for('admin.calendar') }}" class="btn-primary">Aller au calendrier des rendez-vous du chat vidéo</a>
+            <a href="{{ url_for('admin.list_devis') }}" class="btn-primary"> Aller à la liste des devis</a>
+            <a href="{{ url_for('admin.list_subjects_admin') }}" class="btn-primary">Aller à la liste des sujets</a>
+            <a href="{{ url_for('admin.users_list') }}" class="btn-primary">Aller à la liste des utilisateurs</a>
+            <a href="{{ url_for('admin.list_comments_customer') }}" class="btn-primary">Aller à la liste des commentaires</a>
+            <a href="{{ url_for('auth.logout_admin') }}" class="btn-secondary">Se déconnecter du back end</a>
         </div>
     {% endblock %}
 
