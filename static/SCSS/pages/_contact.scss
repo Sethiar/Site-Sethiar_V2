@@ -1,0 +1,121 @@
+// Importation de variables.scss
+@import '../base/variables';
+// Importation de taille responsive
+@import '../base/responsive-size';
+
+
+
+//=============================//
+// Style de la page de contact //
+//=============================//
+
+/* Conteneur de la page contact */
+.contact-content {
+  display: flex;
+  /* Centre le contenu horizontalement */
+  justify-content: center;
+  /* Aligne verticalement si nécessaire */
+  align-items: center; 
+  position: relative;
+  /* Optionnel : pour s'assurer que le conteneur occupe toute la hauteur de la page */
+  height: 100vh; 
+}
+
+
+/* Conteneur pour les images */
+.cart-sethiar {
+  /* Active le mode flexbox */
+  display: flex; 
+  /* Centre les images horizontalement */
+  justify-content: center; 
+  /* Espace entre les images */
+  gap: 20px; 
+  /* Alignement au centre */
+  align-items: center;
+}
+//----------------------------------------------
+
+
+/* Style pour la carte page d'accueil */
+.sethiarcart-pic-contact {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid $color-decline-orange2;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  /* Animation fluide */
+  transition: transform 0.3s ease-in-out;
+}
+
+.sethiarcart-pic-contact img {
+  width: 100%;
+  height: auto;;
+  /* Remplit l'espace sans déformation de l'image */
+  object-fit: cover; 
+  border: 1px solid $color-decline-orange2;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Animation fluide */
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    /* Légère mise en avant */
+    transform: scale(1.1); 
+    /* Ombre subtile */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+}
+//------------------------------------------------------
+
+
+//==================//
+// Responsiv Design //
+//==================//
+
+/* Pour les écrans de 1200px et plus (tablettes et bureau) */
+@include respond-min($breakpoint-lg) {
+
+.sethiarcart-pic-contact img {
+    width: 100%;
+    height: auto;
+  }
+}
+//-------------------------------------------------------------
+
+
+/* Pour les écrans de 768px à 1199px (tablettes) */
+@include respond-between($breakpoint-sm + 1, $breakpoint-lg) {
+
+   .sethiarcart-pic-contact img {
+    width: 100%;
+    height: auto;
+  } 
+}
+//-------------------------------------------------------------
+
+
+/* Pour les écrans de 480px à 767px (mobiles en paysage et petites tablettes) */
+@include respond-between($breakpoint-xxs + 1, $breakpoint-sm) {
+    .sethiarcart-pic-contact img {
+    width: 100%;
+    height: auto;
+  }
+}
+//-------------------------------------------------------------
+
+
+/* Pour les écrans de moins de 480px (mobiles) */
+@include respond-max($breakpoint-xxs) {
+    .cart-sethiar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sethiarcart-pic-contact img {
+    width: 100%;
+    height: auto;
+  }
+}
+//-------------------------------------------------------------

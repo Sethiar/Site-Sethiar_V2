@@ -1,7 +1,17 @@
 // Importation des variables.
 @import '../base/variables';
+// Import taille responsive
+@import '../base/responsive-size';
+
+
+
+//===============================//
+// Style pour les images du site //
+//===============================//
+
 
 /* Style pour la carte page d'accueil */
+//-------------------------------------------------
 .sethiarcart-pic {
   display: flex;
   justify-content: center;
@@ -30,9 +40,16 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   }
 }
+//------------------------------------------------
 
-/* Media Queries pour les petits écrans */
-@media (max-width: 768px) {
+
+//===========================================//
+//             Responsive                    //
+//===========================================//
+
+/* Téléphone portrait < 769px */
+//----------------------------------------------
+@include respond-max($breakpoint-sm) {
   /* Carte d'accueil */
   .sethiarcart-pic {
     /* Réduit la hauteur sur les écrans plus petits */
@@ -46,9 +63,12 @@
     width: 80%; 
   }
 }
+//--------------------------------------------------------------
 
-/* Media Queries pour les très petits écrans (téléphones) */
-@media (max-width: 480px) {
+
+/* Téléphones très petits écrans < 480px */
+//----------------------------------------------------------
+@include respond-max($breakpoint-xxs) {
   /* Carte d'accueil */
   .sethiarcart-pic {
     /* Encore plus petite sur les téléphones */
@@ -62,8 +82,12 @@
     width: 90%; 
   }
 }
+//------------------------------------------------------
 
-/* Styles pour l'image de la zone commentaires*/
+
+//=============================================//
+// Styles pour l'image de la zone commentaires //
+//=============================================//
 
 /* Conteneur de l'image de la zone commentaires*/
 .comment-image-container {
@@ -91,6 +115,8 @@
     transform: scale(1.1); 
   }
 }
+//-----------------------------------------------------------
+
 
 /* Image à l'intérieur */
 .image-comment img {
@@ -105,18 +131,24 @@
   height: auto; 
 }
 
-/* Media Queries pour les petits écrans */
-@media (max-width: 768px) {
+
+/* Téléphones portrait < 769px */
+//---------------------------------------------------------
+@include respond-max($breakpoint-sm) {
   .image-comment img {
     /* Agrandit l'image pour les tablettes et petits écrans */
-    max-width: 80%; 
-  }
-}
-
-/* Media Queries pour les très petits écrans (téléphones) */
-@media (max-width: 480px) {
-  .image-comment img {
-    /* Agrandit encore l'image pour les téléphones */
     max-width: 90%; 
   }
 }
+//---------------------------------------------------------
+
+
+/* Media Queries pour les très petits écrans (téléphones) */
+//---------------------------------------------------------
+@include respond-max($breakpoint-xxs) {
+  .image-comment img {
+    /* Agrandit encore l'image pour les téléphones */
+    max-width: 85%; 
+  }
+}
+//----------------------------------------------------------

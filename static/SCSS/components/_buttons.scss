@@ -1,8 +1,12 @@
 // Importation de variables.scss
 @import '../base/variables';
+// Importation taille responsive
+@import '../base/responsive-size';
 
 
-/* Button CSS - Components/Buttons.scss */
+//=========================================//
+//   Button CSS - Components/Buttons.scss  //
+//=========================================//
 
 /* Regroupement des styles communs aux boutons */
 %btn-common {
@@ -12,13 +16,7 @@
   font-weight: bold;
 }
 
-/* Bouton primaire pour les commentaires */
-.btn-primary-comment {
-  display: flex;
-  margin: 0 auto;
-}
-
-.btn-primary, .btn-primary-comment, .btn-primary-registration {
+.btn-primary, .btn-primary-registration {
   @extend %btn-common;
   padding: 2% 4%;
   font-size: $font-size-base;
@@ -43,7 +41,8 @@
   width: 60%;  
 }
 
-.btn-secondary, .btn-secondary-comment, .reply-button, .change-button, .delete-comment-form button {
+ /* Action communes des boutons du site */
+.btn-secondary {
   @extend %btn-common;
   padding: 2% 3%;
   font-size: $font-size-base;
@@ -59,44 +58,13 @@
     color: $color-decline-orange2;
   }
 }
-
-.delete-comment-form button {
-  background-color: $color-primary;
-  &:hover {
-    /* Légère mise en avant du cadre interne */
-    transform: scale(1.02);
-    /* Ombre amplifiée */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    background-color: $color-decline-orange2;
-    color: $color-white;
-  }
-}
-
-.back-comment {
-  @extend %btn-common;
-  background-color: $color-primary;
-  color: $color-white;
-  padding: 1% 1.5%;
-  text-align: center;
-  font-style: italic;
-  font-size: $font-size-lg;
-  box-shadow: 2px 2px 10px rgba(255, 165, 0, 0.5);
-  cursor: pointer;
-
-  &:hover {
-    /* Légère mise en avant du cadre interne */
-    transform: scale(1.02);
-    /* Ombre amplifiée */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    /* Pas de transformation de texte */
-    text-decoration: none;
-    background-color: $color-decline-orange2;
-    color: $color-white;
-  }
-}
+//----------------------------------------------------
 
 
-// Bouton des formulaires 
+//========================//
+// Bouton des formulaires //
+//========================//
+
 .cancelled-btn, .validated-btn {
   @extend %btn-common;
   display: inline-block;
@@ -134,9 +102,91 @@
     border: 1px solid $color-decline-gold2;
   }
 }
+//---------------------------------------------------
 
 
-// Boton du backend
+//==================================================//
+// Boutons et conteneurs de l'espace de commentaire //
+//==================================================//
+
+.btn-annonce {
+  /* Indentation première ligne */
+  text-indent: 0;
+  display: inline-flex;
+  /* Centrer horizontalement */
+  justify-content: center;
+}
+
+/* Champ du conteneur */
+.form.flex-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;  
+  gap: 20%;
+}
+
+/* Champ de saisie */
+.form .field {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  line-height: 3rem;
+  max-width: 60%;
+  justify-content: center;
+}
+
+.form .field input {
+  /* Espacement interne */
+  
+  text-align: center;
+  padding: 1.2%;             
+  font-size: $font-size-xl;
+  /* Bordure fine autour du champ */
+  border: 1px solid $color-decline-gold2; 
+  /* Coins arrondis */
+  border-radius: 8px;
+  /* Transition lors du focus */
+  transition: border-color 0.3s ease; 
+  
+  &:hover {
+    border-color: $color-neutral-darkgrey;    
+    outline: none;              
+  }
+}
+
+.btn-container-comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn-icon {
+  /* Largeur de l'icône */
+  width: 40px;
+  /* Hauteur de l'icône */               
+  height: 40px;              
+  transition: transform 0.2s ease;
+  /* Bordure de l'icône */
+  border: 2px solid $color-decline-gold2;
+  /* Coins arrondis */
+  border-radius: 8px;
+}
+
+.btn-icon:hover {
+  /* Légère augmentation de la taille au survol */
+  transform: scale(1.1);      
+}
+//--------------------------------------------------------
+
+
+//===========================//
+//    Bouton du backend      //
+//===========================//
+
+/* Bouton de navigation */
+//----------------------------------------
 nav button {
   @extend %btn-common;
   background-color: $color-primary;
@@ -154,8 +204,9 @@ nav button {
   }
 }
 
-// Button containers
-.button-container {
+/* Button containers */
+//----------------------------------------
+.btn-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -163,7 +214,7 @@ nav button {
   margin: 20px 0;
 }
 
-.button-container button {
+.btn-container button {
   width: 70%;
   padding: 10px 20px;
   background-color: $color-primary;
@@ -174,7 +225,7 @@ nav button {
   transition: background-color 0.3s ease;
 }
 
-.button-container button a {
+.btn-container button a {
   text-decoration: none;
   color: $color-white;
   display: block;
@@ -191,35 +242,62 @@ nav button {
     border: 2px solid $color-decline-gold2;
   }
 }
+//-----------------------------------------------------
 
 
-// Responsive design
-/* Tablette */
-@media (max-width: 1024px) {
+//======================//
+//   Responsive design  //
+//======================//
+
+/* Grand écran ( > 1025px ) */
+//------------------------------------------
+@include respond-min($breakpoint-md + 1) {
+  .btn-primary, .btn-secondary, .cancelled-btn, .validated-btn {
+    padding: 2% 5%;
+    font-size: $font-size-lg;
+  }
+}
+
+
+/* Tablette ( < 1024px )*/
+//-------------------------------------------
+@include respond-max($breakpoint-md) {
   .btn-primary-registration {
     /* Plus large sur les tablettes */
     width: 80%;  
   }
 
-  .btn-primary, .btn-secondary, .reply-button, .change-button, .cancelled-btn, .validated-btn {
+  .btn-primary, .btn-secondary, .cancelled-btn, .validated-btn {
     padding: 2% 5%;
     font-size: $font-size-base;
   }
 }
+//-------------------------------------------
 
-/* Mobile */
-@media (max-width: 768px) {
+
+/* Mobile ( < 768px)*/
+//-------------------------------------------
+@include respond-max($breakpoint-sm) {
   .btn-primary-registration {
     /* S'adapte complètement sur mobile */
     width: 100%;  
   }
 
-  .btn-primary, .btn-secondary, .reply-button, .change-button, .cancelled-btn, .validated-btn {
+  .btn-primary, .btn-secondary, .cancelled-btn, .validated-btn {
     font-size: $font-size-base;
   }
 
-  .button-container button {
+  .btn-container button {
     /* Les boutons prennent toute la largeur de l'écran */
     width: 100%;  
   }
+  
+  /* Conteneur des boutons de l'accueil header */
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    padding: 0 1.5%;
+  }
 }
+//-------------------------------------------

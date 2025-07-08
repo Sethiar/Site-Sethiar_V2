@@ -1,6 +1,7 @@
 // Variables et styles de base
 @import 'base/base-reset';
 @import 'base/layout';
+@import 'base/responsive-size';
 @import 'base/typography';
 @import 'base/variables';
 
@@ -19,5 +20,6 @@
 @import 'pages/backend';
 @import 'pages/calendar';
 @import 'pages/comment';
+@import 'pages/contact';
 @import 'pages/landing';
 @import 'pages/politique';

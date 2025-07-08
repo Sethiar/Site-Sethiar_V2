@@ -1,7 +1,9 @@
 // Importation des variables.
 @import '../base/variables';
 
-/* Links CSS - components/links.scss */
+//----------------------------------------//
+//   Links CSS - components/links.scss    //
+//----------------------------------------//
 
 /* Liens communs dans l'interface */
 a {
@@ -13,3 +15,4 @@ a {
 a:hover {
   color: $color-decline-orange2;
 }
+//-------------------------------------------

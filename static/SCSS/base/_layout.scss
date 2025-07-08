@@ -1,12 +1,20 @@
 // Importation des variables.
 @import 'variables';
-
-//layout CSS - base/layout.scss
-
-/* Gère les conteneurs droit et gauche et les séparations et espacement. */
+// Importation taille responsive.
+@import 'responsive-size';
 
 
-// Base layout
+//==================================//
+//   layout CSS - base/layout.scss  //
+//==================================//
+
+
+// Gestion des conteneurs droit et gauche et les séparations et espacement //
+
+//-------------//
+// Base layout //
+//-------------//
+
 .layout {
   display: flex;
   height: 0;
@@ -22,13 +30,18 @@
   margin-top: -200vh;
   background-color: $color-black;
 }
+//-------------------------------------------
 
-// Cadre principal (conteneur externe)
+
+//=======================================//
+//  Cadre principal (conteneur externe)  //
+//=======================================//
+
 .outer-frame {
   /* Couleur et taille de la bordure externe */
   border: 4px solid $color-decline-orange2;
   /* Coins arrondis */
-  border-radius: 15px; 
+  border-radius: 10px; 
   /* Espacement interne */
   padding: 2%; 
   /* Couleur de fond du cadre externe */
@@ -45,8 +58,13 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
   }
 }
+//---------------------------------------------------------
 
-// Cadre interne
+
+//==========================//
+// Cadre interne principal  //
+//==========================//
+
 .inner-frame {
   /* Couleur et taille de la bordure interne */
   border: 2px solid $color-decline-gold2; 
@@ -66,6 +84,12 @@
     border-color: $color-decline-orange2; 
   }
 }
+//-------------------------------------------------
+
+
+//================================//
+// Conteneur principal secondaire //
+//================================//
 
 .registration-wrapper {
   display: flex;
@@ -78,8 +102,13 @@
   /* Prend toute la largeur disponible */
   width: 100%; 
 }
+//----------------------------------------------------
 
-// Cadre principal (conteneur externe)
+
+//================================================//
+// Cadre principal secondaire (conteneur externe) //
+//================================================//
+
 .outer-frame-registration {
   /* Couleur et taille de la bordure externe */
   border: 4px solid $color-decline-orange2;
@@ -103,13 +132,18 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
   }
 }
+//-----------------------------------------------
 
-// Cadre interne
+
+//===============================//
+//    Cadre interne secondaire   //
+//===============================//
+
 .inner-frame-registration {
   /* Couleur et taille de la bordure interne */
   border: 2px solid $color-decline-gold2;
   /* Coins arrondis */
-  border-radius: 15px;
+  border-radius: 8px;
   /* Espacement interne */
   padding: 1.5%;
   /* Couleur de fond du cadre interne */
@@ -124,8 +158,13 @@
     border-color: $color-decline-orange2; 
   }
 }
+//---------------------------------------------
 
-// Separations
+
+//================//
+//  Séparations   //
+//================//
+
 @mixin separator($width, $margin) {
   width: $width;
   margin: $margin;
@@ -147,14 +186,16 @@
 .space2 {
   height: 5vh;
 }
-
-//--------------------------------------------------
-// Media Queries pour la Responsivité
-//--------------------------------------------------
+//----------------------------------------------
 
 
-/* Mobile - Portrait (max-width: 599px) */
-@media (max-width: 599px) {
+//====================================//
+//          Responsive design         //
+//====================================//
+
+// Mobile - Portrait (max-width: 599px)
+//------------------------------------------
+@include respond-max($breakpoint-xs) {
   .layout {
     /* Afficher la mise en page en colonne */
     flex-direction: column; 
@@ -168,17 +209,32 @@
   }
 
   .outer-frame, .inner-frame {
-    padding: 5%;
+    padding: 2%;
     width: 100%;
   }
 
   .outer-frame-registration {
-    width: 80%;
+    width: 85%;
+  }
+
+  .space {
+    height: 7vh;
+  }
+
+  .space2 {
+    height: 3vh;
+  }
+
+  .space-annonce {
+    height: 1vh;
   }
 }
+//----------------------------------------------------
 
-/* Mobile - Paysage (min-width: 600px et max-width: 899px) */
-@media (min-width: 600px) and (max-width: 899px) {
+
+// Mobile - Paysage (min-width: 600px et max-width: 768px)
+//----------------------------------------------------
+@include respond-between($breakpoint-xs + 1, $breakpoint-sm) {
   .layout {
     /* Afficher la mise en page en colonne */
     flex-direction: column; 
@@ -192,17 +248,32 @@
   }
 
   .outer-frame, .inner-frame {
-    padding: 5%;
+    padding: 3%;
     width: 100%;
   }
 
   .outer-frame-registration {
-    width: 70%;
+    width: 80%;
+  }
+
+  .space {
+    height: 7vh;
+  }
+
+  .space2 {
+    height: 3vh;
+  }
+
+  .space-annonce {
+    height: 1vh;
   }
 }
+//---------------------------------------------------------------
 
-/* Tablette - Portrait (min-width: 900px et max-width: 1199px) */
-@media (min-width: 900px) and (max-width: 1199px) {
+
+// Tablette - Portrait (min-width: 769px et max-width: 1024px)
+//-------------------------------------------------------------
+@include respond-between($breakpoint-sm + 1, $breakpoint-md) {
   .layout {
     /* Retour à une mise en page en ligne */
     flex-direction: row; 
@@ -210,8 +281,8 @@
   }
 
   .main-content {
-    margin-left: 25%;
-    width: 75%;
+    margin-left: 0;
+    width: 100%;
   }
 
   .outer-frame, .inner-frame {
@@ -220,19 +291,34 @@
   }
 
   .outer-frame-registration {
-    width: 60%;
+    width: 75%;
+  }
+
+  .space {
+    height: 8.5vh;
+  }
+
+  .space2 {
+    height: 4vh;
+  }
+
+  .space-annone {
+    height: 1.5vh;
   }
 }
+//--------------------------------------------------------
 
-/* Tablette - Paysage (min-width: 1200px et max-width: 1399px) */
-@media (min-width: 1200px) and (max-width: 1399px) {
+
+// Tablette - Paysage (min-width: 1025px et max-width: 1400px)
+//-----------------------------------------------------------------
+@include respond-between($breakpoint-md + 1, $breakpoint-xl) {
   .layout {
     /* Retour à une mise en page en ligne */
     flex-direction: row; 
   }
 
   .main-content {
-    margin-left: 25%;
+    margin-left: 30%;
     width: 75%;
   }
 
@@ -242,6 +328,7 @@
   }
 
   .outer-frame-registration {
-    width: 50%;
+    width: 80%;
   }
 }
+//------------------------------------------------

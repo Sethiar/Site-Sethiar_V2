@@ -1,13 +1,25 @@
 // Importation des variables.
 @import '../base/variables';
+// Import taille responsive
+@import '../base/responsive-size';
 
-// Styles pour les produits
+
+
+//==========================//
+// Styles pour les produits //
+//==========================//
+
 
 // Typographie
+
 /* Titre de la partie produits */
 .h1-product, .h2-product, .h3-product, .h4-product, .p-product {
   margin: 1vw 0;
 }
+
+//========================//
+//        Titres          //
+//========================//
 
 /*Titre principal */
 .product-h1 {
@@ -22,7 +34,7 @@
   margin-bottom: 5%;
 }
 
-/* Titres principaux */
+/* Titres secondaires */
 .product-card h2 {
     font-size: $font-size-xxl;
     margin-bottom: 2%;
@@ -49,9 +61,11 @@
     color: $color-lightgrey;
     font-weight: 600;
 }
+//-------------------------------------------------------------
 
 
 /* Conteneur pour les produits de la page d'accueil. */
+//-------------------------------------------------------------
 .product-grid {
   /* Mise en forme en grille */
   display: grid;
@@ -76,6 +90,8 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   }
 }
+//---------------------------------------------------------
+
 
 /* Texte */
 .product-p {
@@ -89,14 +105,21 @@
   height: 2vh;
 }
 
-/* Media Queries pour les petits écrans */
-@media (max-width: 768px) {
+
+//=========================//
+//      Responsive         //
+//=========================//
+
+/* Téléphone portrait 481px < 769px */
+//-----------------------------------------------
+@include respond-between($breakpoint-xxs+1, $breakpoint-sm) {
   .product-h1 {
     font-size: $font-size-xxl;
   }
 
   .product-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste les colonnes pour les petits écrans */
+    /* Ajustement des colonnes pour les petits écrans */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
     padding: 15px;
   }
 
@@ -125,9 +148,12 @@
     font-size: $font-size-lg; 
   }
 }
+//----------------------------------------------------------
 
-/* Media Queries pour les très petits écrans (téléphones) */
-@media (max-width: 480px) {
+
+/* Pour les très petits écrans (téléphones) < 480px */
+//------------------------------------------------------------
+@include respond-max($breakpoint-xxs) {
   .product-h1 {
     font-size: $font-size-xl;
   }
@@ -163,3 +189,4 @@
     font-size: $font-size-lg; 
   }
 }
+//------------------------------------------------------

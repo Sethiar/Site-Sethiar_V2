@@ -1,19 +1,25 @@
 // Importation des variables.
 @import '../base/variables';
+// Importation taille responsive.
+@import '../base/responsive-size';
 
-// Forms CSS - Components/forms.scss
+
+//===================================//
+// Forms CSS - Components/forms.scss //
+//===================================//
+
 
 /* Style général des formulaires */
-
+//-----------------------------------------
 .annonce {
   color: $color-black;
   border: 1px solid $color-decline-gold2;
   font-size: $font-size-xxl;
-  /* Ajout d'espacement interne */
+  /* Espacement interne */
   padding: 2%;
-  /* Alignement justifié du texte */
+  /* Alignement du texte */
   text-align: justify;
-  /* Indentation de la première ligne */
+  /* Indentation première ligne */
   text-indent: 2em;
   /* Centrage horizontal */
   justify-content: center;
@@ -23,8 +29,8 @@
   height: auto;
   /* Centrage horizontal du conteneur */
   margin: 0 auto;
-  /* Largeur maximale pour ne pas déborder */
-  max-width: 80%;
+  /* Largeur maximale */
+  max-width: 50%;
   /* Ombre pour style */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
   /* Coins arrondis */
@@ -32,8 +38,13 @@
   /* Fond optionnel */
   background-color: $color-neutral-darkgrey; 
 }
+//------------------------------------------
 
-/* Styles du logo du formulaire. */
+
+//==============================//
+// Styles du logo du formulaire //
+//==============================//
+
 .imgcontainer-form {
   display: flex;
   justify-content: center;
@@ -55,12 +66,31 @@ img.avatar-form {
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5); 
   }
 }
+//----------------------------------------------------
+
+
+//============//
+// Espacement //
+//============//
 
 .space-form {
-  height: 5vh;
+  height: 4vh;
 }
 
-/* Titre du formulaire */
+.space-annonce {
+  height: 1.5vh;
+}
+
+.space-inter-form {
+  height: 1.8vh;
+}
+//-------------------------------------------
+
+
+//=====================//
+// Titre du formulaire //
+//=====================//
+
 .h2-form {
   color: $color-primary;
   text-align: center;
@@ -69,23 +99,34 @@ img.avatar-form {
 .h3-form {
   text-decoration: underline;
   color: $color-decline-orange2;
+  font-size: $font-size-xxxl;
   text-align : center;
 }
+//----------------------------------------
 
-/* Conteneur de l'image */
+
+//=================================//
+// Gestion conteneur du formulaire //
+//=================================//
+
 .form-base {
   background-color: $color-black;
   border: 2px solid $color-decline-orange2;
-  padding: 20px;
-  font-size: $font-size-xl;
-  max-width: 30vw;
-  margin: 5% auto;
-  border-radius: 10px;
+  padding: 2%;
+  font-size: $font-size-xxl;
+  max-width: 40vw;
+  margin: 3% auto;
+  border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
+//--------------------------------------------------
 
-/* Conteneur des champs */
+
+//==============================//
+// Gestion conteneur des champs //
+//==============================//
+
 .form-container {
   margin-bottom: 1%;
   display: flex;
@@ -98,10 +139,12 @@ img.avatar-form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
     /* Occupation de toute la largeur disponible */
-    width: 100%; 
+    width: 70%; 
 
     label {
+      font-size: $font-size-xl;
       display: block;
       font-weight: bold;
       color: $color-white;
@@ -138,8 +181,13 @@ img.avatar-form {
     font-size: $font-size-xl;
   }
 }
+//------------------------------------------
 
-/* Lien pour mot de passe oublié */
+
+//===============================//
+// Lien pour mot de passe oublié //
+//===============================//
+
 .forgot-password {
   text-align: center;
   margin-bottom: 2%;
@@ -154,27 +202,71 @@ img.avatar-form {
   border: 1px solid $color-lightgrey;
   border-radius: 5px;
   padding: 15px;
+  font-size: $font-size-xxl;
   margin-top: 20px;
   text-align: center;
 }
+//-----------------------------------------
 
 
-// Responsive design
-/* Mobile */
-@media (max-width: 768px) {
+//==============================//
+// Formulaire de devis checkbox //
+//==============================//
+
+/* Style des cases à cocher */
+.checkbox-group input[type="checkbox"] {
+  /* Couleur de la case cochée. */  
+  accent-color: $color-decline-gold2; 
+}
+
+/* Change la couleur de la case à cocher quand elle est cochée */
+.checkbox-group input[type="checkbox"]:checked {
+  /* Case cochée OR */  
+  background-color: $color-decline-gold1; 
+  /* Couleur de la bordure de la case */
+  border-color: $color-decline-orange2;     
+}
+
+/* Change la couleur de l'élément quand il est cochée et est entouré d'un label */
+.checkbox-group label {
+  /* Couleur du texte du label*/
+  color: $color-black;  
+}
+
+/* Couleur de la case en survol */
+.checkbox-group input[type="checkbox"]:hover {
+  /* Un or légèrement plus clair */  
+  background-color: $color-neutral-darkgrey;
+  /* Bordure d'or */   
+  border-color: $color-decline-orange1; 
+}
+//--------------------------------------------------------
+
+
+
+//==========================//
+//    Responsive design     //
+//==========================//
+
+/* Mobile < 769px */
+@include respond-max($breakpoint-xs) {
   .annonce {
-    /* Prend toute la largeur de l'écran */
-    max-width: 100%;
-    /* Espacement interne suffisant */
+    max-width: 95%;
+    /* Espacement interne */
     padding: 5%;
     /* Pas de marges externes */
-    margin: 0; 
+    margin: 0 auto; 
   }
 
-  /* Enlever les styles qui forcent les marges et la largeur pour mobile */
+  .h3-form {
+    font-size: $font-size-xl;
+  }
+
+  /* Pas de styles marges pour mobile */
   .form-base {
-    /* Laisser le formulaire occuper toute la largeur */
     max-width: 100%; 
+    /* Ajustement de la taille du texte */
+      font-size: $font-size-xl; 
     /* Pas de marges externes */
     margin: 0; 
   }
@@ -187,53 +279,71 @@ img.avatar-form {
   .form-group {
     label {
       /* Ajustement de la taille du texte */
-      font-size: $font-size-lg; 
+      font-size: $font-size-xl; 
     }
 
     input {
       /* Ajuste la taille des champs */
-      font-size: $font-size-lg; 
+      font-size: $font-size-xl; 
     }
   }
 
   .container-btn {
     /* Ajustement du padding du bouton */
     padding: 1.2%; 
+    /* Ajustement de la taille du texte */
+    font-size: $font-size-xl; 
   }
 }
 
-/* Tablettes en paysage */
-@media (max-width: 1024px) {
+/* Tablettes en paysage < 1025px */
+@include respond-max($breakpoint-md) {
   .annonce {
      /* Réduction de la largeur par rapport aux tablettes en portrait */
-    max-width: 90%;
-    padding: 4%;
+    max-width: 60%;
+    padding: 3%;
+  }
+
+  img.avatar-form {
+    width: 65%;
+  }
+
+  .h3-form {
+    font-size: $font-size-xxl;
   }
 
   .form-base {
     /* Ajuste la largeur pour ne pas trop prendre de place */ 
-    max-width: 90vw;
+    max-width: 45vw;
     /* Ajuste la marge */
-    margin: 5% auto; 
+    margin: 2% auto; 
   }
 
   .form-container {
     /* Espacement réduit entre les champs */
-    gap: 10px; 
+    gap: 15%; 
   }
 
   .form-group {
     label {
-      font-size: $font-size-lg;
+      font-size: $font-size-xl;
     }
 
     input {
-      font-size: $font-size-lg;
+      font-size: $font-size-xl;
     }
   }
 
   .container-btn {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10%;
     padding: 1.4%;
+  
+    button, a {
+      font-size: $font-size-base;
+    }
   }
 }
+//---------------------------------------------
 

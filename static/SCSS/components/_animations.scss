@@ -1,9 +1,15 @@
+// Import taille responsive
+@import '../base/responsive-size';
+
+
 /* Animation CSS - components/animations.css */
 
-// Style concernant les animations du site entreprise SethiarWorks
 
+//===================================//
+// Styles concernant les animations  //
+//===================================//
 
-/* Configuration du bouton */
+/* Configuration du bouton de redémarrage de l'animation */
 #btn-logo {
   position: absolute;
   /* Position du bouton */
@@ -14,9 +20,13 @@
   /* Bouton au-dessus des autres éléments */
   z-index: 10; 
 }
+//--------------------------------------------
 
 
-// Configuration des sprites de l'animation
+//==========================================//
+// Configuration des sprites de l'animation //
+//==========================================//
+
 /*  Conteneur globale du logo */
 #logo {
   display: flex;
@@ -38,6 +48,12 @@
   height: 569px;
   overflow: hidden;
 }
+//-----------------------------------------------
+
+
+//========================================//
+//        Gestion des sprites             //
+//========================================//
 
 /* Base commune pour tous les sprites */
 .sprite {
@@ -61,6 +77,12 @@
 .sprite6 { background-image: url('/static/images/images_spritesheet/sprite_6.png'); }
 .sprite7 { background-image: url('/static/images/images_spritesheet/sprite_7.png'); }
 .sprite8 { background-image: url('/static/images/images_spritesheet/sprite_8.png'); }
+//---------------------------------------------------------------------------------------
+
+
+//=====================================================//
+//            Mise en place des Keyframes              //
+//=====================================================//
 
 /* Keyframes pour chaque animation de sprite */
 @keyframes animateLogo1 {
@@ -95,11 +117,16 @@
     from { background-position: 0 0; }
     to { background-position: -11000px 0; }
 }
+//----------------------------------------------------------
 
-/* Animation Responsive */
 
-/* Pour les tablettes portrait */
-@media (max-width: 768px) {
+//===========================//
+//    Animation Responsive   //
+//===========================//
+
+// Pour les tablettes portrait  < 768px //
+//--------------------------------
+@include respond-max($breakpoint-sm) {
   body, #logo, .logo-animation {
     /* Logo positionné par rapport au body */
     position: relative;
@@ -131,10 +158,13 @@
     z-index: 10; 
   }
 }
+//-----------------------------------------------------
 
 
-// Pour les tablettes paysage
-@media (max-width: 1024px) {
+// Pour les tablettes paysage entre 769px - 1024px //
+//--------------------------------
+
+@include respond-between($breakpoint-sm + 1, $breakpoint-md) {
   body, #logo, .logo-animation {
     /* Logo est positionné par rapport au body */
     position: relative; 
@@ -164,10 +194,13 @@
     z-index: 10; 
   }
 }
+//--------------------------------------------------------------------------
 
 
-// Pour les téléphones portrait
-@media (max-width: 480px) {
+// Pour les téléphones portrait < 480px//
+//--------------------------------
+
+@include respond-max($breakpoint-xxs) {
   body, #logo, .logo-animation {
     /* Logo est positionné par rapport au body */
     position: relative; 
@@ -199,8 +232,9 @@
 }
 
 
-// Pour les téléphones paysage
-@media (max-width: 600px) {
+// Pour les téléphones paysage < 796px //
+//--------------------------------
+@include respond-max($breakpoint-sm) {
   body, #logo, .logo-animation {
     /* Logo est positionné par rapport au body */
     position: relative; 
@@ -230,3 +264,4 @@
     z-index: 10; 
   }
 }
+//---------------------------------------------------------------------------

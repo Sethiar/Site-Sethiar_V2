@@ -1,11 +1,32 @@
 // Importation des variables.
 @import 'variables';
+// Importation taille responsive
+@import 'responsive-size';
 
-// Reset CSS - base/base-reset.scss
+
+//===================================//
+// Reset CSS - base/base-reset.scss  //
+//===================================//
+
+
+/* ATTENTION :
+   Ces font-sizes sur html/body influencent TOUS les éléments
+   qui n’ont pas de font-size défini manuellement.
+   Cela peut causer des incohérences visuelles sur certaines résolutions.
+   Pensez à définir font-size explicitement sur les composants clés.
+*/
+
 
 /* Réinitialiser les marges, le padding et la box-sizing */
-html,
-body,
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  line-height: 1.6;
+}
+
 div,
 span,
 h1,
@@ -29,12 +50,6 @@ aside {
   margin: 0;
   padding: 0;
   box-sizing: border-box; /* Utiliser box-sizing border-box par défaut */
-}
-
-/* Éviter que le texte soit hérité de styles non désirés */
-body {
-  line-height: 1.6;
-  font-family: 'Calibri', 'Arial', sans-serif;
 }
 
 /* Réinitialiser les styles pour les liens */
@@ -69,6 +84,7 @@ th {
 
 td,
 th {
+  border: 1px solid $color-white;
   padding: 1rem;
   text-align: left;
 }
@@ -94,42 +110,67 @@ img {
   display: block;
 }
 
-/* Media Queries pour la Responsivité */
+
+//============================================//
+// Media Queries : Gestion responsive globale //
+//============================================//
 
 /* Mobile - Portrait (max-width: 599px) */
-@media (max-width: 599px) {
-  html,
-  body {
-    font-size: $font-size-xl;
-  }
+//----------------------------------------------
+@include respond-max($breakpoint-xs) {
+  /* Mobile portrait : ajustements typographiques et mise en page */
 
-  /* Ajouter d'autres ajustements pour les mobiles ici si nécessaire */
+  /* Ajout d'autres ajustements pour les mobiles ici si nécessaire */
+
 }
+//------------------------------------------------------------
 
-/* Mobile - Paysage (min-width: 600px et max-width: 899px) */
-@media (min-width: 600px) and (max-width: 899px) {
-  html,
-  body {
-    font-size: $font-size-xl;
-  }
 
-  /* Ajouter d'autres ajustements pour les mobiles paysage ici */
+/* Mobile - Paysage (min-width: 600px et max-width: 768px) */
+//-------------------------------------------------------------
+@include respond-between($breakpoint-xs + 1, $breakpoint-sm) {
+  /* Mobile paysage : ajustements typographiques et mise en page */
+
+  /* Ajout d'autres ajustements pour les mobiles paysage ici */
+
 }
+//-------------------------------------------------------------------
 
-/* Tablette - Portrait (min-width: 900px et max-width: 1199px) */
-@media (min-width: 900px) and (max-width: 1199px) {
-  html,
-  body {
-    font-size: $font-size-xl;
-  }
 
-  /* Ajouter d'autres ajustements pour les tablettes portrait ici */
+/* Tablette - Portrait (min-width: 769px et max-width: 1024px) */
+//-------------------------------------------------------------------
+@include respond-between($breakpoint-sm + 1, $breakpoint-md) {
+  /* Tablette portrait : ajustements typographiques et mise en page */
+
+  /* Ajout d'autres ajustements pour les tablettes portrait ici */
+
 }
+//--------------------------------------------------------------------
 
-/* Tablette - Paysage (min-width: 1200px et max-width: 1399px) */
-@media (min-width: 1200px) and (max-width: 1399px) {
-  html,
-  body {
-    font-size: $font-size-xxl;
-  }
+
+/* Tablette - Paysage (min-width: 1025 et max-width: 1199px) */
+@include respond-between($breakpoint-md + 1, $breakpoint-lg) {
+  /* Tablette paysage : ajustements typographiques et mise en page */
+
+  /* Ajout d'autres ajustements pour les tablettes paysage ici */
+
 }
+//------------------------------------------------------------------
+
+/* Grands écrans (min-width: 1200px et max-width: 1400px */
+@include respond-between($breakpoint-lg + 1, $breakpoint-xl) {
+  /* Grand écran : ajustements typographiques et mise en page */
+  
+  /* Ajout d'autres ajustements pour les desktop ici */
+
+}
+//------------------------------------------------------------------
+
+/* Très grands écrans (min-width: 1400px */
+@include respond-min($breakpoint-xl + 1) {
+  /* Très grand écran : ajustements typographiques et mise en page */
+  
+  /* Ajout d'autres ajustements pour les grands desktop ici */
+
+}
+//------------------------------------------------------------------

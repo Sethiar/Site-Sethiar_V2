@@ -1,12 +1,18 @@
+
 // Importation de variables.scss
 @import '../base/variables';
+// importation des tailles responsive
+@import '../base/responsive-size';
 
 
-/* Style de la page calendar.html du blog */
+
+//========================================//
+//    Style de la page calendar.html      //
+//========================================//
 
 #table-appointment {
   color: $color-decline-gold1;
-  width: 90vw;
+  width: auto;
   padding-left: 5vw;
 }
 
@@ -33,7 +39,7 @@ tr {
 }
 
 .btn-valide {
-  width: 10vw;
+  width: auto;
   border: 1px solid $color-decline-gold1;
   background-color: $color-primary;
 

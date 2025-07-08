@@ -1,33 +1,40 @@
 // Importation des variables.
 @import 'variables';
+// Importation tailles responsive.
+@import 'responsive-size';
 
-/* typography css - base/typography.scss */
+
+//=======================================//
+// typography css - base/typography.scss //
+//=======================================//
 
 /* Personnalisation des titres, paragraphes et éléments de contenus */
 
-// Gestion des titres et des tableaux de la section forum et subject-forum
+
+//============================================================================//
+// Gestion des titres de la section de l'espace de commentaire, devis et chat //
+//============================================================================//
+
 
 /*h1*/
 h1.comment-title {
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
   text-align: center;
   font-size: $font-size-xxxl;
   text-decoration: underline;
 }
 
-/*h4*/
-.section-title {
-  font-size: $font-size-xl;
-  color: $color-decline-gold2;
-  margin: 0 auto;
-  text-align: center;
-  padding-bottom: 2%;
+/* Titre de la section laisser un commentaire */
+h3.comment-subtitle {
+/* Centre le texte horizontalement */
+  font-size: $font-size-xxl;
 }
+//-------------------------------------------------------
 
 
-// Gestion des titres et paragraphes des pages mentions et politiques.
-
+// Gestion des titres des pages mentions et politiques devis et chat.
+//-----------------------------------------------------------------
 .h1-politique {
   width: 60%;
   margin: 0 auto;
@@ -66,89 +73,83 @@ h1.comment-title {
   /* Assure que le texte est bien centré */
   text-align: center; 
 }
+//-----------------------------------------------------------
 
-// Typography Responsive
 
-/* Pour les tablettes portrait */
-@media (max-width: 768px) {
-  .comment-title {
-    width: 80%;
-    font-size: $font-size-xxl;
-  }
+//=======================//
+//  Responsive Desiign   //
+//=======================//
 
-  .section-title {
-    font-size: $font-size-xl;
-  }
-
-  .h1-politique {
-    width: 80%;
-    font-size: $font-size-xxl;
-  }
-
-  .h2-politique {
-    font-size: $font-size-xl;
-  }
-}
-
-/* Pour les tablettes paysage */
-@media (max-width: 1024px) {
-  .comment-title {
+/* Pour les tablettes paysage max : 1024px */
+@include respond-max($breakpoint-md) {
+  h1.comment-title {
     width: 70%;
     font-size: $font-size-xxl;
   }
-
-  .section-title {
+  
+  /* Titre de la section laisser un commentaire */
+  h3.comment-subtitle {
+  /* Centre le texte horizontalement */
     font-size: $font-size-xl;
   }
 
   .h1-politique {
     width: 70%;
-    font-size: $font-size-xxxl;
+    font-size: $font-size-xl;
   }
 
   .h2-politique {
-    font-size: $font-size-xl;
+    font-size: $font-size-lg;
   }
 }
+//-------------------------------------------------------
 
-/* Pour les téléphones portrait */
-@media (max-width: 480px) {
-  .comment-title {
+
+/* Pour les tablettes portrait max : 768px */
+@include respond-max($breakpoint-sm) {
+  h1.comment-title {
+    width: 80%;
+    font-size: $font-size-xl;
+  }
+
+  /* Titre de la section laisser un commentaire */
+  h3.comment-subtitle {
+  /* Centre le texte horizontalement */
+    font-size: $font-size-lg;
+  }
+
+  .h1-politique {
+    width: 80%;
+    font-size: $font-size-xl;
+  }
+
+  .h2-politique {
+    font-size: $font-size-lg;
+  }
+}
+//------------------------------------------------
+
+
+/* Pour les téléphones portrait max : 599px */
+@include respond-max($breakpoint-xs) {
+  h1.comment-title {
     width: 90%;
     font-size: $font-size-xl;
   }
 
-  .section-title {
+  /* Titre de la section laisser un commentaire */
+  h3.comment-subtitle {
+  /* Centre le texte horizontalement */
     font-size: $font-size-lg;
   }
 
   .h1-politique {
     width: 90%;
-    font-size: $font-size-xl;
+    font-size: $font-size-lg;
   }
 
   .h2-politique {
-    font-size: $font-size-lg;
+    font-size: $font-size-base;
   }
 }
-
-/* Pour les téléphones paysage */
-@media (max-width: 600px) {
-  .comment-title {
-    width: 90%;
-    font-size: $font-size-xl;
-  }
-
-  .section-title {
-    font-size: $font-size-lg;
-  }
-
-  .h1-politique {
-    width: 90%;
-    font-size: $font-size-xl;
-  }
-
-  .h2-politique {
-    font-size: $font-size-lg;
-  }
-}
+//--------------------------------------------------

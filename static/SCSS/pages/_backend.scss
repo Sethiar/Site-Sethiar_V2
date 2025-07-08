@@ -1,16 +1,21 @@
 // Importation des variables.
 @import '../base/variables';
+// importation des tailles responsive
+@import '../base/responsive-size';
 
 
-// Backend CSS - pages/backend.scss
+//===================================//
+// Backend CSS - pages/backend.scss  //
+//===================================//
 
-/* Style pour la page d'accueil du baseback.html.jinja2 */
+
+/* Style pour la page d'accueil du backend */
+//-----------------------------------------------------
 html, body {
   margin: 0;
   padding: 0;
   background-color: $color-black;
   color: $color-white;
-  font-size: $font-size-base;
 }
 
 .header-backend {
@@ -30,15 +35,19 @@ html, body {
   }
 }
 
-// Style global du backend.
+
+//==========================//
+// Style global du backend  //
+//==========================//
+
 .h1-backend {
-  font-size: $font-size-xxxl;
+  font-size: $font-size-xxl;
   color: $color-decline-orange2;
   text-align: center;
 }
 
 .annonce-back p {
-  font-size: $font-size-xxl;
+  font-size: $font-size-xl;
   color: $color-primary;
   background-color: $color-lightgrey;
   border: 1px solid $color-decline-orange2;
@@ -60,7 +69,10 @@ html, body {
   color: $color-decline-gold2;
 }
 
-// Style de la page calendar.html
+
+//=================================//
+// Style de la page calendar.html  //
+//=================================//
 .table {
   font-size: $font-size-base;
   border: 1px solid $color-lightgrey;
@@ -73,6 +85,7 @@ th {
   color: $color-decline-orange2;
   border: 1px solid $color-lightgrey;
   padding: 2%;
+  font-weight: bold;
 }
 
 tr {
@@ -90,6 +103,7 @@ td {
   border: 1px solid $color-lightgrey;
   padding: 2%;
 }
+//----------------------------------------------------
 
 .actions-buttons {
   margin-right: 1rem;
@@ -111,7 +125,11 @@ td {
   }
 }
 
-// Page de la liste des utilisateurs.
+
+//=================================================//
+// Style pour la page de la liste des utilisateurs //
+//=================================================//
+
 /* Sélection de tous les utilisateurs */
 .select-all-users {
   color: $color-decline-gold2;
@@ -127,7 +145,6 @@ td {
 /* Présentation des premières lettres des pseudos des utilisateurs */
 .lettre-navigation {
   padding-left: 20vw;
-  display: flex-column;
 }
 
 /* Sélection des lettres */
@@ -144,35 +161,42 @@ td {
     text-decoration: underline;
   }
 }
+//------------------------------------------------------
 
+
+//=====================================================//
+//    Styles du tableau de présentation du backend     //
+//=====================================================//
+
+/* Colonne utilisateur */
 .col-user {
-  width: 15vw;
+  width: auto;
   text-align: center;
   vertical-align: middle;
 }
 
+/* Colonne du statut utilisateur */
 .col-title {
-  width: 25vw;
+  width: auto;
   text-align: center;
   vertical-align: middle;
 }
 
+/* Colonne affichant les commentaires */
 .col-comment {
-  width: 40vw;
+  width: auto;
   text-align: center;
   vertical-align: middle;
 }
 
+/* Colonne des boutons d'actions */
 .col-actions {
-  width: 20vw;
+  width: auto;
   text-align: center;
   vertical-align: middle;
 }
 
-.separation {
-  border: 1px solid $color-white;
-}
-
+/* Conteneur des categories de l'espace de commentaires */
 .container-category {
   margin: 0 auto;
   text-align: center;
@@ -184,3 +208,8 @@ td {
 .label {
   width: 40%;
 }
+
+.separation {
+  border: 1px solid $color-white;
+}
+//------------------------------------------

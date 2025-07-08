@@ -1,12 +1,10 @@
-// Fichier javascript permettant de fournir les options de rendez-vous et d'intéraction au calendrier du backend.
-
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        locale: 'fr',  // Configuration pour le format français
-        events: rdvData,  // Utilisation des données passées du template HTML
+        locale: 'fr',
+        events: rdvData,
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -14,28 +12,30 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         selectable: true,
         select: function(info) {
-            // Logique pour gérer la sélection de date.
             var selectedDate = info.startStr;
             alert('Date sélectionnée : ' + formatDateToFrench(selectedDate));
-
-            // Ouvrir une modale pour ajouter un rendez-vous à cette date.
             openModalForDate(selectedDate);
         },
-        eventTimeFormat: { // Personnalisation de l'affichage de l'heure.
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
+        eventTimeFormat: {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
         },
         eventClick: function(info) {
-            // Logique pour gérer le clic sur un événement.
             var eventTitle = info.event.title;
-            var eventDate = info.event.start.toISOString().slice(0, 10);
-            var eventTime = info.event.start.toISOString().slice(11, 16);
+            var eventDate = moment(info.event.start).format('DD/MM/YYYY');
+            var eventTime = moment(info.event.start).format('HH:mm');
             var requestContent = info.event.extendedProps.content;
+            
+            if (info.event.url) {
+                window.open(info.event.url, '_blank');
+            } else {
+                alert('Aucun lien disponible pour cet événement.');
+            }
+            info.jsEvent.preventDefault();
 
             alert('Rendez-vous avec ' + eventTitle + ' le ' + formatDateToFrench(eventDate) + ' à ' + eventTime + ' pour le motif suivant : ' + requestContent);
 
-            // Ouvrir une modale pour afficher les détails ou proposer des actions.
             openModalForEvent(info.event);
         }
     });
@@ -51,17 +51,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fonction pour ouvrir une modale lors de la sélection d'une date.
     function openModalForDate(date) {
-        // Implémentation de la logique pour afficher un formulaire ou une modale ici.
-        console.log('Ouverture de la modale pour la date : ' + formatDateToFrench(date));
-        // Utilisation du framework Bootstrap pour gérer les modales.
+        $('#modal-content').html(`
+            <p><strong>Date sélectionnée :</strong> ${formatDateToFrench(date)}</p>
+            <p>Vous pouvez maintenant ajouter un rendez-vous pour cette date.</p>
+        `);
         $('#yourModalId').modal('show');
     }
 
-    // Fonction d'exemple pour ouvrir une modale lors du clic sur un événement.
+    // Fonction pour ouvrir une modale lors du clic sur un événement.
     function openModalForEvent(event) {
-        // Implémentation de la logique pour afficher les détails de l'événement ou modifier/supprimer.
-        console.log('Ouverture de la modale pour l\'événement : ' + event.title);
-        // Affichage de la modale avec les détails de l'événement.
+        $('#modal-content').html(`
+            <p><strong>Titre :</strong> ${event.title}</p>
+            <p><strong>Date :</strong> ${moment(event.start).format('DD/MM/YYYY')}</p>
+            <p><strong>Heure :</strong> ${moment(event.start).format('HH:mm')}</p>
+            <p><strong>Contenu :</strong> ${event.extendedProps.content}</p>
+        `);
         $('#yourModalId').modal('show');
     }
 });

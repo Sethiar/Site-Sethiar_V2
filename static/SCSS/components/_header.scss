@@ -1,32 +1,53 @@
 // Importation de variables.scss
 @import '../base/variables';
+// Importation taille responsive
+@import '../base/responsive-size';
+
 
 // Variables locales
-$header-bg: rgba(44, 62, 80, 0.95);
+//---------------------------
 $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
-// Style du Header
+
+//=====================//
+//   Style du Header   //
+//=====================//
+
+/* Styles Header Default */
+//-----------------------------------
 .header {
+  /* Position toujours à droite en haut */
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
+  /* 30% de l'écran */
   width: 30%;
-  background-color: $header-bg;
+  background-color: $color-decline-blue2;
   box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+  /* Au dessus de tout composant */
   z-index: 1001;
+  /* Mise en place flex */
   display: flex;
+  /* En colonne */
   flex-direction: column;
+  /* Elements centrés */
   justify-content: center;
   align-items: center;
   padding: 2rem 1rem;
-
-  @media (max-width: 1024px) {
+  
+  /* Disparition du header en dessous de 1024px */
+  @include respond-max($breakpoint-md) {
     display: none;
   }
 }
+//--------------------------------
 
-// Style pour le hamburger
+
+//=========================//
+// Style pour le hamburger //
+//=========================//
+
 .hamburger {
   display: none;
   position: fixed;
@@ -46,13 +67,18 @@ $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: $color-white;
     transition: all 0.3s ease-in-out;
   }
-
-  @media (max-width: 1024px) {
+  
+  /* Affichage du menu hamburger en dessous de 1024px */
+  @include respond-max($breakpoint-md) {
     display: flex;
   }
 }
+//--------------------------------------
 
-// Menu affiché avec le hamburger
+//=================================//
+// Menu affiché avec le hamburger  //
+//=================================//
+
 .hamburger.active + .header,
 .header.active {
   display: flex;
@@ -60,27 +86,38 @@ $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   top: 0;
   left: 0;
   width: 100%;
-  height: 15%;
+  height: 10%;
   flex-direction: column;
-  padding: 1rem;
-  background-color: $header-bg;
+  padding: 1.5rem 1rem;
+  background-color: $color-decline-blue2;
   box-shadow: $box-shadow;
   /* Permet le défilement si les liens débordent */
   overflow-y: auto; 
 }
+//---------------------------------------
+
+
+//==================================//
+// Affichage du conteneur principal //
+//==================================//
 
 .main-content {
   /* Animation fluide lors du changement */
   transition: margin-top 0.3s ease; 
 }
+//-------------------------------------
 
-/* Conteneur de navigation */
+
+//==========================//
+// Conteneur de navigation  //
+//==========================//
+
 .nav-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 1rem 0.5rem;
   gap: 2rem;
 }
 
@@ -98,7 +135,7 @@ $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   align-items: center;
 
   li a {
-    font-size: $font-size-xxxl;
+    font-size: $font-size-xxl;
     color: $color-white;
     text-decoration: none;
     margin: 1rem 0;
@@ -108,18 +145,27 @@ $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
   }
 }
+//--------------------------------
 
-// Actions utilisateur
+
+//======================//
+// Actions utilisateur  //
+//======================//
+
 .actions {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1rem;
+  gap: 2rem;
 
   .logged {
-    font-size: $font-size-xxl;
+    font-size: $font-size-xl;
     font-weight: bold;
+  }
+
+  .logged-2 {
+    font-size: $font-size-lg ;
   }
 
   a {
@@ -127,11 +173,19 @@ $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-size: $font-size-lg;
     color: $color-white;
     padding: 0.8rem 1rem;
-    border-radius: 5px;
+    margin-bottom: 2%;
+    border-radius: 8px;
     background-color: $color-primary;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.3s ease;
 
+    /* Uniformiser la taille des boutons */
+    /* Largeur fixe */
+    width: 300px; 
+    /* Structure en ligne mais avec la largeur définie */
+    display: inline-block;
+    text-align: center;
+    
     &:hover {
       background-color: $color-white;
       color: $color-decline-orange2;
@@ -140,3 +194,159 @@ $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
   }
 }
+//----------------------------------------------------
+
+
+//====================================//
+//           Responsive               //
+//====================================//
+
+// Très grands écrans
+//-----------------------------------------------------
+@include respond-min($breakpoint-lg + 1) {
+  
+  .nav-container {
+    gap: 2rem;
+  }
+  // Navigation
+  .nav-links ul {
+    list-style: none;
+    /* Centre horizontalement */
+    margin: 0 auto; 
+    padding: 0;
+    display: flex;
+    /* Place les liens verticalement */
+    flex-direction: column;
+    /* Centre verticalement si le parent a une hauteur définie */
+    justify-content: center; 
+    align-items: center;
+
+
+    li a {
+      font-size: $font-size-xxxl;
+      color: $color-white;
+      text-decoration: none;
+      margin: 1rem 0;
+
+      &:hover {
+        color: $color-decline-gold2;
+      }
+    }
+  }
+}
+//--------------------------------
+
+//======================//
+// Actions utilisateur  //
+//======================//
+
+.actions {
+  gap: 2rem;
+
+  .logged {
+    font-size: $font-size-xxl;
+  }
+
+  .logged-2 {
+    font-size: $font-size-xl ;
+  }
+
+  a {
+    font-size: $font-size-xl;
+    color: $color-white;
+    padding: 0.8rem 1rem;
+    margin-bottom: 3%;
+  }
+}
+//----------------------------------------------------------
+
+//Style pour écrans moyens min 1025px et max 1199px
+@include respond-between($breakpoint-md +1, $breakpoint-lg) {
+  .nav-container {
+    gap: 2rem;
+  }
+
+  .nav-links ul li a {
+    font-size: $font-size-xxxl;
+  }
+}
+//---------------------------------------------------------------
+
+
+// Gestion du menu hamburger en dessous de 1024px
+@include respond-max($breakpoint-md) {
+  .header.active .nav-links ul li a {
+    font-size: $font-size-xxxl;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .header.active .actions .logged,
+  .header.active .actions .logged-2,
+  .header.active .actions a {
+    font-size: $font-size-xxl;
+  }
+
+  .buttons-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+  
+   a {
+    width: 100%;
+    padding: 1rem;
+    font-size: $font-size-xl;
+   }
+  }
+}
+//------------------------------------------------------
+
+
+// Tablettes portrait et téléphones paysages min 600px et max 1024px
+@include respond-between($breakpoint-xs +1, $breakpoint-md) {
+  .nav-container {
+    gap: 2rem;
+  }
+
+  .nav-links ul li a {
+    font-size: $font-size-xxl;
+  }
+//---------------------//
+// Actions utilisateur //
+//---------------------//
+
+  .actions {
+    gap: 2rem;
+
+    .logged {
+      font-size: $font-size-xl;
+    }
+
+    .logged-2 {
+      font-size: $font-size-lg ;
+    }
+
+    a {
+      font-size: $font-size-lg;
+      color: $color-white;
+      padding: 0.8rem 1rem;
+      margin-bottom: 3%;
+    }
+  }
+}
+//---------------------------------------------------------------
+
+
+// Boutons d'actions dans le menu hamburger //
+// Téléphones portrait 476px-768px.
+@include respond-max($breakpoint-sm) {
+  .buttons-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+}
+//----------------------------------------------------------

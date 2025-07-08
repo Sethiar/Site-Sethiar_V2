@@ -1,9 +1,13 @@
 // Importation des variables.
 @import '../base/variables';
+// importation des tailles responsive
+@import '../base/responsive-size';
 
-/* pages css - pages/home.scss */
 
-// Styles du contenu de la page d'accueil.
+//=========================================//
+// Styles du contenu de la page d'accueil  //
+//=========================================//
+
 
 /* Titre de la page d'accueil */
 .title-container-landing {
@@ -22,6 +26,8 @@
   transform: scale(1.025);
   }
 }
+//----------------------------------------------------
+
 
 /* Contenu centré avec dégradé */
 .content-section-landing {
@@ -34,6 +40,8 @@
   padding: 1rem;
   position: relative;
 }
+//---------------------------------------------------
+
 
 .intro-landing {
   opacity: 0;
@@ -45,6 +53,7 @@
   margin: 3% 0;
   line-height: 1.4;
 }
+//-----------------------------------------------------
 
 /* Conteneur pour le slogan de l'entreprise */
 .slogan-container {
@@ -85,8 +94,13 @@
   font-size: $font-size-xxxl; 
   -webkit-background-clip: text;
 }
+//---------------------------------------------------------------
 
-// Animation concernant l'apparition des phrases de l'accueil.
+
+//==============================================================//
+// Animation concernant l'apparition des phrases de l'accueil   //
+//==============================================================//
+
 /* Animation principale : fadeInUp */
 @keyframes fadeInUp {
   0% {
@@ -97,17 +111,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.registration-sentence-landing {
-    opacity: 0;
-    transform: translateY(50px) scale(0.8);
-    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-    font-size: $font-size-xxxl;
-    color: $color-neutral-darkgrey;
-    text-align: center;
-    margin: 3% 0;
-    line-height: 1;
 }
 
 /* Classe animée lors de l'apparition */
@@ -144,6 +147,21 @@ p.animate {
     transform: scale(1);
   }
 }
+//-------------------------------------------------
+
+
+/* Conteneur d'incitation à la demande d'information */
+.registration-sentence-landing {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    font-size: $font-size-xxxl;
+    color: $color-neutral-darkgrey;
+    text-align: center;
+    margin: 3% 0;
+    line-height: 1;
+}
+//-------------------------------------------------
 
 
 // Styles pour la page wait.
@@ -155,13 +173,18 @@ p.animate {
   text-align: center;
   max-width: 80%;
 }
+//---------------------------------------------------
 
-/* Media Queries pour la réactivité */
 
-@media (max-width: 768px) {
-  /* Ajustements pour les tablettes en portrait et les petits écrans */
+//==================//
+// Reponsive Design //
+//==================//
+
+/* Tablettes en portrait et les petits écrans  481px - 768px */
+@include respond-between($breakpoint-xxs + 1, $breakpoint-sm) {
+  
   .title-container-landing {
-    font-size: $font-size-xxl;
+    font-size: $font-size-xxxl;
     height: 12vh;
   }
 
@@ -171,7 +194,7 @@ p.animate {
   }
 
   .intro-landing {
-    font-size: $font-size-xl;
+    font-size: $font-size-xxl;
     margin: 2% 0;
   }
 
@@ -181,20 +204,22 @@ p.animate {
   }
 
   .slogan-text {
-    font-size: $font-size-xl;
+    font-size: $font-size-xxl;
   }
 
   .registration-sentence-landing {
-    font-size: $font-size-xl;
+    font-size: $font-size-xxl;
   }
 
   .wait-container {
     max-width: 100%;
   }
 }
+//------------------------------------------------------
 
-@media (max-width: 480px) {
-  /* Ajustements pour les smartphones */
+
+@include respond-max($breakpoint-xxs) {
+  /* Petits téléphones */
   .title-container-landing {
     font-size: $font-size-xxl;
     height: 10vh;
@@ -227,3 +252,4 @@ p.animate {
     padding: 1rem;
   }
 }
+//--------------------------------------------------------------

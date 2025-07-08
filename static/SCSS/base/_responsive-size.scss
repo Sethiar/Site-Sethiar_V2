@@ -1,0 +1,41 @@
+
+//==================================//
+// Base des breackpoints responsive //
+//==================================//
+
+
+// variables des breakpoint
+//----------------------------------------------
+$breakpoint-xxs: 480px;  // Mobile max portrait 
+$breakpoint-xs: 599px;   // Mobile max paysage
+$breakpoint-sm: 768px;   // Petite tablette max portrait
+$breakpoint-md: 1024px;  // Tablette paysage max
+$breakpoint-lg: 1199px;  // Petit desktop max
+$breakpoint-xl: 1400px;  // Grand écran min
+
+
+//================================//
+// Mixins pour media queries      //
+//================================//
+
+// Mobile-first : min-width
+@mixin respond-min($size) {
+  @media (min-width: $size) {
+    @content;
+  }
+}
+
+// Mobile-first : max-width
+@mixin respond-max($size) {
+    @media (max-width: $size) {
+        @content;
+    }
+}
+
+// Entre deux tailles min et max
+@mixin respond-between($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+//-----------------------------------------------

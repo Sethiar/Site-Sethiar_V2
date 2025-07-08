@@ -1,7 +1,13 @@
 // Importation des variables
 @import '../base/variables';
+// Importation taille responsive
+@import '../base/responsive-size';
 
-/* Pages CSS du composant carrousel */
+
+//=========================================//
+//      Styles du composant carrousel      //
+//=========================================//
+
 
 /* Images du carrousel */
 .product-pic {
@@ -124,9 +130,16 @@
   margin-top: 1%;
   line-height: 1.5;
 }
+//--------------------------------------------
 
-/* Adaptation pour les téléphones en portrait */
-@media (max-width: 480px) {
+
+//================//
+//   Responsive   //
+//================//
+
+/* Adaptation pour les téléphones en portrait  < 480px */
+//-----------------------------------------------
+@include respond-max($breakpoint-xxs) {
   .swiper-container {
     width: 100%;
     /* Réduit le padding */
@@ -189,9 +202,12 @@
     font-size: $font-size-xl; 
   }
 }
+//----------------------------------------------------
 
-/* Adaptation pour les tablettes en portrait */
-@media (min-width: 481px) and (max-width: 768px) {
+
+/* Adaptation pour les tablettes en portrait (481px - 768px) */
+//------------------------------------------------
+@include respond-between($breakpoint-xxs +1, $breakpoint-sm) {
   .swiper-container {
     /* Carrousel sur toute la largeur */
     width: 100%; 
@@ -242,9 +258,12 @@
     font-size: $font-size-xl;
   }
 }
+//------------------------------------------------
 
-/* Adaptation pour les tablettes en paysage */
-@media (min-width: 769px) and (max-width: 1024px) {
+
+/* Adaptation pour les tablettes en paysage (769px - 1024px ) */
+//------------------------------------------------
+@include respond-between($breakpoint-sm + 1, $breakpoint-md) {
   .swiper-container {
     padding: 2% 0;
   }
@@ -283,9 +302,12 @@
     font-size: $font-size-xxl;
   }
 }
+//------------------------------------------------
 
-/* Adaptation pour les téléphones en paysage */
-@media (max-width: 767px) and (orientation: landscape) {
+
+/* Adaptation pour les téléphones en paysage  < 796px */
+//------------------------------------------------
+@include respond-max($breakpoint-sm) {
   .swiper-container {
     padding: 10px 0;
   }
@@ -324,3 +346,4 @@
     font-size: $font-size-xl;
   }
 }
+//------------------------------------------------

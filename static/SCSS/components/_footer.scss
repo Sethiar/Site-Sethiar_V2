@@ -1,8 +1,16 @@
 // Importation des variables.
 @import '../base/variables';
+// importation des tailles responsive
+@import '../base/responsive-size';
 
 
-/* Styles Footer Global */
+//========================//
+//     Styles Footer      //
+//========================//
+
+
+/* Styles Footer Default */ 
+//--------------------------------------
 footer {
   background-color: $color-decline-blue2;
   /* Ajustement pour un footer responsive */
@@ -15,7 +23,6 @@ footer {
   padding: 3rem 0; 
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
   /* Centre le contenu */
   align-items: center; 
   justify-content: center;
@@ -107,16 +114,50 @@ footer p {
   padding: 2%;
   color: $color-decline_orange2;
 }
+//-----------------------------------
 
 
-/* Adaptation mobile */
-@media (max-width: 1024px) {
+//=======================//
+//  Responsiv Design     //
+//=======================//
+
+
+// Grand écran (1025px - 1399px)
+//-----------------------------------
+@include respond-between($breakpoint-md + 1, $breakpoint-lg) {
   footer {
-    width: 100%;
+    width: 68%;
   }
 }
 
-@media (max-width: 768px) {
+
+// Tablette paysage (769px - 1024px)
+//-----------------------------------
+@include respond-between($breakpoint-sm + 1, $breakpoint-md) {
+  
+  footer {
+    width: 100%;
+  }
+
+  .footer-content {
+    flex-wrap: wrap;
+  }
+
+  .footer-section {
+    width: 45%;
+    margin-bottom: 2rem;
+  }
+}
+//-----------------------------------
+
+
+// Tablette portrait / Mobile paysage (576px - 768px)
+//-----------------------------------
+@include respond-between($breakpoint-xs + 1, $breakpoint-sm) {
+  footer {
+    width: 100%;
+  }
+  
   .footer-content {
     /* Les sections s'affichent verticalement sur mobile */
     flex-direction: column; 
@@ -137,21 +178,25 @@ footer p {
     margin-bottom: 1rem;
   }
 
-  footer ul li {
-    /* Réduit la taille des items de liste */
-    font-size: $font-size-lg; 
+  footer ul li,
+  footer ul li a {
+    font-size: $font-size-lg;
   }
 
   footer p {
-    /* Réduit la taille du texte simple */
-    font-size: $font-size-lg; 
+    /* Réduit la taille des items de liste */
+    font-size: $font-size-base; 
   }
 }
+//-----------------------------------
 
-/* Adaptation très petit écran (téléphones) */
-@media (max-width: 480px) {
+
+// Mobile portrait (< 600px)
+//-----------------------------------
+@include respond-max($breakpoint-xs) {
   footer {
-    padding: 2rem 0;
+    width: 100%;
+    padding: 2rem 1rem;
   }
 
   .footer-content {
@@ -165,13 +210,14 @@ footer p {
     font-size: $font-size-xl; 
   }
 
-  footer ul li {
-    /* Réduit la taille des items de liste */
-    font-size: $font-size-lg; 
+  footer ul li,
+  footer ul li a {
+    font-size: $font-size-lg;
   }
 
   footer p {
-    /* Réduit la taille du texte simple */
-    font-size: $font-size-lg;
+    /* Réduit la taille des items de liste */
+    font-size: $font-size-base; 
   }
 }
+//-----------------------------------
