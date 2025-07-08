@@ -23,8 +23,8 @@ class NewSubjectCommentForm(FlaskForm):
         form = NewSubjectCommentForm()
     """
     # Nom du sujet.
-    nom = StringField(
-        "Sujet",
+    name = StringField(
+        "Ajouter un nouveau sujet",
         validators=[DataRequired()],
         render_kw={'placeholder': "Nouveau sujet"}
     )

@@ -28,14 +28,14 @@ class UserConnection(FlaskForm):
     enterprise_name = StringField(
         "Nom de l'entreprise",
         validators=[DataRequired()],
-        render_kw={"placeholder": "Veuillez renseigner le nom de votre entreprise."}
+        render_kw={"placeholder": "Nom entreprise"}
     )
     
     # Champ pour le password.
     password = PasswordField(
         "Mot de passe",
         validators=[DataRequired()],
-        render_kw={'placeholder': "Veuillez renseigner votre mot de passe."}
+        render_kw={'placeholder': "Mot de passe"}
     )
     
     # Action de soumettre le formulaire.

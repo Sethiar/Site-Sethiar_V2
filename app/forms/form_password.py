@@ -29,11 +29,11 @@ class ForgetPassword(FlaskForm):
     email = EmailField(
         "Email",
         validators=[DataRequired()],
-        render_kw={"placeholder": "Renseignez ici votre email."}
+        render_kw={"placeholder": "Email utilisateur"}
     )
 
     # Action de soumettre le formulaire.
-    submit = SubmitField("Réinitialiser le mot de passe.")
+    submit = SubmitField("Réinitialiser le mot de passe")
 
     # Token de sécuité.
     csrf_token = HiddenField()

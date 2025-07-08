@@ -33,13 +33,13 @@ class ChatRequestForm(FlaskForm):
     enterprise_name = StringField(
         "Nom de l'entreprise",
         validators=[DataRequired()],
-        render_kw={"placeholder": "Veuillez renseigner le nom entreprise"}
+        render_kw={"placeholder": "Nom entreprise"}
         )
     
     email = StringField(
         "Email",
         validators=[DataRequired()],
-        render_kw={"placeholder": "Veuillez renseigner votre email"}    
+        render_kw={"placeholder": "Email"}    
     )
     
     # Contenu de la demande.
@@ -76,9 +76,9 @@ class UserLink(FlaskForm):
     Formulaire pour envoyer le lien à  l'utilisateur.
     """
         
-    # Réception du lien pour le chat à envoyer le lien pour la session fde chat à l'utilisateur.
+    # Réception du lien pour le chat à envoyer le lien pour la session de chat à l'utilisateur.
     chat_link = StringField(
-        "Chat-link",
+        "Lien",
         validators=[DataRequired()],
         render_kw={"placeholder": "Veuillez renseigner le lien copié"}
     )

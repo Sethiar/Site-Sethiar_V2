@@ -56,14 +56,14 @@ class UserRecording(FlaskForm):
     enterprise_name = StringField(
         "Nom de l'entreprise",
         validators=[DataRequired(), Length(min=2, max=30)],
-        render_kw={"placeholder": "Nom de l'entreprise"}
+        render_kw={"placeholder": "Nom entreprise"}
     )
     
     # Champ pour le rôle de l'utilisateur.
     role = StringField(
         "rôle utilisateur",
         validators=[DataRequired()],
-        render_kw={"placeholder": "Rôle de l'utilisateur"}
+        render_kw={"placeholder": "Rôle"}
     )
     
     # Téléphone du référent.
@@ -77,7 +77,7 @@ class UserRecording(FlaskForm):
     email = EmailField(
         "Email",
         validators=[DataRequired(), Email()],
-        render_kw={"placeholder": "Veuillez renseigner l'email du référent projet."}
+        render_kw={"placeholder": "Email du référent projet."}
     )
     
     # Champ pour le mot de passe.
@@ -91,7 +91,7 @@ class UserRecording(FlaskForm):
     password2 = PasswordField(
         "Confirmez le mot de passe",
         validators=[DataRequired(), EqualTo("password", message="Les deux mots de passe doivent correspondre.")],
-        render_kw={"placeholder": "Veuillez confirmer votre mot de passe."}
+        render_kw={"placeholder": "Confirmer mot de passe."}
     )
     
     # Champ pour le logo de l'entreprise.

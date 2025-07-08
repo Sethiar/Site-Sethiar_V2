@@ -40,7 +40,7 @@ class CommentForm(FlaskForm):
     enterprise_name = StringField(
         "Nom de l'entreprise",
         validators=[DataRequired()],
-        render_kw={"placeholder": "Nom de votre entreprise"}
+        render_kw={"placeholder": "Nom entreprise"}
     )
     
     # Action de soumettre le formulaire.

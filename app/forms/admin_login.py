@@ -30,21 +30,21 @@ class AdminConnection(FlaskForm):
     pseudo = StringField(
         "Pseudo adminsitrateur",
         validators=[DataRequired()],
-        render_kw={"placeholder":"Votre pseudo"}
+        render_kw={"placeholder":"Pseudo"}
     )
     
     # Champ pour le rôle.
     role = StringField(
         "Rôle",
         validators=[DataRequired()],
-        render_kw={"placeholder": "Votre rôle"}
+        render_kw={"placeholder": "Rôle"}
     )
     
     # Champ pour le mot de passe.
     password = PasswordField(
         "Mot de passe",
         validators=[DataRequired()],
-        render_kw={"placeholder": "Votre mot de passe"}
+        render_kw={"placeholder": "Mot de passe"}
     )
     
     # Action de soumettre le formulaire.
