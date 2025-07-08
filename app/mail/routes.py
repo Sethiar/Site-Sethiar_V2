@@ -34,16 +34,21 @@ def send_confirmation_email_user(email):
     
             Bonjour M. / Mme {user.lastname},
             
-            Merci de votre confiance quant à la validation de  notre cahier des charges.\n"
-            Comme indiqué sur ce dernier, nous avons inscrit sur le site de notre entreprise afin que vous puissiez, \n" \
-            si vous le désirez, laisser un commentaire sur le travail que nous avons fourni pour votre entreprise. \n" \
-            Votre inscription a été confirmée avec succès.\n"
+            Merci de votre confiance quant à la validation de notre cahier des charges.
+            
+            Comme indiqué sur ce dernier, nous vous avons inscrit sur le site de notre entreprise afin que vous puissiez,
+            si vous le désirez, laisser un commentaire sur le projet que nous avons mené à son terme.
+            
+            Nous espérons que vous avez été satisfait de notre travail et que vous avez apprécié notre collaboration.
+            
+            Votre inscription a été confirmée avec succès.
             
             Vos identifiants sont inscrits dans le cahier des charges que nous vous avons donné, en annexe.
             
             Nous espérons que nous vous retrouverons bientôt.
             
             Nous vous souhaitons une bonne continuation.
+            
             
             Cordialement,
             L'équipe de SethiarWorks.
@@ -77,6 +82,7 @@ def send_confirmation_email_admin(email):
             Bonjour Nono,
             Youpi !!! Une nouvelle inscription sur le site de l'entreprise SethiarWorks.
             
+            
             Cordialement,
             L'équipe de SethiarWorks.
             """
@@ -108,6 +114,7 @@ def reset_password_mail(email, reset_url):
             
             pour réinitialiser votre mot de passe, cliquez sur le lien suivant : {reset_url}
             
+            
             Cordialement,
             L'équipe de SethiarWorks.
             """
@@ -131,6 +138,7 @@ def password_reset_success_email(user):
             Bonjour M. / Mme {user.lastname},
                
             Votre mot de passe a été réinitialisé avec succès.
+               
                
             Cordialement,
             L'équipe de SethiarWorks.
@@ -156,8 +164,11 @@ def mail_reply_comment(email, subject):
     msg.body = f"""
                
             Bonjour M. / Mme {user.lastname},
-            Un utilisateur a répondu à votre commentaire de la section commentaire du site SethiarWorks dont le sujet est : \"{subject.nom}\".
-               
+            Un utilisateur a répondu à votre commentaire de la section commentaire du site SethiarWorks dont le sujet est : \"{subject.name}\".
+            
+            Nous vous invitons à vous connecter à votre compte afin de lire la réponse.
+            
+            
             Cordialement,
             L'équipe de SethiarWorks.
             """
@@ -165,7 +176,7 @@ def mail_reply_comment(email, subject):
 
 
 # Méthode envoyant un mail de confirmation de la demande de chat vidéo à l'utilisateur.
-def send_confirmation_request_reception(request):
+def send_confirmation_request_reception(chat):
     """
     Fonction qui envoie un mail de confirmation à l'utilisateur de la bonne réception de sa requête de chat vidéo.
 
@@ -175,15 +186,17 @@ def send_confirmation_request_reception(request):
     msg = Message(
         "Confirmation de la demande de chat vidéo.",
         sender=current_app.config['MAIL_DEFAULT_SENDER'],
-        recipients=[request.email]
+        recipients=[chat.email]
     )
     msg.body = f"""
     
-            Bonjour M. / Mme {request.lastname},
+            Bonjour,
+            
+            Vous avez sollicité une demande de chat pour l'entreprise : {chat.enterprise_name}.
                
-            nous vous confirmons la bonne réception de votre demande de visio
-            et nous vous répondrons dans les plus brefs délais
-            afin de valider votre rendez-vous.
+            Nous accusons bonen réception de votre demande.
+            Nous vous répondrons dans les plus brefs délais afin de valider votre rendez-vous.
+               
                
             Cordialement,
             L'équipe de SethiarWorks.
@@ -192,7 +205,7 @@ def send_confirmation_request_reception(request):
 
 
 # Méthode envoyant un mail à l'administrateur du site s'il y a une demande de chat vidéo.
-def send_request_admin(request, request_content):
+def send_request_admin(chat):
     """
     Fonction qui envoie un mail pour informer l'administration d'une requête de chat vidéo.
 
@@ -208,16 +221,17 @@ def send_request_admin(request, request_content):
                
             Bonjour Sethiar,
                
-            M. / Mme {request.lastname} souhaite avoir un chat vidéo avec vous.
+            l'entreprise {chat.enterprise_name} souhaite avoir un chat vidéo avec vous.
             Voici sa requête :
-            {request_content}
+            {chat.request_content}
+               
                
             Bon courage Mec.
             """
 
 
 # Fonction envoyant un mail à l'utilisateur en générant le lien de connexion au chat vidéo.
-def send_mail_validate_request(email, request, chat_link):
+def send_mail_validate_request(chat, chat_link):
     """
     Fonction qui envoie un mail pour informer de la validation de la requête par l'administrateur.
     
@@ -229,18 +243,19 @@ def send_mail_validate_request(email, request, chat_link):
     msg = Message(
         "Validation de la requête de chat vidéo.",
         sender=current_app.config['MAIL_DEFAULT_SENDER'],
-        recipients=[email]
+        recipients=[chat.email]
     )
     msg.body = f"""
     
-            Bonjour M. / Mme {request.lastname},
+            Bonjour {chat.enterprise_name}.
                
             L'équipe de SethiarWorks a accepté votre requête de chat vidéo.
-            Le rendez-vous est prévu le {request.date_rdv} à {request.heure}.
+            Le rendez-vous est prévu le {chat.date_rdv} à {chat.heure}.
                
             Voici le lien de connexion: {chat_link}
             Nous vous demandons de cliquer sur ce lien quelques minutes
             avant le rendez-vous afin d'être prêt pour le chat vidéo.
+               
                
             Cordialement,
             L'équipe de SethiarWorks.
@@ -249,7 +264,7 @@ def send_mail_validate_request(email, request, chat_link):
 
 
 # Méthode qui envoie un mail de refus de la requête de chat vidéo.
-def send_mail_refusal_request(request):
+def send_mail_refusal_request(chat):
     """
     Fonction qui envoie un mail pour informer du refus de la requête par l'administrateur.
 
@@ -258,11 +273,11 @@ def send_mail_refusal_request(request):
     msg = Message(
         "Refus de la requête de chat vidéo.",
         sender=current_app.config['MAIL_DEFAULT_SENDER'],
-        recipients=[request.email]
+        recipients=[chat.email]
     )
     msg.body = f"""
             
-            Bonjour M. / Mme {request.lastname},
+            Bonjour {chat.enterprise_name},
             
             L'équipe de SethiarWorks est dans l'impossibilité de valider votre rendez-vous.
             Afin de renouveler votre demande, nous vous prions de bien vouloir
@@ -270,7 +285,8 @@ def send_mail_refusal_request(request):
             
             sethiarworks@gmail.com
             
-            Nous pourrons alors convenir d'une rendez-vous de manière plus précise.
+            Nous pourrons alors convenir d'un rendez-vous de manière plus précise.
+            
             
             Cordialement,
             L'équipe de SethiarWorks.
@@ -297,16 +313,16 @@ def send_mail_validate_demand(devis):
                
             Nous avons bien reçu votre demande de devis et nous y répondrons sous une semaine.
                
-            Afin de mieux cerner votre beosin, je vous proposerai, - une fois le devis validé -
+            Afin de mieux cerner votre besoin, je vous proposerai, - une fois le devis validé -
             un entretien téléphonique qui permettra de cerner plus concrètement votre projet.
                
             À l'issue de notre échange, je serai alors apte à vous transmettre le temps nécessaire
             à la réalisation de votre projet, ainsi que le budget qu'il nécessitera.
                
-            Vous disposerez alors d'une période de réflexion pour me donner votre réponse. Dans le cas où notre
-            partenariat vous intéresserait, 
-            nous commencerons, dès votre accord, la rédaction du cahier des charges de votre projet et 
-            vous recevrez notre contrat dans les trois jours suivant notre accord.
+            Vous disposerez alors d'une période de réflexion pour me donner votre réponse. 
+            
+            Dans le cas où notre partenariat vous intéresserait, nous commencerons, dès votre accord, 
+            la rédaction du cahier des charges de votre projet et vous recevrez notre contrat dans les trois jours suivant la validation.
                
                
             Entreprise : {devis.enterprise_name}
@@ -317,6 +333,7 @@ def send_mail_validate_demand(devis):
             Type de projet : {', ' .join(devis.project_type)}
             Contenu :
                 {devis.devis_content}
+               
                
             Cordialement,
             L'équipe de SethiarWorks. 
@@ -336,11 +353,12 @@ def send_mail_inform_demand():
         recipients=['sethiarworks@gmail.com']
     )
     msg.body = f"""
-            Bonjour Nono,
+            Salut Sethiar,
                
             Nous avons reçu une demande de devis.
                
             Veuillez vous connecter à votre backend afin de vous informer de la demande de devis.
+               
                
             Cordialement,
             L'équipe de SethiarWorks.
@@ -366,7 +384,8 @@ def mail_reply_devis_validate(devis):
         
             Nous avons bien reçu votre demande de devis et nous y répondons favorablement.
             Afin de pouvoir nous entretenir de manière plus efficace,
-            je vous contacterai sous trois jours afin de fixer avec vous d'un entretien téléphonique.
+            Nous vous contacterons sous trois jours afin de fixer un entretien téléphonique avec vous.
+        
         
             Cordialement,
             L'équipe de SethiarWorks.
@@ -391,6 +410,7 @@ def mail_reply_devis_reject(devis):
             
             Nous avons bien reçu votre demande de devis mais nous ne pouvons pas y répondre favorablement
             pour le moment.
+            
             Nous vous remercions pour votre offre ainsi que pour votre confiance.
             
             Nous vous prions de nous excuser pour la gêne occasionnée et nous vous envoyons
@@ -398,7 +418,10 @@ def mail_reply_devis_reject(devis):
             
             N'hésitez à nous recontacter si vous aviez un quelconque besoin dans les mois à venir.
             
+            
             Cordialement,
             L'équipe de SethiarWorks.
             """
     current_app.extensions['mail'].send(msg)
+    
+    
