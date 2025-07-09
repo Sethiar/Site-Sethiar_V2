@@ -126,21 +126,18 @@ def send_request():
             db.session.add(new_request)
             db.session.commit()
 
-            # Envoi du mail à l'utilisateur.
-            send_confirmation_request_reception(new_request.email)
-
-            # Envoi du mail à l'administrateur avec le fichier en pièce jointe (si fichier joint).
-            send_request_admin(admin, request_content=request_content)
-
             flash("Demande effectuée avec succès.", "success")
 
         except Exception as e:
             db.session.rollback()
             flash(f"Erreur lors de l'enregistrement de la demande: {str(e)}", "danger")
+
+        # Envoi du mail à l'utilisateur.
+        send_confirmation_request_reception(new_request.email, new_request.enterprise_name)
+
+        # Envoi du mail à l'administrateur.
+        send_request_admin(new_request.enterprise_name, new_request.request_content)     
         
-        finally:
-            db.session.close()
-             
         return redirect(url_for('landing_page'))
     
     # En cas d'erreur de validation.

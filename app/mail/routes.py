@@ -9,6 +9,10 @@ from flask import current_app, redirect, url_for, flash
 
 from app.Models.user import User
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Fonction qui envoie un mail à l'utilisateur afin de l'avertir du succès de son inscription.
 @mail_bp.route('envoi-pour-confirmer-inscription/<string:email>')
@@ -59,27 +63,23 @@ def send_confirmation_email_user(email):
 
 
 # Fonction qui envoie un mail à l'administrateur afin de l'avertir d'une nouvelle inscription.
-@mail_bp.route('envoi-pour-confirmer-inscription/<string:email>')
-def send_confirmation_email_admin(email):
+@mail_bp.route('envoi-pour-confirmer-inscription/')
+def send_confirmation_email_admin():
     """
     Fonction qui envoie un mail à l'administrateur afin de l'avertir
     d'une nouvelle inscription au site de l'entreprise SethiarWorks.
 
     :param email: Email de l'utilisateur nouvellement inscrit.
     """
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        flash("Utilisateur non trouvé.", "Attention")
-        return redirect(url_for('landing_page'))
 
     # Corps du message.
     msg = Message(
         "Confirmation d'inscription",
         sender=current_app.config['MAIL_DEFAULT_SENDER'],
-        recipients=['MAIL_DEFAULT_SENDER']
+        recipients=[current_app.config['MAIL_DEFAULT_SENDER']] 
     )
     msg.body = f"""
-            Bonjour Nono,
+            Bonjour Sethiar
             Youpi !!! Une nouvelle inscription sur le site de l'entreprise SethiarWorks.
             
             
@@ -176,7 +176,7 @@ def mail_reply_comment(email, subject):
 
 
 # Méthode envoyant un mail de confirmation de la demande de chat vidéo à l'utilisateur.
-def send_confirmation_request_reception(chat):
+def send_confirmation_request_reception(email, enterprise_name):
     """
     Fonction qui envoie un mail de confirmation à l'utilisateur de la bonne réception de sa requête de chat vidéo.
 
@@ -186,15 +186,15 @@ def send_confirmation_request_reception(chat):
     msg = Message(
         "Confirmation de la demande de chat vidéo.",
         sender=current_app.config['MAIL_DEFAULT_SENDER'],
-        recipients=[chat.email]
+        recipients=[email]
     )
     msg.body = f"""
     
             Bonjour,
             
-            Vous avez sollicité une demande de chat pour l'entreprise : {chat.enterprise_name}.
+            Vous avez sollicité une demande de chat pour l'entreprise : {enterprise_name}.
                
-            Nous accusons bonen réception de votre demande.
+            Nous accusons bonne réception de votre demande.
             Nous vous répondrons dans les plus brefs délais afin de valider votre rendez-vous.
                
                
@@ -205,7 +205,7 @@ def send_confirmation_request_reception(chat):
 
 
 # Méthode envoyant un mail à l'administrateur du site s'il y a une demande de chat vidéo.
-def send_request_admin(chat):
+def send_request_admin(enterprise_name, request_content):
     """
     Fonction qui envoie un mail pour informer l'administration d'une requête de chat vidéo.
 
@@ -215,20 +215,21 @@ def send_request_admin(chat):
     msg = Message(
         "Demande de chat vidéo.",
         sender=current_app.config['MAIL_DEFAULT_SENDER'],
-        recipients=['sethiarworks@gmail.com']
+        recipients=[current_app.config['MAIL_DEFAULT_SENDER']]
     )
     msg.body = f"""
                
             Bonjour Sethiar,
                
-            l'entreprise {chat.enterprise_name} souhaite avoir un chat vidéo avec vous.
+            l'entreprise {enterprise_name} souhaite avoir un chat vidéo avec vous.
             Voici sa requête :
-            {chat.request_content}
+            {request_content}
                
                
             Bon courage Mec.
             """
-
+    current_app.extensions['mail'].send(msg)
+    
 
 # Fonction envoyant un mail à l'utilisateur en générant le lien de connexion au chat vidéo.
 def send_mail_validate_request(chat, chat_link):

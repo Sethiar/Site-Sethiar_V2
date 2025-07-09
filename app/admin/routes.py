@@ -28,14 +28,15 @@ from app.Models.devis_request import DevisRequest
 from app.Models.comment_customer import CustomerComment
 
 from app.Models.subject_comment import SubjectComment
-from app.forms.subject_comment import NewSubjectCommentForm, SuppressSubject
 
+from app.forms.subject_comment import NewSubjectCommentForm, SuppressSubject
 from app.forms.form_comment import SuppressCommentForm
 from app.forms.user_registration import UserRecording
 
 from app.forms.chat_request import ChatRequestForm, UserLink
 from app.forms.devis_request import DevisRequestForm
 
+from app.mail.routes import send_confirmation_email_admin, send_confirmation_email_user
 
 from app.decorators import admin_required
 
@@ -542,13 +543,16 @@ def user_recording():
             db.session.add(new_user)
             db.session.commit()
             flash("Inscription réussie! Vous pouvez maintenant vous connecter.")
-            return redirect(url_for("mail.send_confirmation_email_user", email=email))
         
         except Exception as e:
             
             db.session.rollback()
             flash(f"Erreur lors de l'enregistrement de l'utilisateur: {str(e)}", "error")
         
-        
+        # Envoi du mail de confirmation à l'administrateur.
+        send_confirmation_email_admin()
+        # Envoi du mail de confirmation à l'utilisateur.
+        send_confirmation_email_user(new_user.email)
     return render_template("admin/backend.html", formuser=formuser)
+
 

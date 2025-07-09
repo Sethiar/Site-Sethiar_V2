@@ -25,6 +25,7 @@ class CustomerComment(BaseModel):
         subject (Comments): Relation avec la tabe de commentaires.
         user_id (int): identifiant de l'utilisateur client auteur du commentaire.
         user (User): Relation avec l'utilisateur.
+        anonymous_id (str): Identifiant de l'utilisateur anonyme, s'il n'est pas connecté.
         replies (list): Réponses associées à ce commentaire.
     """
     
@@ -44,6 +45,9 @@ class CustomerComment(BaseModel):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship('User', back_populates='customer_comments')
     
+    # Relation avec l'utilisateur anonyme.
+    anonymous_id = db.Column(db.String(36), nullable=True, default=None)
+    
     # Relation avec le classe Replysubject avec suppression en cascade.
     replies = db.relationship('CommentReply', back_populates='comment', cascade='all, delete-orphan')
     
@@ -56,7 +60,7 @@ class CustomerComment(BaseModel):
         Returns:
             str: Chaîne représentant l'objet CustomerComment.
         """
-        auteur = self.user.lastname if self.user else "AnonymousUser"
+        auteur = self.user.lastname if self.user else f"Anonyme (ID: {self.anonymous_id})"
         return f"<CustomerComment(id={self.id}, auteur='{auteur}', content='{self.comment_content[:20]}...', \
         date={self.comment_date})>"         
                  

@@ -1,6 +1,7 @@
 """
 Code permettant de définir les routes concernant les fonctions des utilisateurs du site du frontend.
 """
+import uuid 
 
 from flask import render_template, abort
 
@@ -57,6 +58,14 @@ def subject_comment(subject_id):
     Raises :
         404 error : Si aucun sujet correspondant à l'ID spécifié n'est trouvé dans la base de données.
     """
+    # Si l'utilisateur est anonyme, crée un UUID unique pour cette session
+    if not current_user.is_authenticated:
+        # Génère un UUID unique pour un utilisateur anonyme
+        user_id = str(uuid.uuid4())  
+    else:
+        # Si l'utilisateur est authentifié, utilise son ID
+        user_id = current_user.id 
+        
     # Création de l'instance des formulaires.
     formcomment = CommentForm()
     formsuppress = SuppressCommentForm()
@@ -81,6 +90,6 @@ def subject_comment(subject_id):
 
 
     return render_template("frontend/subject_comments.html", subject=subject, subject_id=subject_id,
-                               formsuppress=formsuppress, formsuppressreply=formsuppressreply,
-                               comment_subject=comment_subject, formcomment=formcomment,
-                               is_authenticated=is_authenticated)
+                           user_id=user_id, formsuppress=formsuppress, 
+                           formsuppressreply=formsuppressreply, comment_subject=comment_subject, 
+                           formcomment=formcomment, is_authenticated=is_authenticated)

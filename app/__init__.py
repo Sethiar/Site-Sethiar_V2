@@ -15,10 +15,15 @@ from itsdangerous import URLSafeTimedSerializer
 
 from flask import Flask, request, redirect, url_for, session, g
 
+from uuid import uuid4
+
 from flask_migrate import Migrate
 from flask_login import current_user
 from flask_assets import Bundle
+
 from app.Models import db
+from app.Models import shutdown_session
+
 
 from .extensions import mailing, csrf, login_manager, moment, assets
 
@@ -160,7 +165,7 @@ def create_app(config_class=Config):
     
     
     #------------------------------------------------------
-    # Déclaration des dononées secrètes.
+    # Déclaration des données secrètes.
     #------------------------------------------------------
 
     # Configuration de la clé secrète pour les sessions.
@@ -173,9 +178,18 @@ def create_app(config_class=Config):
     #-------------------------------------------------------
     
     
-    #-------------------------------------------------------    
-    # Configuration de Flask -Migrate.
+    #===============================================#
+    # Enregistrent du hook de fermeture de session  #
+    #===============================================#
+    
+    # Enregistrement du hook de fermeture de session pour la base de données.
+    app.teardown_appcontext(shutdown_session)
     #-------------------------------------------------------
+    
+    
+    #==================================#   
+    #  Configuration de Flask-Migrate  #
+    #==================================#
     
     # Initialisation de Flask-Migrate pour la gestion des migrations de la base de données.
     db.init_app(app)
@@ -194,9 +208,9 @@ def create_app(config_class=Config):
     #--------------------------------------------------------
    
    
-    #-------------------------------------------------------
-    # Configuration de Flask-Login.
-    #-------------------------------------------------------
+    #=================================#
+    #  Configuration de Flask-Login   #
+    #=================================#
     
     # Configuration de la protection CSRF.
     csrf.init_app(app)
@@ -219,12 +233,13 @@ def create_app(config_class=Config):
     login_manager.needs_refresh_message_category = "warning" 
     # Redirection vers la page de connexion
     login_manager.login_view = 'auth.login'  
+    #--------------------------------------------------------
     
     
-    #-------------------------------------------------------
-    # Fonction de chargement de l'utilisateur.
-    #-------------------------------------------------------
-    
+    #==========================================#
+    # Fonction de chargement de l'utilisateur  #
+    #==========================================#
+
     # Fonction exécutée avant chaque requête pour charger l'utilisateur connecté.
     @app.before_request
     def load_globals():
@@ -235,6 +250,15 @@ def create_app(config_class=Config):
     
         # Chargement de l'utilisateur connecté dans l'objet global g.
         g.user = current_user if current_user.is_authenticated else None
+        
+        # Si l'utilisateur n'est pas authentifié, (utilisateur anonyme),
+        if not g.user:
+            # On crée un utilisateur anonyme.
+            if 'anonymous_id' not in session:
+                # Génération d'un identifiant unique pour l'utilisateur anonyme.
+                session['anonymous_id'] = str(uuid4())
+            g.user = AnonymousUser()
+            
         # Utilisateur et / ou administrateur.
         if g.user and isinstance(g.user, Admin):
             g.admin = g.user
@@ -256,12 +280,19 @@ def create_app(config_class=Config):
         """
 
         # Retourne un User ou un Admin si trouvé.
-        return User.query.get(user_id) or Admin.query.get(user_id)
-
+        user = User.query.get(user_id) or Admin.query.get(user_id)
+        
+        if not user:
+            # Si l'utilisateur n'est pas trouvé, on crée un utilisateur anonyme.
+            user = AnonymousUser(user_id)
+        
+        return user
+    #--------------------------------------------------------
     
-    #-------------------------------------------------------
-    # Gestion des utilisateurs anonymes.
-    #-------------------------------------------------------
+    
+    #=========================================#
+    #    Gestion des utilisateurs anonymes    #
+    #=========================================#
    
     @login_manager.unauthorized_handler
     def unauthorized():
@@ -271,19 +302,26 @@ def create_app(config_class=Config):
         Cette fonction est appelée lorsque l'utilisateur n'est pas connecté et tente d'accéder à une page protégée.
         Elle redirige l'utilisateur vers la page de connexion.
         
-        return: Redirection vers la page de connexion.
+        return: Redirection vers la page de connexion ou pessage personnalisé pour les anonymes.
         """
+        # Si l'utilisateur est anonyme et essaie d'accéder à une page protégée,
+        if g.user and isinstance(g.user, AnonymousUser):
+            return redirect(url_for('landing_page'))
+        
         # Vérification de l'appel de la fonction depuis une requête AJAX.
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             # Si c'est une requête AJAX, renvoie un code d'état 401 (Non autorisé).
             return {'error': 'Unauthorized'}, 401
+        
         # Si ce n'est pas une requête AJAX, redirige vers la page de connexion.
         session['next'] = request.url
         return redirect(url_for('auth.user_connection', next=request.url))
+    #--------------------------------------------------------
     
-    #-------------------------------------------------------
-    # injection des modèles dans le contexte de l'application.    
-    #-------------------------------------------------------
+    
+    #==========================================================#
+    # Injection des modèles dans le contexte de l'application  #  
+    #==========================================================#
     @app.context_processor
     def inject_logged_in():
         """
@@ -298,9 +336,9 @@ def create_app(config_class=Config):
     #-------------------------------------------------------
     
     
-    #-------------------------------------------------------
-    # Configuration de la journalisation.
-    #-------------------------------------------------------
+    #=========================================#
+    #    Configuration de la journalisation   #
+    #=========================================#
     
     # Configuration du niveau de journalisation.
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

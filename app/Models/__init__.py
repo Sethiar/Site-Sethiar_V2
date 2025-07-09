@@ -13,3 +13,12 @@ from flask_sqlalchemy import SQLAlchemy
 # Instanciation de la base de données SQLAlchemy.
 db = SQLAlchemy()
 
+# Fonction pour fermer la session de la base de données.
+def shutdown_session(exception=None):
+    """
+    Fonction pour fermer la session de la base de données.
+    Elle est appelée lors de l'arrêt de l'application ou en cas d'exception.
+    """
+    db.session.remove()
+    logging.info("Session de la base de données fermée.")
+

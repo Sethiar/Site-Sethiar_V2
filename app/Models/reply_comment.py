@@ -24,6 +24,7 @@ class CommentReply(BaseModel):
         reply_date (datetime) : Date et heure de la réponse (par défaut, date actuelle UTC).
         comment_id (int) : Identifiant du commentaire associé à la réponse.
         user_id (int) : Identifiant de l'utilisateur ayant posté la réponse.
+        anonymous_id (str) : Identifiant de l'utilisateur anonyme.
     """
 
     __tablename__ = "comment_reply"
@@ -38,8 +39,11 @@ class CommentReply(BaseModel):
     comment = db.relationship('CustomerComment', back_populates='replies')
 
     # Relation avec la classe User.
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     user = db.relationship('User', back_populates='comment_replies')
+    
+    # Relation avec la classe Anonyme.
+    anonymous_id = db.Column(db.String(36), nullable=True)
 
     
     # Fonction qui permet de représenter l'objet en chaîne de caractères.

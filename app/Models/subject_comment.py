@@ -33,6 +33,6 @@ class SubjectComment(db.Model):
         Returns:
             str: Chaîne représentant l'objet SubjectComment.
         """
-        return f"<SubjectComment(nom='{self.name}')"
+        return f"<SubjectComment(nom='{self.name}')>"
     
     

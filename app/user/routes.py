@@ -2,6 +2,7 @@
 Code permettant de définir les routes concernant les fonctions des utilisateurs du blog comme l'enregistrement
 et l'accès aux formulaires.
 """
+import uuid
 
 from datetime import datetime
 
@@ -9,8 +10,7 @@ from app.user import user_bp
 
 from app.Models import db
 
-from markupsafe import escape
-from flask import render_template, redirect, url_for, request, flash, jsonify 
+from flask import render_template, redirect, url_for, request, flash, session
 from flask_login import login_required, current_user
 
 
@@ -28,7 +28,7 @@ from app.Models.reply_comment import CommentReply
 from app.Models.devis_request import DevisRequest
 
 from app.mail.routes import mail_reply_comment, \
-    send_mail_validate_demand, send_mail_inform_demand, send_confirmation_email_admin
+    send_mail_validate_demand, send_mail_inform_demand
 
 
 
@@ -36,7 +36,7 @@ from app.mail.routes import mail_reply_comment, \
 @user_bp.route("/profil_photo/<int:user_id>")
 def profil_photo(user_id):
     """
-    Affiche la photo de profil d'un utilisateur.
+    Affiche la photo de profil d'un utilisateur ou une photo par defualt si anonyme.
 
     :param user_id : L'identifiant de l'utilisateur.
 
@@ -47,11 +47,17 @@ def profil_photo(user_id):
         return user.profil_photo, {'Content-Type': 'image/jpeg'}
     else:
         return "No image found", 404
-    
-    
+
+
+
+# Route permettant de renvoyer la photo de profil par défaut pour les utilisateurs anonymes.
+@user_bp.route('/static/images/images_profil/default_profile_photo.png')
+def profil_photo_anonymous():
+    return url_for('static', filename='images/images_profil/default_profile_photo.png')
+
+  
 # Route permettant d'ajouter un sujet à l'espace de commentaires une fois connecté.
 @user_bp.route("/comment/ajouter-sujet", methods=['POST'])
-@login_required
 def add_subject_comment():
     """
     Permet à un utilisateur de créer un nouveau sujet pour l'espace de commentaires'.
@@ -66,15 +72,13 @@ def add_subject_comment():
 
     # Passage de la valeur booléenne d'authentification au template.
     is_authenticated = current_user.is_authenticated
-    author = current_user.enterprise_name
-
-    # Debug: Vérification du type.
-    print("Type of is_authenticated:", type(is_authenticated))
+    # Gestion des utilisateurs authentifiés et non authentifiés.
+    author = current_user.enterprise_name if is_authenticated else "Anonyme"
 
     if request.method == "POST":
         # Saisie du nom du sujet.
         nom_subject_comment = formsubjectcomment.name.data
-        subject_comment = SubjectComment(name=nom_subject_comment, author=current_user.enterprise_name)
+        subject_comment = SubjectComment(name=nom_subject_comment, author=author)
 
         # Enregistrement du sujet dans la base de données.
         db.session.add(subject_comment)
@@ -87,12 +91,11 @@ def add_subject_comment():
                            subjects=subjects, is_authenticated=is_authenticated, subject=subject_comment) + '#sujet'
 
 
-# Route permettant à un utilisateur connecté de poster un commentaire.
+# Route permettant à un utilisateur connecté ou non de poster un commentaire.
 @user_bp.route("/commentaires", methods=['POST'])
-@login_required
 def comment_enterprise():
     """
-    Permet à un utilisateur connecté de laisser un commentaire.
+    Permet à un utilisateur, connecté ou non, de laisser un commentaire.
 
     Returns :
          redirect : Redirige vers la page d'accueil après avoir laissé un commentaire.
@@ -103,11 +106,6 @@ def comment_enterprise():
     
     # Debug: Vérification du type.
     print("Type de is_authentificated:", type(is_authenticated))
-    
-    # Utilisation de current_user pour obtenir le nom de l'entreprise et l'id utilisateur.
-    user_enterprise_name = current_user.enterprise_name
-    user_id = current_user.id
-    
  
     # Récupération du contenu du commentaire.
     comment_content = request.form.get("comment_content")
@@ -127,12 +125,27 @@ def comment_enterprise():
         flash("Sujet invalide.", "error")
         return redirect(url_for("frontend.comments"))
     
+    # Si l'utilisateur est authentifié, on utilise current_user
+    if current_user.is_authenticated:
+        user_id = current_user.id
+        user_enterprise_name = current_user.enterprise_name
+        
+    else:
+        # Si l'utilisateur n'est pas authentifié, on utilise l'ID anonyme de la session.
+        user_id = None
+        # Génération d'un ID anonyme unique
+        anonymous_id = str(uuid.uuid4())
+        # Enregistrement de l'ID anonyme dans la session
+        session['anonymous_id'] = anonymous_id
+        user_enterprise_name = "Anonyme" 
+
     
     # Création d'un nouvel objet de commentaire avec les données actuelles.
     new_comment = CustomerComment(
         comment_content=comment_content,
         subject_id=subject_id,
-        user_id=current_user.id
+        user_id=current_user.id if current_user.is_authenticated else None,
+        anonymous_id=anonymous_id if not current_user.is_authenticated else None,
         )
 
     # Ajouter le nouveau commentaire à la base de données.
@@ -140,7 +153,7 @@ def comment_enterprise():
     db.session.commit()
 
     # Redirection sur la page des commentaires.
-    return redirect(url_for("frontend.comments", is_authenticated=is_authenticated, subject_id=subject_id, 
+    return redirect(url_for("frontend.subject_comment", subject_id=subject_id, 
                             user_enterprise_name=user_enterprise_name))
 
 
@@ -150,6 +163,8 @@ def comment_enterprise():
 def change_comment(id):
     """
     Permet à un utilisateur connecté de modifier son commentaire.
+    N'autorise que l'auteur du commentaire à le modifier. Mais si l'utilisateur est anonyme,
+    il ne peut modifier son commentaire.
 
     Args:
         id (int): L'id du commentaire à modifier.
@@ -160,7 +175,7 @@ def change_comment(id):
     comment = CustomerComment.query.filter_by(id=id).first_or_404()
 
     # Vérification que l'utilisateur actuel est l'auteur du commentaire.
-    if comment.user_id != current_user.id:
+    if comment.user_id != current_user.id and comment.anonymous_id != session.get('anonymous_id'):
         flash('Vous n\'êtes pas autorisé à modifier ce commentaire.')
         return redirect(url_for('frontend.forum_subject'))
 
@@ -183,6 +198,8 @@ def change_comment(id):
 def delete_comment(id):
     """
     Permet à un utilisateur connecté de supprimer son commentaire.
+    N'autorise que l'auteur du commentaire à le supprimer. Mais si l'utilisateur est anonyme,
+    il ne peut supprimer son commentaire.
 
     Args:
         id (int): L'id du commentaire à supprimer.
@@ -194,7 +211,7 @@ def delete_comment(id):
     comment = CustomerComment.query.filter_by(id=id).first_or_404()
 
     # Vérification que l'utilisateur actuel est l'auteur du commentaire.
-    if comment.user_id != current_user.id:
+    if comment.user_id != current_user.id and comment.anonymous_id != session.get('anonymous_id'):
         flash('Vous n\'êtes pas autorisé à supprimer ce commentaire.')
         return redirect(url_for('frontend.comments', comment=comment))
 
@@ -204,12 +221,11 @@ def delete_comment(id):
     return redirect(url_for('frontend.comments', comment=comment))
 
 
-# Route permettant à un utilisateur connecté de répondre à un commentaire une fois connecté.
+# Route permettant à un utilisateur connecté ou non de répondre à un commentaire une fois connecté.
 @user_bp.route("/comment<int:comment_id>/reply_subject", methods=['GET', 'POST'])
-@login_required
 def comment_replies(comment_id):
     """
-    Permet à un utilisateur connecté de répondre à un commentaire.
+    Permet à un utilisateur connecté ou non de répondre à un commentaire.
 
     Args :
         comment_id (int) : L'identifiant du commentaire auquel répondre.
@@ -230,26 +246,38 @@ def comment_replies(comment_id):
         return redirect(url_for("frontend.comments"))
 
     if formreply.validate_on_submit():
-        # Obtention de l'utilisateur actuel à partir du nom de l'entreprise.
-        user = current_user
-
-        if not user.enterprise_name:
-            flash("Utilisateur non trouvé.", "error")
-            return redirect(url_for("functional.connexion_requise"))
+        # Obtention de l'utilisateur actuel anonyme ou non à partir du nom de l'entreprise.
+        user = current_user if current_user.is_authenticated else None
+        anonymous_id = session.get('anonymous_id') if not current_user.is_authenticated else None
 
         # Obtenir le contenu du commentaire à partir de la requête POST.
         reply_content = formreply.reply_content.data
+        
+        # Si l'utilisateur est anonyme et qu'il n'a pas d'ID dans la session, générer un ID par défaut
+        if not user and not anonymous_id:
+            anonymous_id = str(uuid.uuid4())  # Générer un ID unique pour cet utilisateur anonyme
+            session['anonymous_id'] = anonymous_id  # Stocker dans la session pour les prochaines requêtes
 
 
         # Créer une nouvelle réponse au commentaire.
-        new_reply = CommentReply(reply_content=reply_content, user_id=user.id, comment_id=comment_id)
+        new_reply = CommentReply(
+            reply_content=reply_content, 
+            user_id=user.id if user else None,
+            anonymous_id=anonymous_id,
+            comment_id=comment_id
+            )
 
         # Ajouter le nouveau commentaire à la table de données.
         db.session.add(new_reply)
         db.session.commit()
 
         flash("La réponse au commentaire a bien été enregistrée.", "success")
-        mail_reply_comment(comment.user.email, comment.subject)
+        
+        # Envoi d'email uniquement si l'auteur du commentaire est authentifié et possède une adresse email
+        if comment.user_id and comment.user.email:
+            mail_reply_comment(comment.user.email, comment.subject)
+        else:
+            flash("Vous ne recevrez pas de notification par email puisque vous êtes anonyme.", "info")
 
         # Redirection vers la page du sujet du forum
         return redirect(url_for("frontend.comments", comment_id=comment_id))
