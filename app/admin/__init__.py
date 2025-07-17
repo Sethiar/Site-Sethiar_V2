@@ -8,4 +8,7 @@ admin_bp = Blueprint('admin', __name__)
 
 # Import des routes pour le blueprint admin
 from app.admin import routes  
+from app.admin import anonymous_comment_routes
+from app.admin import anonymous_reply_routes
+from app.admin import anonymous_subject_routes
 

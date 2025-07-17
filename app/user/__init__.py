@@ -6,4 +6,6 @@ from flask import Blueprint
 
 user_bp = Blueprint('user', __name__)
 
-from app.user import routes  # Import des routes pour le blueprint user
+
+# Import des routes pour le blueprint user
+from app.user import routes  

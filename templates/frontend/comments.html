@@ -60,34 +60,14 @@
             </div>
 
             <div class="space-form"></div>
-            <!-- Annonce de connexion pour commenter -->
-            {% if not logged_in %}
-
-            <hr class="politique-divider">
-            
-            <div class="annonce-comment">
-                <p>
-                    Pour participer aux commentaires, vous devez être connecté-e.
-                </p>
-
-                <div class="space-form"></div>
-            
-                <div class="btn-annonce">
-                    <a class="btn-primary" href="{{ url_for('auth.user_connection') }}">Se connecter</a>  
-                </div>    
-            </div>
-            {% endif %}
-
-            <div class="space-form"></div>
             
             <!-- Séparation -->
             <hr class="politique-divider">
 
-            <!-- conteneur d'ajout de catégories -->
+            <!-- Conteneur d'ajout de catégories -->
             <div class="form-container">
-
-                <!-- formulaire d'ajout de sujet -->
-                <form id="addSubjectForm" method="POST" action="{{ url_for('user.add_subject_comment') }}">
+                <!-- Formulaire d'ajout de sujet pour connecté -->
+                <form method="POST" action="{{ url_for('user.add_subject_comment') }}">
 
                     <!-- Token CSRF pour la sécurité -->
                     {{ formsubjectcomment.csrf_token }}
@@ -99,14 +79,14 @@
                             {{ formsubjectcomment.name(size=20) }}
                         </div>
                     
-                         <!-- Conteneur du bouton de soumission au sujet -->
+                        <!-- Conteneur du bouton de soumission au sujet -->
                         <div class="container-btn-comment">
-                            <img src="../../static/icons/plus_1.svg" class="btn-icon" 
-                            onclick="document.getElementById('addSubjectForm').submit();" 
-                            alt="Envoyer">  
+                            <button type="submit" class="btn-icon">
+                                <img src="{{ url_for('static', filename='icons/plus_1.svg') }}" alt="Envoyer">            
+                            </button>  
                         </div>
                     </div>
-                </form>
+                </form>  
             </div>
 
             <div class="space2"></div>
@@ -125,14 +105,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for subject in subjects %}
-                    <tr>
-                        <td class="subject-name">{{ subject.name }}</td>
-                        <td class="subject-author">{{ subject.author }}</td>
-                        <td class="subject-btn"><a href="{{ url_for('frontend.subject_comment', subject_id=subject.id) }}"
-                               class="btn-secondary">Voir</a></td>
-                    </tr>
-                    {% endfor %}
+                        {% for subject in subjects %}
+                        <tr>
+                            <td>{{ subject.name }}</td>
+                            <td>{{ subject.author_display }}</td>
+                            <td>
+                                <a href="{{ url_for('frontend.subject_comment', subject_id=subject.id) }}"
+                                    class="btn-secondary">
+                                        Voir
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -142,21 +126,5 @@
 {% endblock %}
 
 {% block footer_content %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('addSubjectForm');
-
-    // Variable JavaScript indiquant si l'utilisateur est connecté
-    var isAuthenticated = {is_authenticated, tojson };
-
-    form.addEventListener('submit', function(event) {
-        if (!isAuthenticated) {
-            // Afficher une alerte si l'utilisateur n'est pas connecté
-            alert("Vous devez être connecté pour ajouter un sujet.");
-            event.preventDefault(); // Empêche la soumission du formulaire
-            }
-    });
-});
-</script>
 
 {% endblock %}

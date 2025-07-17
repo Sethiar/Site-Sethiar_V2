@@ -25,9 +25,9 @@ from app.Models.chat_request import ChatRequest, ChatRequestStatus
 
 from app.Models.devis_request import DevisRequest
 
-from app.Models.comment_customer import CustomerComment
+from app.Models.comment import Comment
 
-from app.Models.subject_comment import SubjectComment
+from app.Models.subject import Subject
 
 from app.forms.subject_comment import NewSubjectCommentForm, SuppressSubject
 from app.forms.form_comment import SuppressCommentForm
@@ -146,7 +146,7 @@ def suppress_user(id):
     return redirect(url_for("admin.users_list"))
 
 
-# Route permettant d'afficher la liste des sujets ans le backend.
+# Route permettant d'afficher la liste des sujets dans le backend.
 @admin_bp.route('/liste-sujets')
 @admin_required
 def list_subjects_admin():
@@ -172,7 +172,7 @@ def list_subjects_admin():
     formsubjectcomment = NewSubjectCommentForm()
     
     # Récupération des sujets du forum.
-    subjects = db.session.query(SubjectComment.id, SubjectComment.name, SubjectComment.author).all()
+    subjects = db.session.query(Subject.id, Subject.name, Subject.author).all()
 
     # Création d'un dictionnaire permettant de récupérer les informations des sujets.
     subject_data = [
@@ -209,14 +209,14 @@ def add_subject_admin():
     if formsubjectcomment.validate_on_submit():
         # Saisie du sujet.
         name_subject = formsubjectcomment.name.data
-        subject_comment = SubjectComment(name=name_subject, author='Sethiar')
+        subject_comment = Subject(name=name_subject, author='Sethiar')
         
         # Enregistrement dans la base de données.
         db.session.add(subject_comment)
         db.session.commit()
     
     # Récupération de tous les sujets de la base de données.
-    subjects = db.session.query(SubjectComment.id, SubjectComment.name, SubjectComment.author).all()
+    subjects = db.session.query(Subject.id, Subject.name, Subject.author).all()
     
     subject_data = [
         {'id': subject_id, 'name': name, 'author': author}
@@ -249,7 +249,7 @@ def suppress_subject(id):
         Response: Redirection vers la page du backend qui affiche les sujet 'admin/subjects_list.html'.    
     """
     # Récupération de tous les sujets de la table de données.
-    subject = SubjectComment.query.get_or_404(id)
+    subject = Subject.query.get_or_404(id)
     
     if subject:
         # Suppression du sujet.
@@ -309,7 +309,7 @@ def list_comments_customer():
     # Pour chaque utilisateur, récupération de tous les commentaires associés.
     for user in users:
         # Récupération de tous les commentaires associés à l'utilisateur.
-        comments = CustomerComment.query.filter_by(user_id=user.id).all()
+        comments = Comment.query.filter_by(author_user_id=user.id).all()
         if comments:
             user_comment[user] = []
             for comment in comments:
@@ -341,7 +341,7 @@ def suppress_comment(id):
 
     """
     # Récupération du commentaire du sujet à supprimer.
-    comment = CustomerComment.query.get(id)
+    comment = Comment.query.get(id)
 
     if comment:
         # Suppression du commentaire.

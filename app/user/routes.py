@@ -21,10 +21,17 @@ from app.forms.form_comment import CommentForm, ChangeCommentForm, SuppressComme
 from app.forms.subject_comment import NewSubjectCommentForm
 
 from app.Models.user import User
-from app.Models.subject_comment import SubjectComment
-from app.Models.comment_customer import CustomerComment
-from app.Models.reply_comment import CommentReply
+from app.Models.subject import Subject, SubjectStatus
+from app.Models.comment import Comment
+from app.Models.reply_comment import ReplyComment
 
+from app.Models.comment import Comment, CommentStatus
+
+from app.Models.reply_anonymous_comment import ReplyAnonymousComment, ReplyAnonymousCommentStatus
+
+from app.Models.reply_user_anonyme_comment import ReplyUserAnonymousComment
+
+from app.Models.reply_anonymous_user_comment import ReplyAnonymousUserComment, ReplyAnonymousUserCommentStatus
 from app.Models.devis_request import DevisRequest
 
 from app.mail.routes import mail_reply_comment, \
@@ -55,41 +62,42 @@ def profil_photo(user_id):
 def profil_photo_anonymous():
     return url_for('static', filename='images/images_profil/default_profile_photo.png')
 
-  
-# Route permettant d'ajouter un sujet à l'espace de commentaires une fois connecté.
+
+# route qui va permettre à un sujet connecté ou non de créer un sujet.
 @user_bp.route("/comment/ajouter-sujet", methods=['POST'])
 def add_subject_comment():
     """
-    Permet à un utilisateur de créer un nouveau sujet pour l'espace de commentaires'.
-
-    Returns :
-        redirect : Redirige vers la page d'accueil des commentaires après avoir ajouté le sujet.
+    Permet à un utilisateur (connecté ou non) de créer un sujet.
+    
+        - Connecté --> Création du sujet dans l'espace de commentaire.
+        - Anonyme --> En attende de validation par l'admin.
     """
+    # Instanciation du formulaire.
+    form = NewSubjectCommentForm()
 
-    # Création de l'instance du formulaire.
-    formsubjectcomment = NewSubjectCommentForm()
-    formcomment = CommentForm()
+    if form.validate_on_submit():
+        # Utilise la méthode statique propre du modèle Subject
+        subject = Subject.create(
+            name=form.name.data,
+            user=current_user if current_user.is_authenticated else None
+        )
+        
+        # Ajout dans la base de données.
+        db.session.add(subject)
+        try:
+            # Enregistrement dans la base de données.
+            db.session.commit()
+            if subject.is_anonymous:
+                flash("Votre sujet a été soumis et est en attente de validation.", "info")
+            else:
+                flash("Sujet créé avec succès.", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash("Une erreur est survenue lors de l'ajout du sujet.", "error")
+            print("Erreur lors de l'ajout du sujet :", e)
 
-    # Passage de la valeur booléenne d'authentification au template.
-    is_authenticated = current_user.is_authenticated
-    # Gestion des utilisateurs authentifiés et non authentifiés.
-    author = current_user.enterprise_name if is_authenticated else "Anonyme"
-
-    if request.method == "POST":
-        # Saisie du nom du sujet.
-        nom_subject_comment = formsubjectcomment.name.data
-        subject_comment = SubjectComment(name=nom_subject_comment, author=author)
-
-        # Enregistrement du sujet dans la base de données.
-        db.session.add(subject_comment)
-        db.session.commit()
-
-    # Récupération de tous les sujets après l'ajout du nouveau sujet.
-    subjects = SubjectComment.query.all()
-
-    return render_template("frontend/subject_comments.html", formsubjectcomment=formsubjectcomment, formcomment=formcomment,
-                           subjects=subjects, is_authenticated=is_authenticated, subject=subject_comment) + '#sujet'
-
+    return redirect(url_for('frontend.comments'))         
+    
 
 # Route permettant à un utilisateur connecté ou non de poster un commentaire.
 @user_bp.route("/commentaires", methods=['POST'])
@@ -100,24 +108,14 @@ def comment_enterprise():
     Returns :
          redirect : Redirige vers la page d'accueil après avoir laissé un commentaire.
     """
-    
-    # Passage de la valeur booléenne d'authentification au template.
-    is_authenticated = current_user.is_authenticated
-    
-    # Debug: Vérification du type.
-    print("Type de is_authentificated:", type(is_authenticated))
- 
     # Récupération du contenu du commentaire.
     comment_content = request.form.get("comment_content")
     subject_id = request.form.get("subject_id")
 
-    
     # Vérification que le contenu du commentaire existent.
     if not comment_content or not subject_id:
         flash("Le contenu du commentaire ou le sujet est manquant.", "error")
-        
-        # Redirige vers la page des commentaires.
-        return redirect(url_for("frontend.comments"))  
+        return redirect(url_for("frontend.comments"))
     
     try:
         subject_id = int(subject_id)
@@ -125,36 +123,41 @@ def comment_enterprise():
         flash("Sujet invalide.", "error")
         return redirect(url_for("frontend.comments"))
     
-    # Si l'utilisateur est authentifié, on utilise current_user
-    if current_user.is_authenticated:
-        user_id = current_user.id
-        user_enterprise_name = current_user.enterprise_name
-        
-    else:
-        # Si l'utilisateur n'est pas authentifié, on utilise l'ID anonyme de la session.
-        user_id = None
-        # Génération d'un ID anonyme unique
-        anonymous_id = str(uuid.uuid4())
-        # Enregistrement de l'ID anonyme dans la session
-        session['anonymous_id'] = anonymous_id
-        user_enterprise_name = "Anonyme" 
+    # Recherche du sujet dans la table Subject.
+    subject = Subject.query.get(subject_id)
+    if not subject or subject.status != SubjectStatus.VALIDE:
+        flash("Sujet introuvable ou non validé.", "error")
+        return redirect(url_for("frontend.comments"))
 
-    
-    # Création d'un nouvel objet de commentaire avec les données actuelles.
-    new_comment = CustomerComment(
+    # Gestion de l'anonymat
+    anonymous_id = None
+    if not current_user.is_authenticated:
+        if "anonymous_id" not in session:
+            session["anonymous_id"] = str(uuid.uuid4())
+        anonymous_id = session["anonymous_id"]
+
+    # Création du commentaire
+    new_comment = Comment.create(
         comment_content=comment_content,
-        subject_id=subject_id,
-        user_id=current_user.id if current_user.is_authenticated else None,
-        anonymous_id=anonymous_id if not current_user.is_authenticated else None,
-        )
-
-    # Ajouter le nouveau commentaire à la base de données.
+        subject=subject,
+        user=current_user if current_user.is_authenticated else None,
+        anonymous_id=anonymous_id
+    )
+    
+    # Ajout dans la base de données.
     db.session.add(new_comment)
-    db.session.commit()
+    try:
+        # Enregistrement de la base de données.
+        db.session.commit()
+        flash("Commentaire soumis avec succès.", "success" if not new_comment.is_anonymous else "info")
+    except Exception as e:
+        db.session.rollback()
+        print("Erreur lors de l'enregistrement du commentaire :", e)
+        flash("Une erreur est survenue. Veuillez réessayer.", "error")
+        return redirect(url_for("frontend.comments"))
 
-    # Redirection sur la page des commentaires.
-    return redirect(url_for("frontend.subject_comment", subject_id=subject_id, 
-                            user_enterprise_name=user_enterprise_name))
+    return redirect(url_for("frontend.subject_comment", subject_id=subject_id,
+                            user_enterprise_name=new_comment.author_enterprise_name))
 
 
 # Route permettant à un utilisateur connecté de modifier son commentaire.
@@ -172,7 +175,7 @@ def change_comment(id):
     Returns:
         redirect: Redirige vers la page des commentaires.
     """
-    comment = CustomerComment.query.filter_by(id=id).first_or_404()
+    comment = Comment.query.filter_by(id=id).first_or_404()
 
     # Vérification que l'utilisateur actuel est l'auteur du commentaire.
     if comment.user_id != current_user.id and comment.anonymous_id != session.get('anonymous_id'):
@@ -208,7 +211,7 @@ def delete_comment(id):
         redirect: Redirige vers la page des commentaires.
     """
     formsuppress = SuppressCommentForm()
-    comment = CustomerComment.query.filter_by(id=id).first_or_404()
+    comment = Comment.query.filter_by(id=id).first_or_404()
 
     # Vérification que l'utilisateur actuel est l'auteur du commentaire.
     if comment.user_id != current_user.id and comment.anonymous_id != session.get('anonymous_id'):
@@ -221,68 +224,87 @@ def delete_comment(id):
     return redirect(url_for('frontend.comments', comment=comment))
 
 
-# Route permettant à un utilisateur connecté ou non de répondre à un commentaire une fois connecté.
+# Route permettant à un utilisateur connecté ou non de répondre à un commentaire authentifié ou non.
 @user_bp.route("/comment<int:comment_id>/reply_subject", methods=['GET', 'POST'])
 def comment_replies(comment_id):
     """
     Permet à un utilisateur connecté ou non de répondre à un commentaire.
-
-    Args :
-        comment_id (int) : L'identifiant du commentaire auquel répondre.
-
-    Returns :
-        redirect ou render_template : Redirige vers la page ddes commentaires après avoir ajouté une réponse,
-                                      ou affiche le formulaire de réponse si la méthode est GET.
     """
-   
-    # Création de l'instance du formulaire.
+    # Instanciation du formulaire.
     formreply = ReplyCommentForm()
+    # Récupération de tous les commentaires.
+    comment = Comment.query.get_or_404(comment_id)
+    
+    # Détermination du type de commentaire.
+    comment_type = "anonymous" if comment.author_user_id is None else "customer"
+    subject_id = comment.subject_id
 
-    # Récupérer le commentaire par son id.
-    comment = CustomerComment.query.get(comment_id)
-
-    if not comment:
-        flash("Le commentaire n'a pas été trouvé.", "error")
-        return redirect(url_for("frontend.comments"))
 
     if formreply.validate_on_submit():
-        # Obtention de l'utilisateur actuel anonyme ou non à partir du nom de l'entreprise.
-        user = current_user if current_user.is_authenticated else None
-        anonymous_id = session.get('anonymous_id') if not current_user.is_authenticated else None
 
-        # Obtenir le contenu du commentaire à partir de la requête POST.
         reply_content = formreply.reply_content.data
+        anonymous_id = session.get("anonymous_id")
         
-        # Si l'utilisateur est anonyme et qu'il n'a pas d'ID dans la session, générer un ID par défaut
-        if not user and not anonymous_id:
-            anonymous_id = str(uuid.uuid4())  # Générer un ID unique pour cet utilisateur anonyme
-            session['anonymous_id'] = anonymous_id  # Stocker dans la session pour les prochaines requêtes
-
-
-        # Créer une nouvelle réponse au commentaire.
-        new_reply = CommentReply(
-            reply_content=reply_content, 
-            user_id=user.id if user else None,
-            anonymous_id=anonymous_id,
-            comment_id=comment_id
-            )
-
-        # Ajouter le nouveau commentaire à la table de données.
-        db.session.add(new_reply)
-        db.session.commit()
-
-        flash("La réponse au commentaire a bien été enregistrée.", "success")
-        
-        # Envoi d'email uniquement si l'auteur du commentaire est authentifié et possède une adresse email
-        if comment.user_id and comment.user.email:
-            mail_reply_comment(comment.user.email, comment.subject)
+        # Cas n°1 : utilisateur connecté.
+        if current_user.is_authenticated:
+            if comment_type == "customer":
+                # Authentifié --> Authentifié.
+                new_reply = ReplyComment(
+                    reply_content=reply_content,
+                    user_id=current_user.id,
+                    comment_id=comment.id
+                )    
+            else:
+                # Authentifié --> Anonyme.
+                new_reply = ReplyUserAnonymousComment(
+                    reply_content=reply_content,
+                    user_id=current_user.id,
+                    comment_id=comment.id,
+                )    
+                
+        # Cas n°2 : Utilisateur anonyme.
         else:
-            flash("Vous ne recevrez pas de notification par email puisque vous êtes anonyme.", "info")
+            if not anonymous_id:
+                # Génération d'un id au cas où.
+                anonymous_id = str(uuid.uuid4())
+                session["anonymous_id"] = anonymous_id
+                
+            if comment_type == "customer":
+                # Anonyme --> Authentifié.
+                new_reply = ReplyAnonymousUserComment(
+                    reply_content = reply_content,
+                    anonymous_id=anonymous_id,
+                    comment_id=comment.id,
+                    status=ReplyAnonymousUserCommentStatus.EN_ATTENTE
+                )
+            # Réponse anonyme.
+            else:
+                # Anonyme --> Anonyme
+                new_reply = ReplyAnonymousComment(
+                    reply_content=reply_content,
+                    anonymous_id=anonymous_id,
+                    comment_id=comment.id,
+                    status=ReplyAnonymousCommentStatus.EN_ATTENTE                    
+                )
+                   
+        # Ajout dans la base de données.
+        db.session.add(new_reply)
+        # Enregistrement dans la base de données.
+        db.session.commit()
+        flash("La réponse au commentaire a bien été enregistrée.", "success")
 
-        # Redirection vers la page du sujet du forum
-        return redirect(url_for("frontend.comments", comment_id=comment_id))
 
-    # Si le formulaire n'est pas validé ou en méthode GET, affichez le formulaire de réponse
+        # Notification par e-mail si nécessaire
+        if (
+            current_user.is_authenticated
+            and comment_type == "customer"
+            and comment.author_user and comment.author_user.email
+        ):
+            mail_reply_comment(comment.author_user.email, comment.subject)
+
+        flash("La réponse a bien été enregistrée.", "success")
+        return redirect(url_for("frontend.subject_comment", subject_id=subject_id))
+
     return render_template("user/reply_comment.html", formreply=formreply, comment=comment)
 
 
@@ -299,7 +321,7 @@ def change_reply(id):
     Returns:
         redirect: Redirige vers la page du sujet du forum après modification de la réponse
     """
-    reply = CommentReply.query.filter_by(id=id).first_or_404()
+    reply = ReplyComment.query.filter_by(id=id).first_or_404()
 
     # Vérification que l'utilisateur actuel est l'auteur du commentaire
     if reply.user_id != current_user.id:
@@ -335,7 +357,7 @@ def delete_reply(id):
         redirect: Redirige vers la page du sujet du forum après suppression de la réponse.
     """
     formsuppressreply = SuppressCommentReply()
-    reply = CommentReply.query.filter_by(id=id).first_or_404()
+    reply = ReplyComment.query.filter_by(id=id).first_or_404()
 
     # Vérification que l'utilisateur actuel est l'auteur du commentaire
     if reply.user_id != current_user.id:

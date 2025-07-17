@@ -1,13 +1,15 @@
+"""
+Classe représentant les requêtes de chat vidéo.
+"""
 
-
-#----------------------------------------------------------------
-# Création d'une classe gérant les statuts des requêtes de chat.
-#----------------------------------------------------------------
+#====================================#
+#  Modèle de la classe  ChatRequest  #
+#====================================#
 
 from .base_model import BaseModel
 from enum import Enum
 
-
+# Fonction qui va permettre de gérer les statuts des requêtes de chat vidéo.
 class ChatRequestStatus(Enum):
     """
     Enumération des statuts possibles pour une requête de chat.
@@ -78,6 +80,11 @@ class ChatRequest(BaseModel):
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
     admin = db.relationship('Admin', back_populates='chat_request')
     
+    
+    #===================================================#
+    #    Représentation sre en chaine de catactères     #
+    #===================================================#
+    
     def __repr__(self):
         """
         Représentation de l'objet ChatRequest.
@@ -91,10 +98,10 @@ class ChatRequest(BaseModel):
                 user_choice='{self.user_choice}')>"
                
                 
-    #----------------------------------------------------------------
-    # Fonctions relatives à la validation / Rejet d'une demande de chat vidéo.    
-    #----------------------------------------------------------------
-    
+    #==========================================================================#
+    # Fonctions relatives à la validation / Rejet d'une demande de chat vidéo  #  
+    #==========================================================================#
+
     # Fonction qui convertit l'objet ChatRequest en dictionnaire.
     # Cela est utile pour la sérialisation JSON ou pour d'autres opérations.
     def to_dict(self, include_admin=False):
@@ -116,7 +123,7 @@ class ChatRequest(BaseModel):
         return data
 
     
-    # Focntion qui permet d'accepter un chat vidéo et ainsi de modifier le statut de la demande.
+    # Fonction qui permet d'accepter un chat vidéo et ainsi de modifier le statut de la demande.
     def accept_chat_request(self):
         """
         Accepte la requête de chat en modifiant son statut à 'acceptée'.

@@ -72,7 +72,10 @@ class DevisRequest(BaseModel):
     meta_data = db.Column(JSON, nullable=True)
     
     
-    # Fonction représentant les données dans une chaîne de caractères.
+    #==================================================================#
+    # Fonction représentant les données dans une chaîne de caractères  #
+    #==================================================================#
+    
     def __repr__(self):
         """
         Représentation en chaîne de caractères de l'objet DevisRequest

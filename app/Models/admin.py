@@ -42,7 +42,12 @@ class Admin(UserMixin, BaseModel):
     # Relation avec la table ChatRequest
     chat_request = db.relationship('ChatRequest', back_populates='admin', cascade='all, delete-orphan')
     
-    # Fonction qui représente l'objet en chaîne de caractères.
+
+    
+    #=========================================================#
+    # Fonction qui représente l'objet en chaîne de caractères #
+    #=========================================================#
+    
     def __repr__(self):
         """
         Représentation de l'objet Admin.
@@ -54,9 +59,9 @@ class Admin(UserMixin, BaseModel):
         return f"<Admin (id='{self.id}', pseudo='{self.pseudo}', role='{self.role}')>"
     
     
-    #----------------------------------------------------------------
-    # Fonctions utilisées par Flask-Login pour gérer l'authentification.    
-    #----------------------------------------------------------------
+    #====================================================================#
+    # Fonctions utilisées par Flask-Login pour gérer l'authentification  #  
+    #====================================================================#
         
     # Fonction qui permet de vérifier si l'administrateur est actif ou non.
     def is_active(self):

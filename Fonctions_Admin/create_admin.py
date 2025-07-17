@@ -44,7 +44,7 @@ cur.execute(
 )
 
 # Vérification.
-print("Les identifiants et le rôle de l'administrateur on t bin été enregistrés dans la table de données.")
+print("Les identifiants et le rôle de l'administrateur ont bien été enregistrés dans la table de données.")
 
 # Validation de la procédure et enregistrement au sein de la base de données.
 conn.commit()

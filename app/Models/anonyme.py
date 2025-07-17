@@ -4,8 +4,13 @@ Classe représentant un utilisateur anonyme du site.
 from uuid import uuid4
 from flask_login import AnonymousUserMixin
 
+#====================================#
+# Modèle de la classe AnonymousUser  #
+#====================================#
 
-# Modèle de la classe anonyme.
+
+# Classe AnonymousUserMixin de Flask-Login
+# Cette classe fournit des fonctionnalités de base pour les utilisateurs anonymes.
 class AnonymousUser(AnonymousUserMixin):
     """
     Classe Anonyme qui représente un utilisateur anonyme dans l'application.
@@ -21,9 +26,20 @@ class AnonymousUser(AnonymousUserMixin):
                                            Par défaut, il est None.
         """
         self.anonymous_id = anonymous_id or str(uuid4())
+        
+    @property
+    def id(self):
+        """
+        Retourne l'identifiant de l'utilisateur anonyme.
+        """
+        
+        return self.anonymous_id
 
+
+    #================================================#
+    # Fonction qui renvoit une chaine de caractères  #
+    #================================================#
     
-    # Fonction qui renvoit une chaine de caractères.
     def __repr__(self):
         """
         Représentation de l'objet Anonyme.
@@ -31,7 +47,8 @@ class AnonymousUser(AnonymousUserMixin):
         Returns:
             str: Représentation de l'utilisateur anonyme.
         """
-        return f"<AnonymousUser (ID: {self.id})>"
+        return f"<AnonymousUser (anonymous_id: {self.anonymous_id})>"
+    
     
     # fonction attribuant une photo par defaut à l'utilisateur anonyme.
     def profil_photo_anonymous(self):
@@ -59,19 +76,6 @@ class AnonymousUser(AnonymousUserMixin):
         """
         # Les utilisateurs anonymes n'ont pas de rôles.
         return False
-    
-    
-    # Fonction / Propriété qui renvoie l'identifiant de l'utilisateur anonyme.
-    @property
-    def id(self):
-        """
-        Retourne l'identifiant de l'utilisateur anonyme.
-        
-        Returns:
-            str: Identifiant de l'utilisateur anonyme, qui est toujours 'Anonyme'.
-        """
-        # L'identifiant de l'utilisateur anonyme est une chaîne fixe.
-        return 'Anonyme'
     
     # Fin des fonctions utilisées par Flask-Login pour gérer les utilisateurs anonymes.
     

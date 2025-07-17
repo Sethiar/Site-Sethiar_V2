@@ -1,0 +1,104 @@
+{% extends 'baseback.html.jinja2' %}
+
+{% block head_content %}
+    <meta name="description" content="Page d'administration pour valider les réponses d'utilisateurs anonymes.">
+    <title>{% block title %}Validation des réponses anonymes{% endblock %}</title>
+{% endblock %}
+
+{% block body_content %}
+<div class="space"></div>
+
+<div class="backend-container">
+
+    <!-- SECTION 1 : Réponses anonymes à des commentaires d’anonymes -->
+    <h5 class="h5-devis">Réponses anonymes à des commentaires d’anonymes</h5>
+    <div class="space2"></div>
+
+    {% for status, anonymous_replies_list in grouped_anonymous_replies.items() %}
+    <h6 class="mt-4">{{ status|capitalize }}</h6>
+
+    {% if anonymous_replies_list %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reply in anonymous_replies_list %}
+            <tr>
+                <td>{{ reply.id }}</td>
+                <td>{{ reply.reply_content|truncate(80) }}</td>
+                <td>{{ reply.reply_date.strftime('%d/%m/%Y à %H:%M') }}</td>
+                <td>
+                    {% if reply.status.name == 'EN_ATTENTE' %}
+                        <a href="{{ url_for('admin.validate_anonymous_reply', id=reply.id) }}" class="btn btn-success btn-sm">Valider</a>
+                        <a href="{{ url_for('admin.reject_anonymous_reply', id=reply.id) }}" class="btn btn-danger btn-sm">Rejeter</a>
+                    {% else %}
+                        <span class="text-muted">Déjà traité</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Aucune réponse en attente pour cette section.</p>
+    {% endif %}
+    {% endfor %}
+
+    <div class="space3"></div>
+
+    <!-- SECTION 2 : Réponses anonymes à des commentaires d’utilisateurs authentifiés -->
+    <h5 class="h5-devis">Réponses anonymes à des commentaires d’utilisateurs authentifiés</h5>
+    <div class="space2"></div>
+
+    {% for status, anonymous_user_replies_list in grouped_anonymous_user_replies.items() %}
+    <h6 class="mt-4">{{ status|capitalize }}</h6>
+
+    {% if anonymous_user_replies_list %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Contenu</th>
+                <th>Date</th>
+                <th>ID du commentaire parent</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reply in anonymous_user_replies_list %}
+            <tr>
+                <td>{{ reply.id }}</td>
+                <td>{{ reply.reply_content|truncate(80) }}</td>
+                <td>{{ reply.reply_date.strftime('%d/%m/%Y à %H:%M') }}</td>
+                <td>{{ reply.comment_id }}</td>
+                <td>
+                    {% if reply.status.name == 'EN_ATTENTE' %}
+                        <a href="{{ url_for('admin.validate_anonymous_user_reply', id=reply.id) }}" class="btn btn-success btn-sm">Valider</a>
+                        <a href="{{ url_for('admin.reject_anonymous_user_reply', id=reply.id) }}" class="btn btn-danger btn-sm">Rejeter</a>
+                    {% else %}
+                        <span class="text-muted">Déjà traité</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Aucune réponse en attente pour cette section.</p>
+    {% endif %}
+    {% endfor %}
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // JS facultatif ici
+</script>
+{% endblock %}

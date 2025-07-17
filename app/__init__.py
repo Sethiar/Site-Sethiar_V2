@@ -29,14 +29,24 @@ from .extensions import mailing, csrf, login_manager, moment, assets
 
 # Importation des modèles nécessaires.
 from app.Models.admin import Admin
-from app.Models.anonyme import AnonymousUser
-from app.Models.chat_request import ChatRequest
-from app.Models.comment_customer import CustomerComment
-from app.Models.subject_comment import SubjectComment
 
-from app.Models.devis_request import DevisRequest
-from app.Models.reply_comment import CommentReply
 from app.Models.user import User
+
+from app.Models.anonyme import AnonymousUser
+
+from app.Models.chat_request import ChatRequest
+from app.Models.devis_request import DevisRequest
+
+from app.Models.subject import Subject
+
+from app.Models.comment import Comment
+
+from app.Models.reply_comment import ReplyComment
+from app.Models.reply_anonymous_comment import ReplyAnonymousComment
+from app.Models.reply_anonymous_user_comment import ReplyAnonymousUserComment
+from app.Models.reply_user_anonyme_comment import ReplyUserAnonymousComment
+
+
 
 # Chargement des variables d'environnement depuis le fichier .env.
 load_dotenv()
@@ -206,8 +216,8 @@ def create_app(config_class=Config):
         '<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/fr.js"></script>'
     )
     #--------------------------------------------------------
-   
-   
+    
+    
     #=================================#
     #  Configuration de Flask-Login   #
     #=================================#

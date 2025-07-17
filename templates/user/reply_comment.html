@@ -33,13 +33,15 @@
             <!-- hidden_tag pour génération du token CSRF pour la sécurité -->
             {{ formreply.csrf_token }}
 
+            {{ formreply.comment_id(value=comment.id) }}
+            
             <div class="space-form"></div>
 
             <!-- Conteneur de la réponse au commentaire -->
             <div class="form-group">
                 {{ formreply.reply_content.label }} {{ formreply.reply_content() }}
+                
                 <input type="hidden" name="subject_id" value="{{ comment.subject_id }}">
-                <input type="hidden" name="comment_id" value="{{ comment.id }}">
 
                 <div class="container-btn">
                     <button type="submit" class="validated-btn" aria-label="Valider la réponse">Soumettre la réponse

@@ -2,9 +2,9 @@
 Modèle de la classe utilisateur.
 """
 
-#----------------------------------------------------------------------------------------------
-# Création d'une classe gérant les utilisateurs.
-#----------------------------------------------------------------------------------------------
+#================================================#
+# Création d'une classe gérant les utilisateurs  #
+#================================================#
  
 
 import bcrypt
@@ -45,22 +45,25 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(30), default='Utilisateur')
     phone = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(255), nullable=False)
-    password_hash = db.Column(db.LargeBinary(255), nullable=False)
+    password_hash = db.Column(db.LargeBinary(255), nullable=False, unique=True)
     salt = db.Column(db.LargeBinary(255), nullable=False)
     profil_photo = db.Column(db.LargeBinary, nullable=False)
     chemin_photo = db.Column(db.String(255), nullable=True)
 
     # Relation avec les commentaires des clients.
-    customer_comments = db.relationship('CustomerComment', back_populates='user', cascade='all, delete-orphan')
+    comments = db.relationship('Comment', back_populates='author_user', cascade='all, delete-orphan')
 
     # Relation avec les réponses aux commentaires.
-    comment_replies = db.relationship('CommentReply', back_populates='user', cascade='all, delete-orphan')
+    comment_replies = db.relationship('ReplyComment', back_populates='user', cascade='all, delete-orphan')
+    
+    # Réponses à des commentaires anonymes (utilisateur → anonyme)
+    replies_user_anonymous = db.relationship('ReplyUserAnonymousComment', back_populates='user', cascade='all, delete-orphan')
     #----------------------------------------------------------------------------------------------
     
     
-    #----------------------------------------------------------------------------------------------
-    # Fonction qui représente l'objet en chaîne de caractères.
-    #----------------------------------------------------------------------------------------------
+    #==========================================================#
+    # Fonction qui représente l'objet en chaîne de caractères  #
+    #==========================================================#
     def __repr__(self):
         """
         Représentation de l'objet Utilisateur.
@@ -71,13 +74,13 @@ class User(db.Model, UserMixin):
         """
         return (f"<User(id='{self.id}', lastname='{self.lastname}', firstname='{self.firstname}', \
             enterprise_name='{self.enterprise_name}',  role='{self.role}', phone='{self.phone}', \
-            email='{self.email}', chemin_photo='{self.chemin_photo}', >")
+            email='{self.email}', chemin_photo='{self.chemin_photo}')>")
     #---------------------------------------------------------------
 
 
-    #----------------------------------------#
+    #========================================#
     # Fonction qui redéfinit un mot de passe #
-    #----------------------------------------#
+    #========================================#
     
     def set_password(self, new_password):
         """
@@ -92,9 +95,9 @@ class User(db.Model, UserMixin):
     #---------------------------------------------------------------    
 
 
-    #----------------------------------------------------------------------------------------------
-    # Fonctions utilisées par Flask-Login pour gérer l'authentification.    
-    #----------------------------------------------------------------------------------------------
+    #=====================================================================#
+    #  Fonctions utilisées par Flask-Login pour gérer l'authentification  #   
+    #=====================================================================#
     
     # Fonction qui vérife l'authentification de l'utilisateur.
     @property

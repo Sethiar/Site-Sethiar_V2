@@ -56,7 +56,10 @@
             <a href="{{ url_for('admin.list_devis') }}" class="btn-primary"> Aller à la liste des devis</a>
             <a href="{{ url_for('admin.list_subjects_admin') }}" class="btn-primary">Aller à la liste des sujets</a>
             <a href="{{ url_for('admin.users_list') }}" class="btn-primary">Aller à la liste des utilisateurs</a>
-            <a href="{{ url_for('admin.list_comments_customer') }}" class="btn-primary">Aller à la liste des commentaires</a>
+            <a href="{{ url_for('admin.list_comments_customer') }}" class="btn-primary">Aller à la liste des commentaires utilisateurs</a>
+            <a href="{{ url_for('admin.subject_anonymous_list') }}" class="btn-primary">Aller à la liste des sujets anonymes</a>
+            <a href="{{ url_for('admin.anonymous_comments_list') }}" class="btn-primary">Aller à la liste des commentaires anonymes</a>
+            <a href="{{ url_for('admin.anonymous_replies_list') }}" class="btn-primary">Aller à la liste des réponses anonoymes</a>
             <a href="{{ url_for('auth.logout_admin') }}" class="btn-secondary">Se déconnecter du back end</a>
         </div>
     {% endblock %}

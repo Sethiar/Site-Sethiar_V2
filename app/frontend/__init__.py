@@ -5,4 +5,6 @@ from flask import Blueprint
 
 frontend_bp = Blueprint('frontend', __name__)
 
-from app.frontend import routes  # Import des routes pour le blueprint frontend
+
+# Import des routes pour le blueprint frontend
+from app.frontend import routes  

@@ -2,9 +2,9 @@
 Code fournissant les formulaires concernant les sujets de l"'espace de commentaires du site de l'entreprise SethiarWorks.
 """
 
-#------------------------------------------------------------------------------------------#
+#==========================================================================================#
 # Enregistrement d'un nouveau sujet de commentaire / Suppression d'un sujet de commentaire #
-#------------------------------------------------------------------------------------------#
+#==========================================================================================#
 
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, StringField, HiddenField

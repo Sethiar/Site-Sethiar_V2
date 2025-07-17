@@ -2,9 +2,9 @@
 Représente la classe des réponses aux commentaires des sujets du forum.
 """
 
-#----------------------------------------------------------------
-# Création d'une classe gérant les réponses aux commentaires.
-#----------------------------------------------------------------
+#============================================================#
+# Création d'une classe gérant les réponses aux commentaires #
+#============================================================#
 
 from . import db
 from .base_model import BaseModel
@@ -14,7 +14,7 @@ from datetime import datetime
 
 
 # Table des réponses aux commentaires des clients.
-class CommentReply(BaseModel):
+class ReplyComment(BaseModel):
     """
     Représente une réponse à un commentaire sur le site.
 
@@ -27,7 +27,7 @@ class CommentReply(BaseModel):
         anonymous_id (str) : Identifiant de l'utilisateur anonyme.
     """
 
-    __tablename__ = "comment_reply"
+    __tablename__ = "reply_comment"
     __table_args__ = {"extend_existing": True}
 
     id = db.Column(db.Integer, primary_key=True)
@@ -35,8 +35,8 @@ class CommentReply(BaseModel):
     reply_date = db.Column(db.DateTime(timezone=True), nullable=False, default=datetime.utcnow)
 
     # Relation avec la classe CustomerComment.
-    comment_id = db.Column(db.Integer, db.ForeignKey('customer_comment.id'), nullable=False)
-    comment = db.relationship('CustomerComment', back_populates='replies')
+    comment_id = db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=False)
+    comment = db.relationship('Comment', back_populates='replies')
 
     # Relation avec la classe User.
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -45,8 +45,11 @@ class CommentReply(BaseModel):
     # Relation avec la classe Anonyme.
     anonymous_id = db.Column(db.String(36), nullable=True)
 
+
+    #====================================================================#
+    # Fonction qui permet de représenter l'objet en chaîne de caractères #
+    #====================================================================#
     
-    # Fonction qui permet de représenter l'objet en chaîne de caractères.
     def __repr__(self):
         """
         Affichage lisible de l'objet pour le debug ou les logs.
