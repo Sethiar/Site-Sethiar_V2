@@ -1,0 +1,110 @@
+// Importations des variables.
+@import '../base/variables.scss';
+// Importation des tailles responsive.
+@import '../base/responsive-size';
+
+
+//=================================//
+//         Page d’infomations      //
+//=================================//
+
+
+/* Cadre externe */
+.outer-frame-information {
+  border: 4px solid $color-decline-orange2;
+  border-radius: 8px;
+  padding: 2%;
+  margin: 10%;
+  background: $color-lightgrey;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    /* Légère mise en avant */
+    transform: scale(1.02);
+    /* Ombre amplifiée */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Cadre interne */
+.inner-frame-information {
+  border: 2px solid $color-decline-gold2;
+  border-radius: 8px;
+  padding: 1.5%;
+  background: $color-black;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteneur principal */
+.information-main  {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Titre de la section */
+.information-title {
+  font-size: $font-size-xxxl;
+  text-align: center;
+  color: $color-primary;
+  margin-bottom: 1rem;
+}
+
+/* Conteneur des images */
+.container-information-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+
+  // Gestion de la responsivité
+  flex-wrap: wrap; 
+}
+
+/* Styles pour les deux images */
+.information-image {
+  flex: 0 1 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styles pour le titre de la section */
+h2.information-welcome {
+  text-align: center;
+  font-size: $font-size-xxl;
+  padding: 1rem;
+  border: 1px solid $color-decline-gold1;
+
+}
+
+/* Sous-titres de la partie information */
+.information-subtitle {
+  font-size: $font-size-xl;
+  color: $color-decline-gold2;
+  margin: 2rem 0 1rem;
+}
+
+/* Introduction de la section information */
+.information-intro {
+  font-size: $font-size-xxl;
+  line-height: 1.7;
+  color: $color-white;
+}
+
+/* Styles des paragraphes */
+.information-section p {
+  font-size: $font-size-xl;
+  text-indent: 2rem;
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 1rem;
+}
+
+/* Styles de la division entre les parties */
+.information-divider {
+  width: 20%;
+  border: 0.5px solid $color-white;
+  margin: 0 auto;
+}

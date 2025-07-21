@@ -1,60 +1,43 @@
 {% extends 'base2.html.jinja2' %}
 
 {% block head_content %}
-<meta name="description" content="Page de contacts du site de l'entreprise SethiarWorks.">
-<title>{% block title %}Contacts{% endblock %}</title>
+    <meta name="description" content="Page de contacts du site de l'entreprise SethiarWorks.">
+    <title>{% block title %}Contacts{% endblock %}</title>
 {% endblock %}
 
 {% block main_content %}
-<div class="outer-frame-politique">
-    <div class="inner-frame-politique">
-        <main class="politique-main">
+<div class="outer-frame-information">
+    <div class="inner-frame-information">
+        
+        <div class="contact-main">
+
             <div class="politique-border">
+                <div class="space-reply"></div>
 
-                <!--titre -->
-                <h1 class="politique-title">Contacts</h1>
+                <h1 class="information-title">Contacts</h1>
 
-                <!-- Section : Mise à jour et retour -->
                 <div class="politique-header">
                     <p class="politique-update">Dernière mise à jour : 1 juillet 2025</p>
-                    <a href="{{ url_for('landing_page') }}" class="politique-home-link">Retour à l'accueil</a>
+                    <div class="space-reply"></div>
+                    <a href="{{ url_for('landing_page') }}" class="btn-secondary">Retour à l'accueil</a>
                 </div>
             </div>
 
-            <!-- Séparation -->
             <hr class="politique-divider">
 
-            <!-- Logo -->
-            <div class="imgcontainer-form">
-                <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}"
-                     alt="Logo de SethiarWorks"
-                     class="avatar-form">
+            <!-- Cartes de visite -->
+            <div class="contact-cartes-wrapper">
+                <img src="{{ url_for('static', filename='images/images_sethiarworks/cart_sethiar.png') }}"
+                     alt="Carte de visite verso"
+                     class="carte-visite">
+                <img src="{{ url_for('static', filename='images/images_sethiarworks/cart_sethiar2.png') }}"
+                     alt="Carte de visite recto"
+                     class="carte-visite">
             </div>
-            
-            <div class="space-form"></div>
-
-            <!-- Contenu principal -->
-            <div class="contact-content">
-
-                <!-- Carte de visite SethiarWorks -->
-                <div class="contact-cart-sethiar">
-                    
-                    <!-- Verso -->
-                    <img src="{{ url_for('static', filename='images/images_sethiarworks/cart_sethiar.png') }}"
-                         alt="carte de visite de SethiarWorks verso"
-                         class="sethiarcart-pic-contact">
-
-                    <div class="space"></div>
-                    
-                    <!-- Recto -->
-                    <img src="{{ url_for('static', filename='images/images_sethiarworks/cart_sethiar2.png') }}"
-                         alt="carte de visite de SethiarWorks recto"
-                         class="sethiarcart-pic-contact">
-                </div>
-            </div>
-        </main>
+        </div>
     </div>
 </div>
 {% endblock %}
+
 {% block footer_content %}
 {% endblock %}

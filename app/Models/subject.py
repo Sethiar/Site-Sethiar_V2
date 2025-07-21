@@ -1,6 +1,12 @@
 """
 Classe permettant de créer l'objet "sujet" de l'espace de commentaires.
 """
+
+#========================================#
+#   Modèle de table de données "Sujet"  #
+#========================================#
+
+
 import logging
 
 from .base_model import BaseModel
@@ -103,13 +109,14 @@ class Subject(BaseModel):
     # Fontion récupérant l'auteur du sujet.
     @property
     def author_display(self):
+        
         """
         Renvoie le nom de l’auteur du sujet : soit le nom d'entreprise saisi soit l'anonymat de l'auteur.
         """
-        if self.is_anonymous or not self.author_user:
+        if self.is_anonymous or not self.author_enterprise_name:
             return "Anonyme"
         else:
-            return f"{self.author_user.enterprise_name}"
+            return f"{self.author_enterprise_name}"
         
     
     #==============================================================#

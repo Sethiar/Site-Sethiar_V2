@@ -36,9 +36,9 @@
             <nav class="nav-links" aria-label="Navigation principale">
                 <ul>
                     <li><a href="{{ url_for('landing_page') }}">Accueil</a></li>
-                    <li><a href="#products">Produits</a></li>
+                    <li><a href="{{ url_for('landing_page') }}#products">Produits</a></li>
                     <li><a href="{{ url_for('frontend.comments') }}">Commentaires</a></li>
-                    <li><a href="#" target="_blank">Portfolio</a></li>
+                    <li><a href="#" target="_blank">Portfolio (Bientôt)</a></li>
                     <li><a href="{{ url_for('functional.contact') }}">Contact</a></li>
                 </ul>
             </nav>

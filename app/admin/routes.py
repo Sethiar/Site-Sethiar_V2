@@ -172,7 +172,7 @@ def list_subjects_admin():
     formsubjectcomment = NewSubjectCommentForm()
     
     # Récupération des sujets du forum.
-    subjects = db.session.query(Subject.id, Subject.name, Subject.author).all()
+    subjects = db.session.query(Subject.id, Subject.name, Subject.author_enterprise_name).all()
 
     # Création d'un dictionnaire permettant de récupérer les informations des sujets.
     subject_data = [

@@ -13,6 +13,8 @@
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -49,7 +51,7 @@ html {
 
 body {
   font-family: "Lato", sans-serif;
-  line-height: 1.6;
+  line-height: 1.4;
 }
 
 div,
@@ -179,6 +181,8 @@ img {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -331,6 +335,14 @@ img {
   height: 5vh;
 }
 
+.space-reply {
+  height: 2vh;
+}
+
+.space-negatif {
+  margin-top: -2vh;
+}
+
 @media (max-width: 599px) {
   .layout {
     /* Afficher la mise en page en colonne */
@@ -354,6 +366,9 @@ img {
   }
   .space2 {
     height: 3vh;
+  }
+  .space-reply {
+    height: 1vh;
   }
   .space-annonce {
     height: 1vh;
@@ -383,6 +398,9 @@ img {
   .space2 {
     height: 3vh;
   }
+  .space-reply {
+    height: 1.5vh;
+  }
   .space-annonce {
     height: 1vh;
   }
@@ -409,6 +427,9 @@ img {
   }
   .space2 {
     height: 4vh;
+  }
+  .space-reply {
+    height: 1.75vh;
   }
   .space-annone {
     height: 1.5vh;
@@ -445,6 +466,8 @@ img {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -594,6 +617,8 @@ h3.comment-subtitle {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -898,6 +923,8 @@ h3.comment-subtitle {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -964,8 +991,9 @@ nav button, .cancelled-btn, .validated-btn, .btn-secondary, .btn-primary, .btn-p
   transform: scale(1.02);
   /* Ombre amplifiée */
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-  background-color: #a9a9a9;
-  color: #C96B12;
+  background-color: #DE7915;
+  color: #ffffff;
+  border: 1px solid #000000;
 }
 
 .cancelled-btn, .validated-btn {
@@ -1052,23 +1080,6 @@ nav button, .cancelled-btn, .validated-btn, .btn-secondary, .btn-primary, .btn-p
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-
-.btn-icon {
-  /* Largeur de l'icône */
-  width: 40px;
-  /* Hauteur de l'icône */
-  height: 40px;
-  transition: transform 0.2s ease;
-  /* Bordure de l'icône */
-  border: 2px solid #E5AD36;
-  /* Coins arrondis */
-  border-radius: 8px;
-}
-
-.btn-icon:hover {
-  /* Légère augmentation de la taille au survol */
-  transform: scale(1.1);
 }
 
 /* Bouton de navigation */
@@ -1177,6 +1188,8 @@ nav button:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -1500,6 +1513,8 @@ nav button:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -1708,6 +1723,8 @@ footer p {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -2006,6 +2023,8 @@ img.avatar-form:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -2293,6 +2312,118 @@ img.avatar-form:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Style des icônes */
+.btn-icon {
+  /* Largeur de l'icône */
+  width: 40px;
+  /* Hauteur de l'icône */
+  height: 40px;
+  margin-left: 5%;
+  transition: transform 0.2s ease;
+  /* Bordure de l'icône */
+  border: 2px solid #E5AD36;
+  /* Coins arrondis */
+  border-radius: 8px;
+}
+.btn-icon:hover {
+  /* Légère augmentation de la taille au survol */
+  transform: scale(1.1);
+  border: 1px solid #000000;
+}
+
+/* Style de l'icône de suppression */
+.btn-icon2 {
+  /* Largeur de l'icône */
+  width: 40px;
+  /* Hauteur de l'icône */
+  height: 40px;
+  margin-right: 5%;
+  background-color: #D32F2F;
+  transition: transform 0.2s ease;
+  /* Bordure de l'icône */
+  border: 2px solid #E5AD36;
+  /* Coins arrondis */
+  border-radius: 8px;
+}
+.btn-icon2:hover {
+  /* Légère augmentation de la taille au survol */
+  transform: scale(1.1);
+}
+
+/* Icone de retour à la page d'accueil */
+.mobile-only {
+  /* Masqué par défaut */
+  display: none;
+}
+
+/* Ecran jusqu'à 768px */
+@media (max-width: 768px) {
+  /* Lien de retour à la page d'accueil */
+  .comment-actions .desktop-only {
+    /* Affiché uniquement sur les écrans de bureau */
+    display: none;
+  }
+  .back-link-comment .desktop-only {
+    display: none;
+  }
+  /* Icone de retour à la page d'accueil */
+  .btn-icon.mobile-only {
+    /* Masqué par défaut */
+    display: flex;
+    background-color: #DE7915;
+    border: 1px solid #C96B12;
+  }
+}
+/* Ecran au-dessus de 769px (desktop) */
+@media (min-width: 769px) {
+  .desktop-only {
+    display: inline-block;
+  }
+  .btn-icon.mobile-only {
+    display: none;
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -2439,6 +2570,8 @@ img.avatar-form:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -2487,6 +2620,8 @@ a:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -2669,6 +2804,8 @@ a:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -2883,6 +3020,8 @@ td {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -2958,6 +3097,8 @@ tr {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -3042,12 +3183,6 @@ tr {
 .back-link-comment a:hover {
   /* fond-blanc border foncé */
   border: 1px solid #000000;
-}
-
-/* Icone de retour à la page d'accueil */
-.mobile-only {
-  /* Masqué par défaut */
-  display: none;
 }
 
 /* Section du tableau des sujets */
@@ -3137,7 +3272,7 @@ textarea:hover {
 
 /* Photo des utilisateurs ayant posté */
 .comment-header {
-  background-color: #a9a9a9;
+  background-color: transparent;
   display: flex;
   align-items: center;
   gap: 1%;
@@ -3150,13 +3285,9 @@ textarea:hover {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: #a9a9a9;
+  background-color: transparent;
   border: 1px solid #C96B12;
   object-fit: cover;
-}
-.profile-picture:hover {
-  /* Agrandit légèrement l'image */
-  transform: scale(1.2);
 }
 
 /* Info utilisateur */
@@ -3194,8 +3325,10 @@ textarea:hover {
 .content-comment {
   text-indent: 2%;
   text-align: justify;
-  background-color: transparent;
+  background-color: #f2f2f2;
   color: #000000;
+  border-radius: 8px;
+  border: 1px solid #000000;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -3203,6 +3336,8 @@ textarea:hover {
   max-height: 200px;
   overflow-y: auto;
   box-sizing: border-box;
+  /* Effet 3D interne + externe */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Style des réponses aux commentaires */
@@ -3216,13 +3351,12 @@ textarea:hover {
 .replies-container {
   margin-top: 5%;
   padding-left: 5%;
-  background-color: #000000;
-  border-left: 2px solid #ddd;
+  background-color: transparent;
 }
 
 /* Conteneur d'une réponse individuelle */
 .reply-card {
-  background-color: #f2f2f2;
+  background-color: #e4dcdc;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -3249,9 +3383,14 @@ textarea:hover {
   /* Animation fluide pour le zoom et l'ombre */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.reply-profile-picture:hover {
-  /* Agrandit légèrement l'image */
-  transform: scale(1.2);
+
+.reply-divider {
+  height: 1px;
+  width: 20vw;
+  background-color: #000000;
+  border-radius: 999px;
+  margin: 1rem auto;
+  border: none;
 }
 
 /* Infos utilisateur */
@@ -3280,7 +3419,7 @@ textarea:hover {
   text-indent: 10%;
   background-color: transparent;
   color: #000000;
-  border-top: 1px solid #FFD580;
+  border-top: 1px solid #f2f2f2;
 }
 
 /* Contenu de la réponse */
@@ -3290,7 +3429,8 @@ textarea:hover {
 
 .reply-content {
   text-align: left;
-  background-color: transparent;
+  font-size: 1rem;
+  background-color: #f2f2f2;
   color: #000000;
   padding-right: 4%;
   margin-left: 5%;
@@ -3303,6 +3443,10 @@ textarea:hover {
   overflow-y: auto;
   padding: 0.8%;
   box-sizing: border-box;
+  border-radius: 8px;
+  border: #000000;
+  /* Effet 3D interne + externe */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(255, 255, 255, 0.05), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Base commune des boutons de la section */
@@ -3455,22 +3599,12 @@ textarea:hover {
     /* fond-blanc border foncé */
     border: 1px solid #000000;
   }
-  /* Lien de retour à la page d'accueil */
-  .desktop-only {
-    /* Affiché uniquement sur les écrans de bureau */
-    display: none;
-  }
-  /* Icone de retour à la page d'accueil */
-  .btn-icon.mobile-only {
-    /* Masqué par défaut */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #C96B12;
-  }
   .reply-profile-picture {
     width: 65px;
     height: 65px;
+  }
+  .reply-body {
+    font-size: 1rem;
   }
   .reply-content {
     font-size: 1rem;
@@ -3514,7 +3648,7 @@ textarea:hover {
     height: 30px;
   }
   .reply-content {
-    font-size: 0.875rem;
+    font-size: 1rem;
     margin-left: 3%;
     margin-right: 3%;
   }
@@ -3524,16 +3658,16 @@ textarea:hover {
   }
   /* Bouton postant le commentaire */
   .btn-comment {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
   .change-comment-btn {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
   .suppress-comment-btn {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
   .reply-btn {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 }
 /* Variables CSS - base/variables.scss */
@@ -3550,6 +3684,8 @@ textarea:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -3573,91 +3709,55 @@ textarea:hover {
 /* Police principale */
 /* Police secondaire */
 /* Police tertiare */
-/* Conteneur de la page contact */
-.contact-content {
-  display: flex;
-  /* Centre le contenu horizontalement */
-  justify-content: center;
-  /* Aligne verticalement si nécessaire */
-  align-items: center;
-  position: relative;
-  /* Optionnel : pour s'assurer que le conteneur occupe toute la hauteur de la page */
-  height: 100vh;
+.contact-logo-wrapper {
+  text-align: center;
+  margin: 0 auto;
 }
 
-/* Conteneur pour les images */
-.cart-sethiar {
-  /* Active le mode flexbox */
-  display: flex;
-  /* Centre les images horizontalement */
-  justify-content: center;
-  /* Espace entre les images */
-  gap: 20px;
-  /* Alignement au centre */
-  align-items: center;
-}
-
-/* Style pour la carte page d'accueil */
-.sethiarcart-pic-contact {
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border: 1px solid #C96B12;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  /* Animation fluide */
-  transition: transform 0.3s ease-in-out;
-}
-
-.sethiarcart-pic-contact img {
+.contact-logo {
+  max-width: 200px;
   width: 100%;
   height: auto;
-  /* Remplit l'espace sans déformation de l'image */
-  object-fit: cover;
+}
+
+.contact-cartes-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 2rem 1rem;
+}
+
+.carte-visite {
+  width: 100%;
+  max-width: 400px;
   border: 1px solid #C96B12;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* Animation fluide */
   transition: transform 0.3s ease-in-out;
+  object-fit: cover;
 }
-.sethiarcart-pic-contact img:hover {
-  /* Légère mise en avant */
-  transform: scale(1.1);
-  /* Ombre subtile */
+.carte-visite:hover {
+  transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Pour les écrans de 1200px et plus (tablettes et bureau) */
-@media (min-width: 1199px) {
-  .sethiarcart-pic-contact img {
-    width: 100%;
-    height: auto;
+@media screen and (min-width: 769px) {
+  .contact-cartes-wrapper {
+    flex-direction: row;
+  }
+  .carte-visite {
+    width: 45%;
   }
 }
-/* Pour les écrans de 768px à 1199px (tablettes) */
-@media (min-width: 769px) and (max-width: 1199px) {
-  .sethiarcart-pic-contact img {
-    width: 100%;
-    height: auto;
-  }
-}
-/* Pour les écrans de 480px à 767px (mobiles en paysage et petites tablettes) */
-@media (min-width: 481px) and (max-width: 768px) {
-  .sethiarcart-pic-contact img {
-    width: 100%;
-    height: auto;
-  }
-}
-/* Pour les écrans de moins de 480px (mobiles) */
-@media (max-width: 480px) {
-  .cart-sethiar {
+@media screen and (max-width: 768px) {
+  .contact-cartes-wrapper {
     flex-direction: column;
-    gap: 10px;
   }
-  .sethiarcart-pic-contact img {
-    width: 100%;
-    height: auto;
+  .carte-visite {
+    width: 90%;
+    margin: 0 auto;
   }
 }
 /* Variables CSS - base/variables.scss */
@@ -3674,6 +3774,258 @@ textarea:hover {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+.error-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #a9a9a9;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  border: 2px solid #DE7915;
+  color: #000000;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.error-image {
+  display: block;
+  max-width: 60%;
+  margin: 0 auto 2rem auto;
+  animation: float 3s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+.error-annonce {
+  text-align: center;
+  line-height: 1.6;
+  font-size: 1.25rem;
+}
+
+.error-h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #DE7915;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.error-sentence {
+  margin-bottom: 1.2rem;
+  text-align: justify;
+}
+
+.error-list {
+  margin: 1rem auto;
+  padding-left: 2rem;
+  text-align: left;
+}
+.error-list li {
+  list-style: disc;
+  margin-bottom: 0.5rem;
+}
+
+.error-link {
+  color: #DE7915;
+  text-decoration: underline;
+}
+.error-link:hover {
+  color: #E5AD36;
+  text-decoration: none;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
+/* Gris clair */
+/* Orange */
+/* Rouge foncé */
+/* Rouge foncé hover cancelled */
+/* Orange foncé */
+/* Antracite */
+/* Blanc pur */
+/* Blanc cassé */
+/* Gris très très clair */
+/* Gris foncé */
+/* Orange plus clair */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Texte */
+/* Fond */
+/* Bordure */
+/* Police principale */
+/* Police secondaire */
+/* Police tertiare */
+/* Cadre externe */
+.outer-frame-information {
+  border: 4px solid #C96B12;
+  border-radius: 8px;
+  padding: 2%;
+  margin: 10%;
+  background: #f2f2f2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.outer-frame-information:hover {
+  /* Légère mise en avant */
+  transform: scale(1.02);
+  /* Ombre amplifiée */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Cadre interne */
+.inner-frame-information {
+  border: 2px solid #E5AD36;
+  border-radius: 8px;
+  padding: 1.5%;
+  background: #000000;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteneur principal */
+.information-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Titre de la section */
+.information-title {
+  font-size: 3rem;
+  text-align: center;
+  color: #DE7915;
+  margin-bottom: 1rem;
+}
+
+/* Conteneur des images */
+.container-information-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+/* Styles pour les deux images */
+.information-image {
+  flex: 0 1 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styles pour le titre de la section */
+h2.information-welcome {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+  border: 1px solid #FFD580;
+}
+
+/* Sous-titres de la partie information */
+.information-subtitle {
+  font-size: 1.5rem;
+  color: #E5AD36;
+  margin: 2rem 0 1rem;
+}
+
+/* Introduction de la section information */
+.information-intro {
+  font-size: 2rem;
+  line-height: 1.7;
+  color: #ffffff;
+}
+
+/* Styles des paragraphes */
+.information-section p {
+  font-size: 1.5rem;
+  text-indent: 2rem;
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 1rem;
+}
+
+/* Styles de la division entre les parties */
+.information-divider {
+  width: 20%;
+  border: 0.5px solid #ffffff;
+  margin: 0 auto;
+}
+
+/* Variables CSS - base/variables.scss */
+/* Orange Sethiar */
+/* Noir */
+/* Blanc */
+/* Couleur footer Bleu Sethiar */
+/* Orange classique */
+/* Jaune Or */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Plus clair */
+/* Plus foncé */
+/* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -3908,6 +4260,8 @@ p.animate {
 /* Plus clair */
 /* Plus foncé */
 /* Gris foncé */
+/* Gris */
+/*Gris clair 1 */
 /* Gris clair */
 /* Orange */
 /* Rouge foncé */
@@ -4033,7 +4387,7 @@ p.animate {
   font-weight: bold;
   text-decoration: underline;
   padding: 4%;
-  color: #ffffff;
+  color: #E5AD36;
   margin-bottom: 1%;
 }
 .politique-content .politique-section p {

@@ -2,6 +2,11 @@
 Routes pour la gestion des commentaires anonymes dans l'interface d'administration.
 """
 
+#================================#
+#   Routes Commentaires anonymes #
+#================================#
+
+
 import logging
 
 from flask import redirect, url_for, flash, render_template

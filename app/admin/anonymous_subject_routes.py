@@ -2,6 +2,11 @@
 Routes pour la gestion des sujets anonymes dans l'interface administrateur.
 """
 
+#==========================#
+#   Routes Sujets anonymes #
+#==========================#
+
+
 import logging
 from flask import redirect, url_for, flash, render_template
 

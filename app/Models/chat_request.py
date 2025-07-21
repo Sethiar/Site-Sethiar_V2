@@ -2,9 +2,10 @@
 Classe représentant les requêtes de chat vidéo.
 """
 
-#====================================#
-#  Modèle de la classe  ChatRequest  #
-#====================================#
+#======================================#
+#  Modèle de la classe  "ChatRequest"  #
+#======================================#
+
 
 from .base_model import BaseModel
 from enum import Enum

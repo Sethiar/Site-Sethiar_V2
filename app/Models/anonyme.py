@@ -4,9 +4,9 @@ Classe représentant un utilisateur anonyme du site.
 from uuid import uuid4
 from flask_login import AnonymousUserMixin
 
-#====================================#
-# Modèle de la classe AnonymousUser  #
-#====================================#
+#======================================#
+# Modèle de la classe "AnonymousUser"  #
+#======================================#
 
 
 # Classe AnonymousUserMixin de Flask-Login

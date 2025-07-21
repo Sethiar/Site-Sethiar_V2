@@ -1,0 +1,92 @@
+// Importation de variables.scss
+@import '../base/variables';
+// Importation taille responsive
+@import '../base/responsive-size';
+
+
+//==============================//
+//      Styles des icônes       //
+//==============================//
+
+
+/* Style des icônes */
+.btn-icon {
+  /* Largeur de l'icône */
+  width: 40px;
+  /* Hauteur de l'icône */               
+  height: 40px;
+  margin-left: 5%;
+  transition: transform 0.2s ease;
+  /* Bordure de l'icône */
+  border: 2px solid $color-decline-gold2;
+  /* Coins arrondis */
+  border-radius: 8px;
+
+  &:hover {
+    /* Légère augmentation de la taille au survol */
+    transform: scale(1.1);
+    border: 1px solid $color-black; 
+  }
+}
+
+/* Style de l'icône de suppression */
+.btn-icon2 {
+  /* Largeur de l'icône */
+  width: 40px;
+  /* Hauteur de l'icône */               
+  height: 40px;
+  margin-right: 5%;
+  background-color: $color-accent-darkred;
+  transition: transform 0.2s ease;
+  /* Bordure de l'icône */
+  border: 2px solid $color-decline-gold2;
+  /* Coins arrondis */
+  border-radius: 8px;
+
+  &:hover {
+    /* Légère augmentation de la taille au survol */
+    transform: scale(1.1);      
+  }
+}
+
+/* Icone de retour à la page d'accueil */
+.mobile-only {
+  /* Masqué par défaut */
+  display: none; 
+}
+
+
+/* Ecran jusqu'à 768px */
+@include respond-max($breakpoint-sm) {
+  
+  /* Lien de retour à la page d'accueil */
+  .comment-actions .desktop-only {
+    /* Affiché uniquement sur les écrans de bureau */
+    display: none;
+  }
+
+  .back-link-comment .desktop-only {
+    display: none;
+  }
+
+  /* Icone de retour à la page d'accueil */
+  .btn-icon.mobile-only {
+    /* Masqué par défaut */
+    display: flex;
+    background-color: $color-primary;
+    border: 1px solid $color-decline-orange2;
+  }
+}
+
+/* Ecran au-dessus de 769px (desktop) */
+@include respond-min($breakpoint-sm + 1) {
+  .desktop-only {
+    // Affiche sur desktop
+    display: inline-block; 
+  }
+
+  .btn-icon.mobile-only {
+    // Cache icônes mobiles
+    display: none;
+  }
+}

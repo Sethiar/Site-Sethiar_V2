@@ -2,6 +2,12 @@
 Routes pour la gestion des réponses anonymes aux commentaires d'authentifiés ou non dans la section administrateur
 """
 
+
+#============================#
+#   Routes réponses anonymes #
+#============================#
+
+
 import logging
 from flask import redirect, render_template, flash, url_for
 

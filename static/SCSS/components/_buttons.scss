@@ -54,8 +54,9 @@
     transform: scale(1.02);
     /* Ombre amplifiée */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    background-color: $color-neutral-darkgrey;
-    color: $color-decline-orange2;
+    background-color: $color-primary;
+    color: $color-white;
+    border: 1px solid $color-black;
   }
 }
 //----------------------------------------------------
@@ -162,22 +163,6 @@
   cursor: pointer;
 }
 
-.btn-icon {
-  /* Largeur de l'icône */
-  width: 40px;
-  /* Hauteur de l'icône */               
-  height: 40px;              
-  transition: transform 0.2s ease;
-  /* Bordure de l'icône */
-  border: 2px solid $color-decline-gold2;
-  /* Coins arrondis */
-  border-radius: 8px;
-}
-
-.btn-icon:hover {
-  /* Légère augmentation de la taille au survol */
-  transform: scale(1.1);      
-}
 //--------------------------------------------------------
 
 

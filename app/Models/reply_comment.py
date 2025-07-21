@@ -2,9 +2,9 @@
 Représente la classe des réponses aux commentaires des sujets du forum.
 """
 
-#============================================================#
-# Création d'une classe gérant les réponses aux commentaires #
-#============================================================#
+#==============================================#
+#   Modèle de table de données "ReplyComment"  #
+#==============================================#
 
 from . import db
 from .base_model import BaseModel

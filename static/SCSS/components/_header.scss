@@ -261,7 +261,7 @@ $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 //----------------------------------------------------------
 
 //Style pour écrans moyens min 1025px et max 1199px
-@include respond-between($breakpoint-md +1, $breakpoint-lg) {
+@include respond-between($breakpoint-md + 1, $breakpoint-lg) {
   .nav-container {
     gap: 2rem;
   }
@@ -305,7 +305,7 @@ $box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
 
 // Tablettes portrait et téléphones paysages min 600px et max 1024px
-@include respond-between($breakpoint-xs +1, $breakpoint-md) {
+@include respond-between($breakpoint-xs + 1, $breakpoint-md) {
   .nav-container {
     gap: 2rem;
   }

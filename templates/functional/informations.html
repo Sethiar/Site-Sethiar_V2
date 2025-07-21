@@ -2,23 +2,134 @@
 
 {% block head_content %}
     <meta name="description" content="Page de d'informations du site de l'entreprise SethiarWorks.">
-    <title>{% block title %}Contacts{% endblock %}</title>
+    <title>{% block title %}Informations à propos de l'administrateur{% endblock %}</title>
 {% endblock %}
 
 {% block main_content %}
 
-<h1>Informations</h1>
-<br>
-<p>Dernière mise à jour : 1 juillet 2025</p>
-<a href="{{ url_for('landing_page') }}">Retour à l'accueil</a>
-<div class="separation">
+<div class="outer-frame-information">
 
+    <div class="inner-frame-information">
+    
+        <div class="information-main">
+
+            <div class="politique-border">
+
+                <!-- Titre de la section -->
+                <h1 class="information-title">À propos de l’administrateur</h1> 
+            
+                <!-- Section : Mise à jour et retour -->
+                <div class="politique-header">
+                    <p class="politique-update">Dernière mise à jour : 1 juillet 2025</p>
+                    
+                    <div class="space-reply"></div>
+                    
+                    <a href="{{ url_for('landing_page') }}" class="btn-secondary">Retour à l'accueil</a>
+                </div>
+            </div>
+
+            <!-- Séparation -->
+            <hr class="politique-divider">
+
+            <!-- Logo et photo de profil -->
+            <div class="container-information-image">
+                <div class="information-image">
+                    <img src="{{ url_for('static', filename='images/images_accueil/logo_png.png') }}"
+                        alt="logo de SethiarWorks"
+                        class="politique-image">
+                </div>
+
+                <div class="information-image">
+                    <img src="{{ url_for('static', filename='images/images_accueil/image_sethiar.png') }}"
+                        alt="Image de l'administrateur"
+                        class="politique-image">
+                </div>
+
+            </div>
+            
+            <!-- Contenu principal -->
+            <div class="politique-content">
+
+                <!-- Introduction -->
+                <section class="information-section">
+                    <h2 class="information-welcome">Bienvenue sur le site officiel de <strong>SethiarWorks</strong>.</h2>
+                    
+                    <div class="space-form"></div>
+                    
+                    <p class="politique-intro">
+                        Je m'appelle <strong>Lefetey Arnaud</strong> et je suis le fondateur et l’unique développeur de cette entreprise indépendante.  
+                    </p>
+                </section>
+
+                <!-- Biographie -->
+                <section class="information-section"> 
+                    
+                    <div class="space-reply"></div>
+
+                    <hr class="information-divider">
+
+                    <h2 class="information-subtitle">Mon parcours</h2>
+                    <p>
+                        Issu d’un cursus universitaire en philosophie des sciences à la Sorbonne, j’ai toujours été animé par la logique, la rigueur et la créativité.
+                    </p>
+                    <p>
+                        En 2023, j’ai décidé de me reconvertir dans le développement informatique. J’ai suivi une formation intensive pendant deux ans, au cours de laquelle j’ai appris à concevoir des applications mobiles, des sites web modernes, et à développer des solutions techniques robustes.
+                    </p>
+                    <p>
+                        N’ayant pas trouvé de poste en entreprise faute d’expérience, j’ai fondé <strong>SethiarWorks</strong> pour créer mes propres projets et m’autonomiser techniquement.
+                    </p>
+                </section>
+
+                <!-- L’entreprise -->
+                <section class="information-section">
+                    
+                    <div class="space-reply"></div>
+
+                    <h2 class="information-subtitle">SethiarWorks</h2>
+                    <p>
+                        Ce site est une création 100% maison : de l’architecture à l’UX/UI, en passant par le design, le développement, le contenu, le référencement… tout a été pensé et réalisé par mes soins.
+                    </p>
+                    <p>
+                        <strong>SethiarWorks</strong> est bien plus qu’un simple projet : c’est une démarche concrète vers l’indépendance professionnelle et la valorisation du savoir-faire artisanal en informatique.
+                    </p>
+                </section>
+
+                <!-- Philosophie & engagement -->
+                <section class="information-section">
+                    
+                    <div class="space-reply"></div>
+
+                    <h2 class="information-subtitle">Pourquoi me faire confiance ?</h2>
+                    <p>
+                        Je suis quelqu’un de passionné, autonome et méthodique. J’aime résoudre des problèmes complexes et proposer des solutions élégantes, efficaces et surtout tenables dans le temps.
+                    </p>
+                    <p>
+                        Mon engagement : livrer du travail de qualité, respecter mes promesses et construire une relation de confiance durable avec mes clients.
+                    </p>
+                </section>
+
+                <!-- Conclusion -->
+                <section class="politique-section">
+                    
+                    <div class="space-reply"></div>
+                    <hr class="information-divider">
+                    <div class="space-reply"></div>
+
+                    <p>
+                        Merci pour votre visite sur <strong>SethiarWorks</strong>. J’espère que ce projet vous inspirera confiance et que nous aurons l’occasion de collaborer ensemble prochainement.
+                    </p>
+
+                    <div class="space-reply"></div>
+
+                    <p>
+                        Bien cordialement,<br>
+                        <strong>Lefetey Arnaud</strong>
+                    </p>
+                </section>
+            </div>
+        </div>  
+    </div>
 </div>
-<br>
-<div class="container-informations">
-
-</div>
-
 {% endblock %}
 {% block footer_content %}
 {% endblock %}

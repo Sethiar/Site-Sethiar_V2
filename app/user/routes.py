@@ -178,7 +178,7 @@ def change_comment(id):
     comment = Comment.query.filter_by(id=id).first_or_404()
 
     # Vérification que l'utilisateur actuel est l'auteur du commentaire.
-    if comment.user_id != current_user.id and comment.anonymous_id != session.get('anonymous_id'):
+    if comment.author_user_id != current_user.id and comment.anonymous_id != session.get('anonymous_id'):
         flash('Vous n\'êtes pas autorisé à modifier ce commentaire.')
         return redirect(url_for('frontend.forum_subject'))
 
@@ -214,7 +214,7 @@ def delete_comment(id):
     comment = Comment.query.filter_by(id=id).first_or_404()
 
     # Vérification que l'utilisateur actuel est l'auteur du commentaire.
-    if comment.user_id != current_user.id and comment.anonymous_id != session.get('anonymous_id'):
+    if comment.author_user_id != current_user.id and comment.anonymous_id != session.get('anonymous_id'):
         flash('Vous n\'êtes pas autorisé à supprimer ce commentaire.')
         return redirect(url_for('frontend.comments', comment=comment))
 

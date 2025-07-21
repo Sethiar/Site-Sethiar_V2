@@ -2,9 +2,9 @@
 Classe représentant une réponse d'un utilisateur connecté à un commentaire d'anonyme.
 """
 
-#===============================================#
-# Modèle de la classe ReplyUserAnonymousComment #
-#===============================================#
+#============================================================#
+#   Modèle de table de données "ReplyUserAnonymousComment."  #
+#============================================================#
 
 from .base_model import BaseModel
     

@@ -2,9 +2,9 @@
 Représente la classe des demandes de devis.
 """
 
-#----------------------------------------------------------------
-# Création d'une classe gérant les administrateurs.
-#----------------------------------------------------------------
+#==============================================#
+#   Modèle de table de données "DevisRequest"  #
+#==============================================#
 
 
 import logging

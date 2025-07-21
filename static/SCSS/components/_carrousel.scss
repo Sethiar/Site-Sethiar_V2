@@ -207,7 +207,7 @@
 
 /* Adaptation pour les tablettes en portrait (481px - 768px) */
 //------------------------------------------------
-@include respond-between($breakpoint-xxs +1, $breakpoint-sm) {
+@include respond-between($breakpoint-xxs + 1, $breakpoint-sm) {
   .swiper-container {
     /* Carrousel sur toute la largeur */
     width: 100%; 

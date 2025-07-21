@@ -2,10 +2,9 @@
 Modèle de la classe utilisateur.
 """
 
-#================================================#
-# Création d'une classe gérant les utilisateurs  #
-#================================================#
- 
+#=============================================#
+#   Modèle de table de données "Utilisateur"  #
+#=============================================#
 
 import bcrypt
 import logging

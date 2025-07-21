@@ -1,0 +1,53 @@
+{% extends 'baseerror.html.jinja2' %}
+
+{% block head_content %}
+    <meta name="description" content="Erreur 401 – Accès non autorisé">
+    <title>{% block title %}Erreur 401 – Accès non autorisé{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='gen/style.css') }}?v=1.0">
+{% endblock %}
+
+{% block main_content %}
+
+<div class="error-container">
+
+    <img class="error-image" src="{{ url_for('static', filename='images/images_error/image_401.png') }}"
+         alt="Erreur 401 - Accès non autorisé">
+
+    <div class="error-annonce">
+
+        <h1 class="error-h1">Accès refusé</h1>
+
+        <p class="error-sentence">
+            Vous avez tenté d’accéder à une page ou une ressource qui nécessite une autorisation.
+        </p>
+
+        <p class="error-sentence">
+            Voici quelques raisons possibles :
+        </p>
+
+        <ul class="error-list">
+            <li>Vous n’êtes pas connecté ou votre session a expiré</li>
+            <li>Vous n’avez pas les droits pour accéder à cette section</li>
+            <li>Votre compte ne dispose pas des autorisations nécessaires</li>
+        </ul>
+
+        <p class="error-sentence">
+            Si vous pensez que c’est une erreur, contactez un administrateur ou reconnectez-vous.
+        </p>
+
+        <p class="error-sentence">
+            <a class="error-link" href="{{ url_for('user.user_connection') }}">Se connecter</a> ou <a class="error-link" href="{{ url_for('landing_page') }}">retour à l’accueil</a>
+        </p>
+
+        <p class="error-sentence">
+            L’équipe <strong>SethiarWorks</strong> veille à votre sécurité.
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer_content %}
+{% endblock %}

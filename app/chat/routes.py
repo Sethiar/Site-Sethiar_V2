@@ -15,20 +15,10 @@ from app.forms.chat_request import ChatRequestForm, UserLink
 from app.Models.chat_request import ChatRequest
 from app.Models.admin import Admin
 
-from app.mail.routes import send_mail_validate_request, send_mail_refusal_request, \
+from app.mail.routes import send_mail_validate_request, send_mail_refusal_request, send_validate_request, \
     send_confirmation_request_reception, send_request_admin
 
 from app.extensions import create_whereby_meeting_admin
-
-
-# Route pour la page de remerciement de la demande de chat vidéo.
-@chat_bp.route("/demande-de-chat-remerciement")
-def user_chat_thanks():
-    """
-    Page affichée après l'envoi réussi d'une demande de devis.
-    """
-    
-    return render_template("chat/chat_form_thanks.html")
 
 
 # Route permettant d'afficher la vidéo du chat vidéo.
@@ -138,10 +128,20 @@ def send_request():
         # Envoi du mail à l'administrateur.
         send_request_admin(new_request.enterprise_name, new_request.request_content)     
         
-        return redirect(url_for('landing_page'))
+        return redirect(url_for('chat.user_chat_thanks'))
     
     # En cas d'erreur de validation.
     return render_template('chat/form_request_chat.html', formrequest=formrequest)
+
+
+# Route pour la page de remerciement
+@chat_bp.route("/demande-de-chat-remerciement")
+def user_chat_thanks():
+    """
+    Page affichée après l'envoi réussi d'une demande de chat.
+    """
+    
+    return render_template("chat/chat_form_thanks.html")
 
 
 # Méthode supprimant la demande de chat vidéo du tableau administrateur.
@@ -189,7 +189,7 @@ def valide_chat(id):
 
     Cette route permet à un administrateur de valider une demande de chat vidéo en attente, identifiée par son ID.
     Après avoir mis à jour le statut de la demande à "validée", un e-mail de confirmation est envoyé à l'utilisateur
-    pour l'informer de la validation et lui fournir le lien de la session de chat.
+    pour l'informer de la validation.
 
     Args:
         id (int): L'identifiant unique de la demande de chat vidéo à valider.
@@ -213,8 +213,9 @@ def valide_chat(id):
 
             # Validation de la requête.
             chat.accept_chat_request()
-            # Envoi du mail de validation.
-            send_mail_validate_request(chat)
+            
+            # Envoi du mail de validation de la requête
+            send_validate_request(chat)
 
             flash("La demande de chat vidéo a été traitée et validée.", "success")
         except Exception as e:
@@ -225,6 +226,7 @@ def valide_chat(id):
     return redirect(url_for("admin.calendar"))
 
 
+    
 # Méthode traitant la demande en attente et la refusant.
 @chat_bp.route('/refus-demande-chat/<int:id>', methods=['POST'])
 def refuse_chat(id):

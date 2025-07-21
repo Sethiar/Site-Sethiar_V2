@@ -2,9 +2,9 @@
 Modèle représentant les commentaires d'un utilisateur anonyme ou non.
 """
 
-#================================#
-#   Modèle de la classe Comment  #
-#================================#
+#==================================#
+#   Modèle de la classe "Comment"  #
+#==================================#
 
 import logging
 

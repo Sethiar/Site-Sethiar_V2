@@ -332,6 +332,7 @@ def create_app(config_class=Config):
     #==========================================================#
     # Injection des modèles dans le contexte de l'application  #  
     #==========================================================#
+    
     @app.context_processor
     def inject_logged_in():
         """

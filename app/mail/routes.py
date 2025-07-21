@@ -222,15 +222,47 @@ def send_request_admin(enterprise_name, request_content):
             Bonjour Sethiar,
                
             l'entreprise {enterprise_name} souhaite avoir un chat vidéo avec vous.
+            
             Voici sa requête :
-            {request_content}
+            
+                {request_content}
                
                
             Bon courage Mec.
             """
     current_app.extensions['mail'].send(msg)
     
+    
+# Méthode qui envoie un mail d'accepttion de la requête de chat vidéo.
+def send_validate_request(chat):
+    """
+    Fonction qui envoie un mail pour informer de la validation de la requête par l'administrateur.
 
+    :param request: Informations de l'utilisateur qui a envoyé la demande de chat.
+    """
+    msg = Message(
+        "Acceptation de la requête de chat vidéo.",
+        sender=current_app.config['MAIL_DEFAULT_SENDER'],
+        recipients=[chat.email]
+    )
+    msg.body = f"""
+            
+            Bonjour {chat.enterprise_name},
+            
+            L'équipe de SethiarWorks est heureuse de vous informer que nous sommes en mesure d'assurer votre rendez-vous.
+            
+            Nous vous enverrons un mail dans les 5 minutes précédant le rendez-vous contenant le lien de connexion pour la visio
+            
+            Nous vous remercions de votre confiance et nous vous souhaitons une bonne fin de journée.
+            
+            
+            Cordialement,
+            L'équipe de SethiarWorks.
+            """
+            
+    current_app.extensions['mail'].send(msg)
+    
+    
 # Fonction envoyant un mail à l'utilisateur en générant le lien de connexion au chat vidéo.
 def send_mail_validate_request(chat, chat_link):
     """
@@ -247,13 +279,14 @@ def send_mail_validate_request(chat, chat_link):
         recipients=[chat.email]
     )
     msg.body = f"""
-    
             Bonjour {chat.enterprise_name}.
                
             L'équipe de SethiarWorks a accepté votre requête de chat vidéo.
+            
             Le rendez-vous est prévu le {chat.date_rdv} à {chat.heure}.
                
             Voici le lien de connexion: {chat_link}
+            
             Nous vous demandons de cliquer sur ce lien quelques minutes
             avant le rendez-vous afin d'être prêt pour le chat vidéo.
                
@@ -312,7 +345,7 @@ def send_mail_validate_demand(devis):
                
             Bonjour M. / Mme {devis.lastname},
                
-            Nous avons bien reçu votre demande de devis et nous y répondrons sous une semaine.
+            Nous avons bien reçu votre demande de devis et nous y répondrons sous trois jours ouvrés.
                
             Afin de mieux cerner votre besoin, je vous proposerai, - une fois le devis validé -
             un entretien téléphonique qui permettra de cerner plus concrètement votre projet.

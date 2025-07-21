@@ -1,0 +1,82 @@
+
+// Importations des variables.
+@import '../base/variables.scss';
+// Importation des tailles responsive.
+@import '../base/responsive-size';
+
+
+//===============================//
+//         Page d’erreur         //
+//===============================//
+
+.error-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: $color-neutral-darkgrey;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  border: 2px solid $color-primary;
+  color: $color-black;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.error-image {
+  display: block;
+  max-width: 60%;
+  margin: 0 auto 2rem auto;
+  animation: float 3s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+.error-annonce {
+  text-align: center;
+  line-height: 1.6;
+  font-size: $font-size-lg;
+}
+
+.error-h1 {
+  font-size: $font-size-xxl;
+  margin-bottom: 1rem;
+  color: $color-primary;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.error-sentence {
+  margin-bottom: 1.2rem;
+  text-align: justify;
+}
+
+.error-list {
+  margin: 1rem auto;
+  padding-left: 2rem;
+  text-align: left;
+
+  li {
+    list-style: disc;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.error-link {
+  color: $color-primary;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color-decline-gold2;
+    text-decoration: none;
+  }
+}
+
+// === Animations ===
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

@@ -98,11 +98,15 @@
                 </div>
             </div>
 
+
+{#=========================================================================================================================#}
+            
+
             {# --------------------- #}
             {# COMMENTAIRES CONNECTÉS #}
             {# --------------------- #}
 
-            {% for comment in comment %}
+            {% for comment in comment|reverse  %}
             <div class="container-comment">
 
                 <!-- Entête commentaire -->
@@ -136,39 +140,63 @@
                     </p>
                 </div>
 
+                <div class="space-reply"></div>
+                
+                
+                {% if comment.author_user_id == current_user.id %}
                 <div class="politique-divider"></div>
-
-                {% if comment.user_id == current_user.id %}
                 <div class="comment-actions">
-                    <button>
-                        <a href="{{ url_for('user.change_comment', id=comment.id) }}" class="change-comment-btn">
-                            Modifier le commentaire
-                        </a>
-                    </button>
+                    <!-- Desktop -->
+                    <a class="btn-secondary desktop-only" href="{{ url_for('user.change_comment', id=comment.id) }}" >
+                        Modifier le commentaire
+                    </a>
+                    <!-- Mobile -->    
+                    <a class="btn-icon mobile-only" href="{{ url_for('user.change_comment', id=comment.id) }}" title="Modifier le commentaire">
+                        <img src="{{ url_for('static', filename='icons/change_0.svg') }}" alt="Modifier le commentaire">
+                    </a>
 
-                    <form action="{{ url_for('user.delete_comment', id=comment.id) }}" method="POST"
-                          class="delete-comment-form">
+                    <div class="reply-btn-container">
+
+                        <a href="{{ url_for('user.comment_replies', comment_id=comment.id) }}"
+                           class="reply-btn">
+                            Répondre
+                        </a>
+                    
+                    </div>
+
+                    <!-- Supprimer le commentaire (mobile, icône) -->
+                    <form action="{{ url_for('user.delete_comment', id=comment.id) }}" method="POST" 
+                        class="delete-comment-form">
                         {{ formsuppress.csrf_token }}
-                        <button type="submit" class="suppress-comment-btn"
-                                onclick="return confirm('Êtes-vous certain-e de vouloir supprimer votre commentaire ?'); ">
-                            Supprimer le commentaire
+                        <button type="submit" class="btn-icon2"
+                            onclick="return confirm('Êtes-vous certain-e de vouloir supprimer votre commentaire ?');"
+                            title="Supprimer le commentaire">
+                            <img src="{{ url_for('static', filename='icons/trash_0.svg') }}" alt="Supprimer le commentaire">
                         </button>
                     </form>
                 </div>
+                
                 {% endif %}
 
+                {% if user_anonymous_replies[comment.id] %}
                 <div class="reply-btn-container">
-                    <a href="{{ url_for('user.comment_replies', comment_id=comment.id) }}"
-                       class="reply-btn">
-                        Répondre
-                    </a>
+
+                        <a href="{{ url_for('user.comment_replies', comment_id=comment.id) }}"
+                           class="reply-btn">
+                            Répondre
+                        </a>
                     
-                </div>
+                    </div>
+                {% endif %}
+                
+                <div class="politique-divider"></div>
 
-                {# ----------------- #}
+                <div class="reply-divider"></div>
+                
+                {# ------------------ #}
                 {# RÉPONSES CONNECTÉS #}
-                {# ----------------- #}
-
+                {# ------------------ #}
+                
                 <div class="replies-container">
                     {% for reply in replies[comment.id] %}
                     <div class="reply-card">
@@ -195,29 +223,40 @@
                             </p>
                         </div>
 
-                        <div class="politique-divider"></div>
+                        <hr class="politique-divider">
 
                         {% if reply.user_id == current_user.id %}
                         <div class="comment-actions">
-                            <button>
-                                <a href="{{ url_for('user.change_reply', id=reply.id) }}" class="change-comment-btn"
-                                   style="margin-left:10%;">
-                                    Modifier la réponse
-                                </a>
-                            </button>
+                            <!-- Desktop -->
+                            <a class="btn-secondary desktop-only" href="{{ url_for('user.change_reply', id=reply.id) }}" 
+                                style="margin-left:10%;">
+                                Modifier la réponse
+                            </a>
 
-                            <form action="{{ url_for('user.delete_reply', id=reply.id) }}" method="POST"
+                            <!-- Mobile -->
+                            <a class="btn-icon mobile-only" href="{{ url_for('user.change_reply', id=comment.id) }}" title="Modifier la réponse">
+                                <img src="{{ url_for('static', filename='icons/change_0.svg') }}" alt="Modifier le commentaire">
+                            </a> 
+
+                            <!-- Supprimer la réponse -->
+                            <form action="{{ url_for('user.delete_comment', id=comment.id) }}" method="POST" 
                                   class="delete-comment-form">
-                                {{ formsuppressreply.csrf_token }}
-                                <button type="submit" class="suppress-comment-btn"
-                                        onclick="return confirm('Êtes-vous certain-e de vouloir supprimer votre réponse ?');">
-                                    Supprimer la réponse
+                                {{ formsuppress.csrf_token }}
+                                <button type="submit" class="btn-icon2"
+                                    onclick="return confirm('Êtes-vous certain-e de vouloir supprimer votre commentaire ?');"
+                                    title="Supprimer le commentaire">
+                                    <img src="{{ url_for('static', filename='icons/trash_0.svg') }}" alt="Supprimer le commentaire">
                                 </button>
-                            </form>
+                            </form>       
                         </div>
                         {% endif %}
+                        <div class="space-reply"></div>
                     </div>
+                    
+                    <!-- Espacement entre deux réponses connectées-->
+                    <div class="space-reply"></div>
                     {% endfor %}
+                    <div class="space-negatif"></div>   
                 </div>
 
                 {#----------------------------------------------#}
@@ -234,7 +273,7 @@
                                 alt="Photo de profil" class="reply-profile-picture">
                         
                             <div class="reply-user-info">
-                                <strong class="reply-user-enterprise-name">Utilisateur anonyme</strong>                       
+                                <strong class="reply-user-enterprise-name">Anonyme</strong>                       
                                 <span class="reply-user-role">a répondu :</span>
                                 <small class="reply-date">
                                     Le {{ moment(reply.reply_date).format('DD-MM-YYYY à HH:mm') }}                
@@ -246,13 +285,12 @@
                                 {{ reply.reply_content | replace('\n', '<br>') | safe }}
                             </p>
                         </div>
-
-                        <div class="politique-divider"></div>
+                        <div class="space-reply"></div>
                     </div>
                     {% endfor %}
+                    <div class="space-negatif"></div>
                     {% endif %}
                 </div>
-
                 
                 {#---------------------------------------------#}
                 {# RÉPONSES ANONYMES À UN COMMENTAIRE CONNECTÉ #}
@@ -268,7 +306,7 @@
                                 alt="Photo de profil" class="reply-profile-picture">
                     
                             <div class="reply-user-info">
-                                <strong class="reply-user-enterprise-name">Utilisateur anonyme</strong>                       
+                                <strong class="reply-user-enterprise-name">Anonyme</strong>                       
                                 <span class="reply-user-role">a répondu :</span>
                                 <small class="reply-date">
                                     Le {{ moment(reply.reply_date).format('DD-MM-YYYY à HH:mm') }}                
@@ -280,21 +318,19 @@
                                 {{ reply.reply_content | replace('\n', '<br>') | safe }}
                             </p>
                         </div>
-
-                        <div class="politique-divider"></div>
+                        <div class="space-reply"></div>
                     </div>
+                    <!-- Espacement entre les réponses anonymes-->
+                     <div class="space-reply"></div>
+
                     {% endfor %}
                     {% endif %}
-                     
-                    <!-- Style à implémenter -->
-                    <div class="space-reply"></div>
-                
                 </div>
-            
-                {# --------------------- #}
-                {# RÉPONSES ANONYMES    #}
-                {# --------------------- #}
 
+                {# --------------------- #}
+                {#  RÉPONSES ANONYMES    #}
+                {# --------------------- #}
+                
                 <div class="replies-container">
                     {% for reply in anonymous_replies[comment.id] %}
                     <div class="reply-card">
@@ -302,7 +338,7 @@
                             <img src="{{ url_for('static', filename='images/images_profil/default_profile_photo.png') }}"
                                 alt="Photo de profil" class="reply-profile-picture">
                             <div class="reply-user-info">
-                                <strong class="reply-user-enterprise-name">Utilisateur anonyme</strong>
+                                <strong class="reply-user-enterprise-name">Anonyme</strong>
                                 <span class="reply-user-role">a répondu :</span>
                                 <small class="reply-date">
                                     Le {{ moment(reply.reply_date).format('DD-MM-YYYY à HH:mm') }}
@@ -315,15 +351,13 @@
                                 {{ reply.reply_content | replace('\n', '<br>') | safe }}
                             </p>
                         </div>
-
-                        <div class="politique-divider"></div>
+                        <div class="space-reply"></div>
                     </div>
+                    <div class="space-reply"></div>
                     {% endfor %}
-                </div>               
+                </div> 
             </div>
             {% endfor %}
-
-            <div class="space2"></div>
 
         </div>
 
@@ -337,11 +371,11 @@
                 Retour à la sélection des sujets
             </a>
 
-            <a class="btn-icon mobile-only" href="{{ url_for('landing_page') }}">
-                <img src="{{ url_for('static', filename='icons/home_1.svg') }}" alt="Retour à l'accueil">
+            <a class="btn-icon mobile-only" href="{{ url_for('landing_page') }}" title="Retour à l'accueil">
+                <img src="{{ url_for('static', filename='icons/home_0.svg') }}" alt="Retour à l'accueil">
             </a>
-            <a class="btn-icon mobile-only" href="{{ url_for('frontend.comments') }}">
-                <img src="{{ url_for('static', filename='icons/subject.svg') }}" alt="Retour à la sélection des sujets">
+            <a class="btn-icon mobile-only" href="{{ url_for('frontend.comments') }}" title="Retour à la sélection des sujets">
+                <img src="{{ url_for('static', filename='icons/arrow-big-left_0.svg') }}" alt="Retour à la sélection des sujets">
             </a>
         </div>
     </div>

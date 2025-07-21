@@ -2,6 +2,12 @@
 Ce code permet de gérer les entrées dans les tables de données.
 """
 
+
+#==============================================#
+#    Modèle de table de données "BaseModel"    #
+#==============================================#
+
+
 import logging
 from . import db
 
