@@ -18,16 +18,6 @@ app = create_app()
 #==================================================================#
 # Définition des pages particulières de l'application SethiarWorks #
 #==================================================================#
-
-
-# Route menant au favicon dans static.
-@app.route('/logo_favicon.ico')
-def favicon():
-    """
-    Sert le fichier favicon.ico à partir du répertoire 'static'.
-    """
-    return send_from_directory(os.path.join(app.route_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
     
 
 # Route renvoyant l'erreur 404.
